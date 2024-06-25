@@ -58,4 +58,7 @@ print('\n')
 for vs in person.values():
   print(vs)
 
+print('\n')
 
+for key, value in person.items():
+  print(key, value)
