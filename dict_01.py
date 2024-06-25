@@ -39,3 +39,7 @@ for key in person:
         print (f'{j} = {i[j]}')
   else:  
     print (f'{key} = {person[key]}')
+
+del person['address'] # Apaga os endereços"
+if person.get('address') is None:
+  print("\nAddress NOT FOUND!")
