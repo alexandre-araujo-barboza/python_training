@@ -31,15 +31,31 @@ person = {
   ],
 }
 
+print('\n')
+
 for key in person:
   if type(person[key]) == list:
     address = person[key] 
+    
     for i in address:
-      for (j) in i:
+      print('\n')
+
+      for j in i:
         print (f'{j} = {i[j]}')
+
   else:  
     print (f'{key} = {person[key]}')
 
 del person['address'] # Apaga os endereços"
 if person.get('address') is None:
-  print("\nAddress NOT FOUND!")
+  print('\nAddress NOT FOUND! (was deleted)\n')
+
+for ks in person.keys():
+  print(ks)
+
+print('\n')
+
+for vs in person.values():
+  print(vs)
+
+
