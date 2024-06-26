@@ -1,4 +1,6 @@
-# Exercício com set, tuple, dict e list
+# Exercício com set, tuple, dict e list. Com base no exercício da aula 132,
+# encontre e liste todos os números que se repetem em cada linha da matriz,
+# mostrando quantas vezes eles se repetem.
 
 from pprint import pformat
 
@@ -21,7 +23,7 @@ for vector in matrix:
 
 result = list()
 def matrix_scanner(index, vector):
-  string = f'line {str(index +1)}'
+  string = f'line {str(index +1).zfill(2)}'
   line = dict()
   row = list()
   tmp = tuple()
@@ -54,10 +56,13 @@ print('\n')
 
 for value in result:
   layout = pformat(value, width=60)
-  chars_to_remove = ["{", "}", "'", "[", "]"]
+  removed = ["{", "}", "'", "]"]
+  changed = "["
   
-  for char in chars_to_remove:
+  for char in removed:
     layout = layout.replace(char, "")
   
+  for char in changed:
+    layout = layout.replace(char, "    ")  
   print(layout)  
   
