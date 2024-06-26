@@ -31,7 +31,6 @@ def matrix_scanner(index, vector):
   found = set(vector)
   line  = dict()
   row   = list()
-  col   = list()
   
   for k1 in found:
     count = 0
