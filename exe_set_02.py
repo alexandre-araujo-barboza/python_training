@@ -64,5 +64,6 @@ for value in result:
   
   for char in changed:
     layout = layout.replace(char, "    ")  
+  
   print(layout)  
   
