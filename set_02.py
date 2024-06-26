@@ -1,4 +1,4 @@
-# Exmplode uso do Set
+# Exemplo de uso do Set
 letras = set()
 while True:
   letra = input('Digite uma letra: ')

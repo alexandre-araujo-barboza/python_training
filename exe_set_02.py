@@ -1,4 +1,4 @@
-# Exercício com set, tuple, dict e list. Com base no exercício da aula 132,
+# Exercício com set, dict e list. Com base no exercício da aula 132,
 # encontre e liste todos os números que se repetem em cada linha da matriz,
 # mostrando quantas vezes eles se repetem.
 
@@ -18,16 +18,20 @@ matrix = [
   [5, 3, 1, 8, 5, 7, 1, 8, 8, 7],
   [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
 ]
+
+print('\nMatrix:\n')
+
 for vector in matrix:
   print(vector)
 
 result = list()
+
 def matrix_scanner(index, vector):
   string = f'line {str(index +1).zfill(2)}'
-  line = dict()
-  row = list()
-  tmp = tuple()
   found = set(vector)
+  line  = dict()
+  row   = list()
+  col   = list()
   
   for k1 in found:
     count = 0
@@ -37,11 +41,11 @@ def matrix_scanner(index, vector):
         count += 1
     
     if count > 1:
-      tmp = {
+      col = {
         'repeat' : str(count), 
         'value' : str(k1),
       }
-      row.append(tmp)
+      row.append(col)
    
   if len(row) == 0:
     row.append('No repetitions found!')
@@ -52,7 +56,7 @@ def matrix_scanner(index, vector):
 for index, vector in enumerate(matrix):
   result.append(matrix_scanner(index, vector))
 
-print('\n')
+print()
 
 for value in result:
   layout = pformat(value, width=60)
@@ -65,5 +69,8 @@ for value in result:
   for char in changed:
     layout = layout.replace(char, "    ")  
   
-  print(layout)  
+  print(layout)
+
+print()
+
   
