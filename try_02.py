@@ -22,7 +22,7 @@ while True:
       print('Erro: 4')
       x = 'string'
       y = 1
-      x + y              # can only concatenate str (not "int") to str
+      x + y              # can only concatenate str (not "int") to str.
     
   except ZeroDivisionError:
     print('Dividiu por zero.')
