@@ -7,7 +7,7 @@ while True:
       a = 18
       b = 0
       print('Erro: 1')
-      c = a / b          # division by zero
+      c = a / b          # division by zero.
     
     elif flag == 2:
       print('Erro: 2')
