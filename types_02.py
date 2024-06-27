@@ -1,6 +1,11 @@
 # Valores Truthy e Falsy, Tipos Mutáveis e Imutáveis
 # Mutáveis [] {} set()
 # Imutáveis () "" 0 0.0 None False range(0, 10)
+
+# Pascal Case: UmaClassePorExemplo
+# Camel  Case: umaInstanciaDeObjeto
+# Snake  Case: uma_simples_variavel 
+
 lista = []
 dicionario = {}
 conjunto = set()
