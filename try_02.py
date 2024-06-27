@@ -24,20 +24,30 @@ while True:
       y = 1
       x + y              # can only concatenate str (not "int") to str.
     
-  except ZeroDivisionError:
+  except ZeroDivisionError as error:
     print('Dividiu por zero.')
+    print('Mensagem:', error)
+    print('Classe:', error.__class__.__name__)
     
-  except NameError:
+  except NameError as error:
     print('Nome não está definido.')
+    print('Mensagem:', error)
+    print('Classe:', error.__class__.__name__)
     
-  except IndexError:
+  except IndexError as error:
     print('Índice não existente.')
-
-  except TypeError:  
-    print('Erro no tipo de dados.')
+    print('Mensagem:', error)
+    print('Classe:', error.__class__.__name__)
     
-  except Exception:
+  except TypeError as error:  
+    print('Erro no tipo de dados.')
+    print('Mensagem:', error)
+    print('Classe:', error.__class__.__name__)
+    
+  except Exception as error:
     print('ERRO DESCONHECIDO.')
+    print('Mensagem:', error)
+    print('Classe:', error.__class__.__name__)
 
   finally:
     print('CONTINUAR:', flag, '\n')
