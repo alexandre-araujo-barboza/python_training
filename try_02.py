@@ -1,3 +1,5 @@
+# Exemplo do uso de try, except, finally e else
+
 flag = 1
 print('\nControle de erros:\n')
 
@@ -45,9 +47,12 @@ while True:
     print('Classe:', error.__class__.__name__)
     
   except Exception as error:
-    print('ERRO DESCONHECIDO.')
+    print('ERRO DESCONHECIDO!')
     print('Mensagem:', error)
     print('Classe:', error.__class__.__name__)
+  
+  else:
+    print("NENHUM ERRO!")
 
   finally:
     print('CONTINUAR:', flag, '\n')
