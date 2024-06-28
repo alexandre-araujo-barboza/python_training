@@ -1,5 +1,5 @@
 # Decorador com log de erro
-import logging
+import logging, time
 
 def factory_decorator():
   print('Decorator called...')
@@ -10,6 +10,7 @@ def factory_decorator():
     def nested_function(*args, **kwargs):
       print('\t\tNested called...')
       print('\t\tDecorator params:')
+      
       for arg in args:
         print('\t\t\t', arg)
       
@@ -17,15 +18,17 @@ def factory_decorator():
       return result
     
     return nested_function
-  
   return factory_function
 
 @factory_decorator()
+
 def factory_errors(error, message, type):
-    try:
-      raise Exception(error, message, type)
-    except Exception as inst:
-      return inst
+  d = time.strftime("%Y-%m-%d", time.localtime())
+  t = time.strftime("%H:%M:%S", time.localtime())
+  try:
+    raise Exception(error, message, type, d, t)
+  except Exception as inst:
+    return inst
 
 set_error_400 = factory_errors(400, 'Bad Request ',  'Client Error')
 set_error_401 = factory_errors(401, 'Unauthorized',  'Client Error')
@@ -68,4 +71,4 @@ set_error_508 = factory_errors(508, 'Loop Detected', 'Server Error')
 set_error_511 = factory_errors(511, 'Network Authentication Required', 'Server Error')
 
 logging.basicConfig(filename="error.log", level=logging.ERROR)
-logging.error(set_error_511)
+logging.error(set_error_503)
