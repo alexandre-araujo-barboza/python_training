@@ -1,17 +1,20 @@
 # Decoradores com parâmetros
 
 def factory_decorator(a=None, b=None, c=None):
-  def factory_function(function):
-    print('Decorator called...')
+  print('Decorator called...')
 
+  def factory_function(function):
+    print('\tfunction called...')
+     
     def nested_function(*args, **kwargs):
-      print('Decorator params: ', a, b, c)
-      print('Nested...')
+      print('\t\tNested...')
+      print('\t\tDecorator params: ', a, b, c)
       
       result = function(*args, **kwargs)
       return result
     
     return nested_function
+  
   return factory_function
 
 @factory_decorator('a', 'b', 'c')
