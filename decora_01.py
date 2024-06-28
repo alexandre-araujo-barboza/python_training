@@ -8,7 +8,7 @@ def factory_decorator(a=None, b=None, c=None):
      
     def nested_function(*args, **kwargs):
       print('\t\tNested...')
-      print('\t\tDecorator params: ', a, b, c)
+      print('\t\tDecorator params:', a, b, c)
       
       result = function(*args, **kwargs)
       return result
