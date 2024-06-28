@@ -74,8 +74,8 @@ username  = decorator(lambda login, pid, cwd: (login, pid, cwd))
 id = username(os.getlogin(), os.getpid(), os.getcwd())
 
 logging.error(id)
-logging.error(set_error_502)
-logging.error(set_error_431)
-logging.error(set_error_422)
+logging.error(set_error_505)
+logging.error(set_error_411)
+logging.error(set_error_508)
 
 logging.shutdown()
