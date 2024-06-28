@@ -1,4 +1,4 @@
-# Exercícios (com import, lambda, sort e deep copy)
+# Exercícios (com import, lambda, sort, deep copy e list comprehension)
 
 import copy
 from package import items
