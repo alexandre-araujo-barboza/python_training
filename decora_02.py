@@ -1,26 +1,24 @@
 # Decorador com log de erro
-import logging, time
+import logging, time, os
 
-def factory_decorator():
+def factory_decorator(log):
+  logging.basicConfig(filename=log, level=logging.ERROR)
   print('Decorator called...')
 
   def factory_function(function):
-    print('\tFunction called...')
-     
+    print('\tfunction called...')
+
     def nested_function(*args, **kwargs):
-      print('\t\tNested called...')
-      print('\t\tDecorator params:')
-      
-      for arg in args:
-        print('\t\t\t', arg)
+      print('\t\tNested...')
+      print('\t\tDecorator params:', log)
       
       result = function(*args, **kwargs)
+      print('\t\t\tArgs:', args)
       return result
     
     return nested_function
+  
   return factory_function
-
-@factory_decorator()
 
 def factory_errors(error, message, type):
   d = time.strftime("%Y-%m-%d", time.localtime())
@@ -70,5 +68,14 @@ set_error_507 = factory_errors(507, 'Insufficient Storage', 'Server Error')
 set_error_508 = factory_errors(508, 'Loop Detected', 'Server Error')
 set_error_511 = factory_errors(511, 'Network Authentication Required', 'Server Error')
 
-logging.basicConfig(filename="error.log", level=logging.ERROR)
-logging.error(set_error_503)
+decorator = factory_decorator('error.log')
+username  = decorator(lambda login, pid, cwd: (login, pid, cwd))
+
+id = username(os.getlogin(), os.getpid(), os.getcwd())
+
+logging.error(id)
+logging.error(set_error_502)
+logging.error(set_error_431)
+logging.error(set_error_422)
+
+logging.shutdown()
