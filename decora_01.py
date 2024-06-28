@@ -17,7 +17,9 @@ def factory_decorator(a=None, b=None, c=None):
   
   return factory_function
 
-@factory_decorator('a', 'b', 'c')
+@factory_decorator('d', 'e', 'f') # SECOND
+@factory_decorator('a', 'b', 'c') # FIRST
+
 def sum(x, y):
     return x + y
 
