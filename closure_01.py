@@ -1,4 +1,4 @@
-# Exercício: Adiando execução de funções (usando closureS)
+# Exercício: Adiando execução de funções (usando closure)
 
 def soma(x, y):
   return x + y
