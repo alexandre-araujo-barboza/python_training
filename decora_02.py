@@ -1,4 +1,4 @@
-# Decorador com log de erro
+# Decorador com log de erros
 import logging, time, os
 
 def factory_decorator(log):
@@ -10,7 +10,7 @@ def factory_decorator(log):
 
     def nested_function(*args, **kwargs):
       print('\t\tNested...')
-      print('\t\tDecorator params:', log)
+      print('\t\tDecorator param:', log)
       
       result = function(*args, **kwargs)
       print('\t\t\tArgs:', args)
@@ -18,6 +18,7 @@ def factory_decorator(log):
     
     return nested_function
   
+  logging.shutdown()  
   return factory_function
 
 def factory_errors(error, message, type):
@@ -74,8 +75,5 @@ username  = decorator(lambda login, pid, cwd: (login, pid, cwd))
 id = username(os.getlogin(), os.getpid(), os.getcwd())
 
 logging.error(id)
-logging.error(set_error_505)
-logging.error(set_error_411)
-logging.error(set_error_508)
-
-logging.shutdown()
+logging.error(set_error_500)
+logging.error(set_error_400)
