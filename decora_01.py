@@ -1,7 +1,7 @@
 # Decoradores com parâmetros
 
-def decorator_factory(a=None, b=None, c=None):
-  def function_factory(function):
+def factory_decorator(a=None, b=None, c=None):
+  def factory_function(function):
     print('Decorator called...')
 
     def nested_function(*args, **kwargs):
@@ -12,14 +12,13 @@ def decorator_factory(a=None, b=None, c=None):
       return result
     
     return nested_function
-  
-  return function_factory
+  return factory_function
 
-@decorator_factory('a', 'b', 'c')
+@factory_decorator('a', 'b', 'c')
 def sum(x, y):
     return x + y
 
-decorator = decorator_factory()
+decorator = factory_decorator()
 multiplicator = decorator(lambda x, y: x * y)
 
 ten_plus_five = sum(10, 5)
