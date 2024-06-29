@@ -1,6 +1,6 @@
-# Criando arquivos com Python + Context Manager with
+# Criando filenames com Python + Context Manager with
 # Usamos a função open para abrir
-# um arquivo em Python (ele pode ou não existir)
+# um filename em Python (ele pode ou não existir)
 # Modos:
 # r (leitura), w (escrita), x (para criação)
 # a (escreve ao final), b (binário)
@@ -13,10 +13,10 @@
 # readline (ler linha)
 # readlines (ler linhas)
 # Vamos falar mais sobre o módulo os, mas:
-# os.remove ou unlink - apaga o arquivo
-# os.rename - troca o nome ou move o arquivo
+# os.remove ou unlink - apaga o filename
+# os.rename - troca o nome ou move o filename
 # Vamos falar mais sobre o módulo json, mas:
-# json.dump = Gera um arquivo json
+# json.dump = Gera um filename json
 # json.load
 
 import os, json
@@ -27,10 +27,10 @@ other_file = 'teste2.txt'
 try: 
   file = open(other_file, 'r')
 except FileNotFoundError:
-  print("Arquivo não existe!")
+  print("filename não existe!")
 
 with open(file_path, 'w') as filename:
-  print('Arquivo vai ser fechado')
+  print('filename vai ser fechado')
   filename.close()
 
 with open(file_path, 'w+') as filename:
@@ -61,7 +61,7 @@ with open(file_path, 'r') as filename:
 with open(file_path, 'w', encoding='utf8') as filename:
   filename.write('Atenção\n')
   filename.writelines(
-    ('Caracteres acentuados\n', 'presentes neste arquivo\n')
+    ('Caracteres acentuados\n', 'presentes neste filename\n')
   )
   filename.close()
 
@@ -96,16 +96,16 @@ pessoa = {
   'nada': None,
 }
 
-with open('teste.json', 'w', encoding='utf8') as arquivo:
+with open('teste.json', 'w', encoding='utf8') as filename:
   json.dump(
     pessoa,
-    arquivo,
+    filename,
     ensure_ascii=False,
     indent=2,
   )
 
-with open('teste.json', 'r', encoding='utf8') as arquivo:
-  pessoa = json.load(arquivo)
+with open('teste.json', 'r', encoding='utf8') as filename:
+  pessoa = json.load(filename)
   print(type(pessoa))
   print(pessoa['nome'])
 
