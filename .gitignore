@@ -1,5 +1,7 @@
 /venv
 /package/__pycache__
+/calculadora-imc
 error.log
 teste.txt
 requirements.txt
+tasks.json
