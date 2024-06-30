@@ -24,7 +24,7 @@ def factory_errors(func):
 @factory_errors
 def set_error(number, description, level):
   try:
-    raise Exception ('Sorry, an error occurred: ' + str(number) + ' - ' + description + ' (' + level + ')\nPlease, see the error log for details.')
+    raise Exception ('Sorry, an error occurred: ' + str(number) + ' - ' + description + ' (' + level + ').\nPlease, see the error log for details.')
   except Exception as inst:
     return inst
   
