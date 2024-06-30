@@ -49,18 +49,21 @@ def add(tasks, task):
   print()
   show(tasks)
 
-def load(path):
-  global tasks
+def load(tasks,path):
   data = []
   try:
     with open(path, 'r', encoding='utf8') as file:
       data = json.load(file)
-      tasks = data
+      for value in data:
+        tasks.append(value)
       print()
-      print("file was loaded!")
+      print("file was loaded.")
   except FileNotFoundError:
     print()
     print('File not found!')
+  except json.decoder.JSONDecodeError:
+    print()
+    print('File was corrupted!')
 
 def save(tasks, path):
   data = tasks
@@ -68,7 +71,15 @@ def save(tasks, path):
     data = json.dump(tasks, file, indent=2, ensure_ascii=False)
   tasks = data
   print()
-  print("file was saved!")
+  print("file was saved.")
+
+def destroy(tasks):
+  print()
+  print("tasks is empty.")
+  tasks.clear()
+
+def clear():
+  os.system('cls')
 
 def quit():
   print("Bye!")
@@ -76,16 +87,18 @@ def quit():
   os.system(exit())
 
 while True:
-  print('Commands: show, undo, redo, load save and quit')
+  print('Commands: show, undo, redo, load, save, destroy, clear and quit')
   task = input('Enter a task or command: ')
   commands= {
     'show' : lambda: show(tasks),
     'undo' : lambda: undo(tasks, tasks_to_redo),
     'redo' : lambda: redo(tasks, tasks_to_redo),
     'add'  : lambda: add(tasks, task),
-    'load' : lambda: load(filename),
+    'load' : lambda: load(tasks,filename),
     'save' : lambda: save(tasks, filename),
-    'quit' : lambda: quit()
+    'destroy' : lambda : destroy(tasks),
+    'clear': lambda: clear(),
+    'quit' : lambda: quit(),
 
   }
   
