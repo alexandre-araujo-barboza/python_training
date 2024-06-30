@@ -74,10 +74,10 @@ def save(tasks, path):
   print("file was saved.")
 
 def destroy(tasks):
+  tasks.clear()
   print()
   print("tasks is empty.")
-  tasks.clear()
-
+  
 def clear():
   os.system('cls')
 
