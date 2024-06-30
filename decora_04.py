@@ -70,7 +70,7 @@ errors= {
   }
 
 command = errors['error_400']
-# Do something risky from client
+# Do something risky to client
 ...
 
 # if an error occurs
@@ -78,7 +78,7 @@ command = errors['error_400']
 print(command())
 
 command = errors['error_500']
-# Do something risky from server
+# Do something risky to server
 ...
 
 # if an error occurs
