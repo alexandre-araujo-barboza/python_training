@@ -1,4 +1,5 @@
 /venv
+/__pycache__
 /package/__pycache__
 /calculadora-imc
 error.log
