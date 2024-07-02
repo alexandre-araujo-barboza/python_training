@@ -57,19 +57,31 @@ class Carro:
   
   def frear(self):
     print(f'{self.nome} está freiando...')
-    
+
+  def set_marca(self, marca):
+    self.marca = marca
+
+  def set_cor(self, cor):
+    self.cor = cor
+
+  def get_marca(self):
+    return self.marca
+  
+  def get_cor(self):
+    return self.cor
+
 fusca = Carro('Fusca')
 print(fusca.nome)
-fusca.marca = "Volkswagen"
-fusca.cor = "Amarelo"
-print('fusca é: ' + fusca.marca + ' sua cor é: ' + fusca.cor)
+fusca.set_marca("Volkswagen")
+fusca.set_cor("Amarelo")
+print('fusca é: ' + fusca.get_marca() + ' sua cor é: ' + fusca.get_cor())
 fusca.acelerar()
 fusca.frear()
 
 celta = Carro(nome='Celta')
 print(celta.nome)
-celta.marca = "Ford"
-celta.cor = "Preto"
-print('celta é: ' + celta.marca + ' sua cor é: ' + celta.cor)
+celta.set_marca("Ford")
+celta.set_cor("Preto")
+print('celta é: ' + celta.get_marca() + ' sua cor é: ' + celta.get_cor())
 celta.acelerar()
 celta.frear()
