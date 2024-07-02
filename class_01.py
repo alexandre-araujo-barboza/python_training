@@ -14,8 +14,6 @@ class Pessoa:
   def __init__(self, nome=None, sobrenome=None):
     self.nome = nome
     self.sobrenome = sobrenome
-    
-
 
 p1 = Pessoa()
 p1.nome = 'Alexandre'
@@ -60,8 +58,6 @@ class Carro:
   def frear(self):
     print(f'{self.nome} está freiando...')
     
-
-
 fusca = Carro('Fusca')
 print(fusca.nome)
 fusca.marca = "Volkswagen"
