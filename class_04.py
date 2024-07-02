@@ -24,17 +24,17 @@ class Connection:
 
   @staticmethod
   def log(msg):
-    print('LOG:', msg)
-
-
+    return 'LOG: ' + msg
+ 
 def connection_log(msg):
   print('LOG:', msg)
 
+connection_log("Essa é a mensagem de log de uma função pública!")
 
 c1 = Connection.create_with_auth('Jorge', '1234')
-print(Connection.log('Essa é a mensagem de log'))
-print(f'username:{c1.user}')
-print(f'password:{c1.password}')
+print(Connection.log('Essa é a mensagem de log estática da classe Connection!'))
+print(f'username: {c1.user}')
+print(f'password: {c1.password}')
 
 # @property - um getter no modo Pythônico
 # getter - um método para obter um atributo
@@ -59,12 +59,12 @@ class Caneta:
     return self.cor_tinta
 
   @property
-  def cor_tampa(self):
+  def cor_corpo(self):
     return 'transparente'
 
 caneta = Caneta('azul')
-print('Caneta Cor:', caneta.cor)
-print('Caneta Tampa:', caneta.cor_tampa)
+print('Caneta Cor Tinta:', caneta.cor)
+print('Caneta Cor Corpo:', caneta.cor_corpo)
 
 # @property + @setter - getter e setter no modo Pythônico
 # - como getter
@@ -103,5 +103,6 @@ lapis = Lapis('preto')
 lapis.fabricante = 'Faber Castel'
 lapis.tipo = 2
 
-print('Lapis fabricante:', lapis.fabricante)
-print('Lapis tipo:', lapis.tipo)
+print('Lápis:', lapis.cor)
+print('Lápis fabricante:', lapis.fabricante)
+print('Lápis tipo:', lapis.tipo)
