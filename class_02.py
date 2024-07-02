@@ -63,7 +63,7 @@ c2.fotografar()
 
 # Atributos de classe
 class Pessoa:
-    ano_atual = 2022
+    ano_atual = 2024
 
     def __init__(self, nome, idade):
         self.nome = nome
@@ -76,8 +76,20 @@ class Pessoa:
 p1 = Pessoa('João', 35)
 p2 = Pessoa('Helena', 12)
 
-print(Pessoa.ano_atual)
-# Pessoa.ano_atual = 1
+print('Ano Atual: ' + str(Pessoa.ano_atual))
+print('Ano nascimento ' + p1.nome + ': ' + str(p1.get_ano_nascimento()))
+print('Ano nascimento ' + p2.nome + ': ' + str(p2.get_ano_nascimento()))
 
-print(p1.get_ano_nascimento())
-print(p2.get_ano_nascimento())
+# __dict__ e vars para atributos de instância
+
+p1.__dict__['atributo'] = 'novo'
+del p1.__dict__['nome']
+print(p1.__dict__)
+print(vars(p1))
+
+# desempacotando um dicionário para a classe
+
+dados = {'idade' : 54, 'nome' : 'Jorge'}
+p3 = Pessoa(**dados)
+print(p3.nome)
+print(p3.idade)
