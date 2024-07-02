@@ -98,8 +98,7 @@ class Lapis:
   @tipo.setter
   def tipo(self, tipo):
     self._tipo = tipo
-    print(self.tipo)
-
+  
 lapis = Lapis('preto')
 lapis.fabricante = 'Faber Castel'
 lapis.tipo = 2
