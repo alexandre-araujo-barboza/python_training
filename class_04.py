@@ -56,13 +56,53 @@ class Caneta:
 
   @property
   def cor(self):
-    print('PROPERTY')
     return self.cor_tinta
 
   @property
   def cor_tampa(self):
     return 'transparente'
 
-caneta = Caneta('Azul')
-print(caneta.cor)
-print(caneta.cor_tampa)
+caneta = Caneta('azul')
+print('Caneta Cor:', caneta.cor)
+print('Caneta Tampa:', caneta.cor_tampa)
+
+# @property + @setter - getter e setter no modo Pythônico
+# - como getter
+# - p/ evitar quebrar código cliente
+# - p/ habilitar setter
+# - p/ executar ações ao obter um atributo
+# Atributos que começar com um ou dois underlines
+# não devem ser usados fora da classe.
+
+class Lapis:
+  def __init__(self, cor):
+    
+    self.cor = cor
+
+    # private protected
+    self._fabricante = None
+    self._tipo = None
+
+  @property
+  def fabricante(self):
+    return self._fabricante
+  
+  @property
+  def tipo(self):
+    return self._tipo
+
+  @fabricante.setter
+  def fabricante(self, fabricante):
+    self._fabricante = fabricante
+  
+  @tipo.setter
+  def tipo(self, tipo):
+    self._tipo = tipo
+    print(self.tipo)
+
+lapis = Lapis('preto')
+lapis.fabricante = 'Faber Castel'
+lapis.tipo = 2
+
+print('Lapis fabricante:', lapis.fabricante)
+print('Lapis tipo:', lapis.tipo)
