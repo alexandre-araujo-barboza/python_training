@@ -13,7 +13,6 @@ class Eletronico:
     if self._ligado:
       self._ligado = False
 
-
 class Smartphone(Eletronico, LogFileMixin):
   def ligar(self):
     super().ligar()
@@ -28,4 +27,3 @@ class Smartphone(Eletronico, LogFileMixin):
     if not self._ligado:
       msg = f'{self._nome} está desligado'
       self.log_error(msg)
-      
