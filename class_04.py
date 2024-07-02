@@ -42,7 +42,7 @@ print(f'password:{c1.password}')
 # modo pythônico - modo do Python de fazer coisas
 # @property é uma propriedade do objeto, ela
 # é um método que se comporta como um
-# atributo 🤯 🤯 🤯
+# atributo
 # Geralmente é usada nas seguintes situações:
 # - como getter
 # - p/ evitar quebrar código cliente
