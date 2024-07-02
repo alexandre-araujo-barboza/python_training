@@ -122,7 +122,53 @@ class Produto:
 
 print()
 carrinho = Carrinho()
-p1, p2 = Produto('Caneta', 1.20), Produto('Lápis', 0.80)
-carrinho.inserir_produtos(p1, p2)
+p1, p2, p3 = Produto('Caneta', 1.20), Produto('Lápis', 0.80), Produto('Régua', 0.40)
+carrinho.inserir_produtos(p1, p2, p3)
 carrinho.listar_produtos()
 print('Total:', carrinho.total())
+
+# Composição é uma especialização da agregação.
+# Mas nela, quando o objeto "pai" for apagado, todas
+# as referências dos objetos filhos também são
+# apagadas.
+
+class Cliente:
+  def __init__(self, nome):
+    self.nome = nome
+    self.enderecos = []
+
+  def inserir_endereco(self, rua, numero):
+    self.enderecos.append(Endereco(rua, numero))
+
+  def inserir_endereco_externo(self, endereco):
+    self.enderecos.append(endereco)
+
+  def listar_enderecos(self):
+    for endereco in self.enderecos:
+      print(f'Rua: {endereco.rua}, Número: {endereco.numero}')
+
+  def __del__(self):
+    print(f'Apagando Nome: {self.nome}')
+
+class Endereco:
+    def __init__(self, rua, numero):
+      self.rua = rua
+      self.numero = numero
+
+    def __del__(self):
+      print(f'Apagando Rua: {self.rua}, Número: {self.numero}')
+
+print()
+
+cliente = Cliente('Maria Amélia')
+cliente.inserir_endereco('Major Rolinda da Silva', 54)
+cliente.inserir_endereco('Buenos Aires', 6745)
+endereco_externo = Endereco('Fonte da Saudade', 123213)
+
+cliente.inserir_endereco_externo(endereco_externo)
+cliente.listar_enderecos()
+
+del cliente
+
+print(f'Rua: {endereco_externo.rua}, Número: {endereco_externo.numero}')
+print('Garbage collector apagando...')
