@@ -32,12 +32,13 @@ class C(B):
     super().metodo()         # CLASS B
     print('CLASS C')
 
+# mro = Method Resolution Order
 print(A.mro())
 print(B.mro())
 print(C.mro())
 
 c = C('Atributo 1', 'Atributo 2')
-c.metodo()
+c.metodo() , # A, B, C 
 
 print(c.atributo_a)
 print(c.atributo_b)
