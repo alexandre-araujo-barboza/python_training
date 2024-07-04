@@ -28,8 +28,6 @@ class Veiculo(abc.ABC):
   def __repr__(self):
     class_name = type(self).__name__
     attrs = f'({self._cavalos!r}, {self._torque!r}, {self._marca!r}, {self._modelo!r})'
-    print('Veículo representado como:')
-    print('\t', attrs)
     return f'{class_name}{attrs}'
   
   def __enter__(self, terrain) -> None:
@@ -205,7 +203,7 @@ class Anfibio(Carro, Barco):
 # Carro
 carro = Carro(200, 18.0, 'Mercedez', 'C-500')
 carro(print('Veículo é um carro.'))
-carro.__repr__()
+print(carro)
 carro.ligar()
 carro.__enter__()
 carro.velocidade = 140
@@ -222,7 +220,7 @@ print()
 # Barco
 barco = Barco(160, 11.7, 'Volvo', 'V-30')
 barco(print('Veículo é um barco.'))
-barco.__repr__()
+print(barco)
 barco.ligar()
 barco.__enter__()
 barco.velocidade = 80
@@ -239,7 +237,7 @@ print()
 # Anfíbio
 anfibio = Anfibio(185, 15.2, 'Toyota', 'Moby-Dick')
 anfibio(print('Veículo é anfíbio.'))
-anfibio.__repr__()
+print(anfibio)
 anfibio.ligar()
 anfibio.__enter__('terra')
 anfibio.velocidade = 120
