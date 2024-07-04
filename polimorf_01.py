@@ -16,8 +16,8 @@
 # (*) Princípio da substituição de liskov
 # Objetos de uma superclasse devem ser substituíveis
 # por objetos de uma subclasse sem quebrar a aplicação.
-# Sobrecarga de métodos (overload) 
-# Sobreposição de métodos (override)
+# Sobrecarga de métodos (overload) - Python não permite
+# Sobreposição de métodos (override) - É possível em Python
 
 from abc import ABC, abstractmethod
 
