@@ -11,7 +11,6 @@
 # Você poderá usar seu Enum com type annotations, com isinstance e
 # outras coisas relacionadas com tipo.
 # Para obter os dados:
-
 # membro = Classe(valor), Classe['chave']
 # chave = Classe.chave.name
 # valor = Classe.chave.value
