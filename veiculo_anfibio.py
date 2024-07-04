@@ -31,10 +31,10 @@ class Veiculo(abc.ABC):
     return f'{class_name}{attrs}'
   
   def __enter__(self) -> None:
-    print('Veículo iniciado...')
+    print('Veículo iniciando...')
   
   def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-    print('Veículo finalizado...')
+    print('Veículo finalizando...')
   
   def __del__(self) -> None:
     print('Destruindo veículo...')
