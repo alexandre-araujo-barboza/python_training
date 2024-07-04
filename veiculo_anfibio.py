@@ -1,16 +1,16 @@
 import abc
 
 class Veiculo(abc.ABC):
-  def __init__(self, cavalos: int, torque: float, velocidade: int = 0, rpm: int = 0.0) -> None:
+  def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
     self._cavalos = cavalos
     self._torque = torque
-    self._velocidade = velocidade
-    self._rpm = rpm
+    self._marca = marca
+    self._modelo = modelo
     print('Veiculo criado com:')
     print(f'\tcavalos: {cavalos}')
     print(f'\ttorque: {torque}')
-    print(f'\tvelocidade: {velocidade}')
-    print(f'\trpm: {velocidade}')
+    print(f'\tMarca: {marca}')
+    print(f'\tModelo: {modelo}')
   
   def __call__(self, func):
     def inner(*args, **kwargs):
@@ -30,7 +30,7 @@ class Veiculo(abc.ABC):
   
   def __repr__(self):
     class_name = type(self).__name__
-    attrs = f'({self._cavalos!r}, {self._torque!r}, {self._velocidade!r}, {self._rpm!r})'
+    attrs = f'({self._cavalos!r}, {self._torque!r}, {self._marca!r}, {self._modelo!r})'
     print('Veículo representado como:')
     print('\t', attrs)
     return f'{class_name}{attrs}'
@@ -77,6 +77,14 @@ class Veiculo(abc.ABC):
   def rpm(self):
     return self._rpm
 
+  @property
+  def marca(self):
+    return self._marca
+  
+  @property
+  def modelo(self):
+    return self._modelo
+
   @cavalos.setter
   def cavalos(self, cavalos: int):
     self._cavalos = cavalos
@@ -92,10 +100,18 @@ class Veiculo(abc.ABC):
   @rpm.setter
   def rpm(self, rpm: float):
     self._rpm = rpm
+  
+  @marca.setter
+  def marca(self, marca: str):
+    self._marca = marca
+  
+  @modelo.setter
+  def modelo(self, modelo: str):
+    self._modelo = modelo
 
 class Carro(Veiculo) :
-  def __init__(self, cavalos: int, torque: float, velocidade: int = 0, rpm: int = 0) -> None:
-    super().__init__(cavalos, torque, velocidade, rpm)
+  def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
+    super().__init__(cavalos, torque, marca, modelo)
 
   def __call__(self, func):
     return super().__call__(func)
@@ -125,8 +141,8 @@ class Carro(Veiculo) :
     super().desligar()
 
 class Barco(Veiculo) :
-  def __init__(self, cavalos: int, torque: float, velocidade: int = 0, rpm: int = 0) -> None:
-    super().__init__(cavalos, torque, velocidade, rpm)
+  def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
+    super().__init__(cavalos, torque, marca, modelo)
 
   def __call__(self, func):
     return super().__call__(func)
@@ -156,8 +172,8 @@ class Barco(Veiculo) :
     super().desligar()
 
 class Anfibio(Carro, Barco): 
-  def __init__(self, cavalos: int, torque: float, velocidade: int = 0, rpm: int = 0) -> None:
-    super().__init__(cavalos, torque, velocidade, rpm)
+  def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
+    super().__init__(cavalos, torque, marca, modelo)
   def __call__(self, func):
     return super().__call__(func)
    
@@ -185,7 +201,7 @@ class Anfibio(Carro, Barco):
   def desligar(self) -> None:
     super().desligar()
 
-# carro = Carro(185, 15.2)
+# carro = Carro(185, 15.2, 'TOYOTA', 'Mobile Flex')
 # carro.__repr__()
 # carro.__enter__('terra')
 # carro.ligar()
@@ -198,7 +214,7 @@ class Anfibio(Carro, Barco):
 # carro.desligar()
 # carro.__exit__('terra')
 
-# barco = Barco(185, 15.2)
+# barco = Barco(185, 15.2, 'TOYOTA', 'Mobile Flex')
 # barco.__repr__()
 # barco.__enter__('água')
 # barco.ligar()
@@ -211,7 +227,7 @@ class Anfibio(Carro, Barco):
 # barco.desligar()
 # barco.__exit__('água')
 
-anfibio = Anfibio(185, 15.2)
+anfibio = Anfibio(185, 15.2, 'TOYOTA', 'Mobile Flex')
 anfibio.__repr__()
 anfibio.ligar()
 anfibio.__enter__('terra')
