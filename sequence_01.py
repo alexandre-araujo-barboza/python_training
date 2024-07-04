@@ -47,6 +47,3 @@ print(len(lista))
 for item in lista:
   print(item)
 print('---')
-for item in lista:
-  print(item)
-print('---')
