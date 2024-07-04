@@ -1,6 +1,13 @@
 import abc
 
 class Veiculo(abc.ABC):
+  def __new__(cls, *args):
+    print('Veiculo novo com:')
+    for i, arg in enumerate(args):
+      print(f'\targumento({i + 1}): {arg}')
+    instance = super().__new__(cls)
+    return instance
+  
   def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
     self._cavalos = cavalos
     self._torque = torque
@@ -18,46 +25,27 @@ class Veiculo(abc.ABC):
       return results
     return inner
   
-  def __new__(cls, *args):
-    print('Veiculo novo com:')
-    for arg in args:
-      print(f'\targumento: {arg}')
-    instance = super().__new__(cls)
-    return instance
-  
   def __repr__(self):
     class_name = type(self).__name__
     attrs = f'({self._cavalos!r}, {self._torque!r}, {self._marca!r}, {self._modelo!r})'
     return f'{class_name}{attrs}'
   
   def __enter__(self) -> None:
-    print('Veículo iniciando...')
+    print('Veículo iniciando')
   
   def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-    print('Veículo finalizando...')
+    print('Veículo finalizando')
   
   def __del__(self) -> None:
-    print('Destruindo veículo...')
+    print('Destruindo veículo')
 
   @abc.abstractmethod
   def ligar(self) -> None:
-    print('veículo ligando...')
-  
-  @abc.abstractmethod
-  def acelerar(self, velocidade: int, rpm: int) -> None:
-    print('veículo acelerando...')
-    print(f'\tvelocidade: {velocidade}') 
-    print(f'\trpm: {rpm}')
-  
-  @abc.abstractmethod
-  def freiar(self, velocidade: int, rpm: int) -> None:
-    print('veículo freiando...')
-    print(f'\tvelocidade: {velocidade}') 
-    print(f'\trpm: {rpm}')
+    print('veículo ligando')
   
   @abc.abstractmethod
   def desligar(self) -> None:
-    print('veículo desligando...')
+    print('veículo desligando')
   
   @abc.abstractmethod
   def entrar(self, terrain) -> None:
@@ -66,6 +54,18 @@ class Veiculo(abc.ABC):
   @abc.abstractmethod
   def sair(self, terrain) -> None:
     print(f'Veículo saiu da {terrain}')
+  @abc.abstractmethod
+  
+  def acelerar(self, velocidade: int, rpm: int) -> None:
+    print('veículo acelerando')
+    print(f'\tvelocidade: {velocidade}') 
+    print(f'\trpm: {rpm}')
+  
+  @abc.abstractmethod
+  def freiar(self, velocidade: int, rpm: int) -> None:
+    print('veículo freiando')
+    print(f'\tvelocidade: {velocidade}') 
+    print(f'\trpm: {rpm}')
     
   @property
   def cavalos(self):
@@ -118,13 +118,7 @@ class Veiculo(abc.ABC):
 class Carro(Veiculo) :
   def ligar(self) -> None:
     super().ligar()
-
-  def acelerar(self, velocidade: int, rpm: int) -> None:
-    super().acelerar(velocidade, rpm)
   
-  def freiar(self, velocidade: int, rpm: int) -> None:
-    super().freiar(velocidade, rpm)
-
   def desligar(self) -> None:
     super().desligar()
   
@@ -133,17 +127,17 @@ class Carro(Veiculo) :
 
   def sair(self, terrain='terra') -> None:
     super().sair(terrain)
-   
-class Barco(Veiculo) :
-  def ligar(self) -> None:
-    super().ligar()
-
+  
   def acelerar(self, velocidade: int, rpm: int) -> None:
     super().acelerar(velocidade, rpm)
   
   def freiar(self, velocidade: int, rpm: int) -> None:
     super().freiar(velocidade, rpm)
-
+   
+class Barco(Veiculo) :
+  def ligar(self) -> None:
+    super().ligar()
+  
   def desligar(self) -> None:
     super().desligar()
   
@@ -153,16 +147,16 @@ class Barco(Veiculo) :
   def sair(self, terrain='água') -> None:
     super().sair(terrain)
   
-class Anfibio(Carro, Barco): 
-  def ligar(self) -> None:
-    super().ligar()
-
   def acelerar(self, velocidade: int, rpm: int) -> None:
     super().acelerar(velocidade, rpm)
   
   def freiar(self, velocidade: int, rpm: int) -> None:
     super().freiar(velocidade, rpm)
-
+  
+class Anfibio(Carro, Barco): 
+  def ligar(self) -> None:
+    super().ligar()
+  
   def desligar(self) -> None:
     super().desligar()
   
@@ -171,6 +165,12 @@ class Anfibio(Carro, Barco):
 
   def sair(self, terrain) -> None:
     super().sair(terrain)
+  
+  def acelerar(self, velocidade: int, rpm: int) -> None:
+    super().acelerar(velocidade, rpm)
+  
+  def freiar(self, velocidade: int, rpm: int) -> None:
+    super().freiar(velocidade, rpm)
   
 # Carro
 carro = Carro(200, 18.0, 'Mercedez', 'C-500')
