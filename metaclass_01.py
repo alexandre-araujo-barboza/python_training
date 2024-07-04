@@ -31,13 +31,12 @@ class Meta(type):
   def __new__(mcs, name, bases, dct):
     print('METACLASS NEW')
     cls = super().__new__(mcs, name, bases, dct)
-    cls.attr = 1234
+    cls.attr = 'Família Araujo'
     cls.__repr__ = meu_repr
 
     if 'falar' not in cls.__dict__ or \
       not callable(cls.__dict__['falar']):
       raise NotImplementedError('Implemente falar')
-
     return cls
 
   def __call__(cls, *args, **kwargs):
@@ -64,3 +63,4 @@ class Pessoa(metaclass=Meta):
 
 p1 = Pessoa('Alexandre')
 p1.falar()
+print(p1.attr)
