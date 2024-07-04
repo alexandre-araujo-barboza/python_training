@@ -15,9 +15,6 @@ class Veiculo(abc.ABC):
   def __call__(self, func):
     def inner(*args, **kwargs):
       results = func(*args, **kwargs)
-      print('Veiculo chamado com:')
-      for i, arg in enumerate(args):
-        print(f'\targ_{i+1}: {arg}')
       return results
     return inner
   
@@ -240,7 +237,7 @@ del barco
 print()
 
 # Anfíbio
-anfibio = Anfibio(185, 15.2, 'Toyota', 'Mobi Dick')
+anfibio = Anfibio(185, 15.2, 'Toyota', 'Moby-Dick')
 anfibio(print('Veículo é anfíbio.'))
 anfibio.__repr__()
 anfibio.ligar()
