@@ -177,6 +177,7 @@ class Barco(Veiculo) :
 class Anfibio(Carro, Barco): 
   def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
     super().__init__(cavalos, torque, marca, modelo)
+  
   def __call__(self, func):
     return super().__call__(func)
    
