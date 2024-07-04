@@ -116,24 +116,6 @@ class Veiculo(abc.ABC):
     self._modelo = modelo
 
 class Carro(Veiculo) :
-  def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
-    super().__init__(cavalos, torque, marca, modelo)
-
-  def __call__(self, func):
-    return super().__call__(func)
-   
-  def __new__(cls, *args):
-    return super().__new__(cls, args)
-  
-  def __repr__(self):
-    return super().__repr__()
-  
-  def __enter__(self) -> None:
-    super().__enter__()
-  
-  def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-    super().__exit__(exc_type, exc_val, exc_tb)
-    
   def ligar(self) -> None:
     super().ligar()
 
@@ -153,24 +135,6 @@ class Carro(Veiculo) :
     super().sair(terrain)
    
 class Barco(Veiculo) :
-  def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
-    super().__init__(cavalos, torque, marca, modelo)
-
-  def __call__(self, func):
-    return super().__call__(func)
-   
-  def __new__(cls, *args):
-    return super().__new__(cls, args)
-  
-  def __repr__(self):
-    return super().__repr__()
-  
-  def __enter__(self) -> None:
-    super().__enter__()
-  
-  def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-    super().__exit__(exc_type, exc_val, exc_tb)
-    
   def ligar(self) -> None:
     super().ligar()
 
@@ -190,24 +154,6 @@ class Barco(Veiculo) :
     super().sair(terrain)
   
 class Anfibio(Carro, Barco): 
-  def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
-    super().__init__(cavalos, torque, marca, modelo)
-  
-  def __call__(self, func):
-    return super().__call__(func)
-   
-  def __new__(cls, *args):
-    return super().__new__(cls, args)
-  
-  def __repr__(self):
-    return super().__repr__()
-  
-  def __enter__(self) -> None:
-    super().__enter__()
-  
-  def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-    super().__exit__(exc_type, exc_val, exc_tb)
-    
   def ligar(self) -> None:
     super().ligar()
 
