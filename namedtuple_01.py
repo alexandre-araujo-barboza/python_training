@@ -13,7 +13,7 @@ class Carta(NamedTuple):
   valor: str = 'VALOR'
   naipe: str = 'NAIPE'
 
-as_espadas = Carta('A')
+as_espadas = Carta('A', 'espada')
 
 print(as_espadas._asdict())
 print(as_espadas)
