@@ -205,9 +205,10 @@ class Anfibio(Carro, Barco):
   def desligar(self) -> None:
     super().desligar()
 
-print('\nVeículo é um carro.')
+# Carro
 carro = Carro(200, 18.0, 'Mercedez', 'C-500')
-carro.__call__(carro.__repr__())
+carro(print('Veículo é um carro.'))
+carro.__repr__()
 carro.ligar()
 carro.__enter__()
 carro.velocidade = 140
@@ -219,10 +220,12 @@ carro.freiar(carro.velocidade, carro.rpm)
 carro.__exit__()
 carro.desligar()
 del carro
+print()
 
-print('\nVeículo é um barco.')
+# Barco
 barco = Barco(160, 11.7, 'Volvo', 'V-30')
-barco.__call__(barco.__repr__())
+barco(print('Veículo é um barco.'))
+barco.__repr__()
 barco.ligar()
 barco.__enter__()
 barco.velocidade = 80
@@ -234,10 +237,12 @@ barco.freiar(barco.velocidade, barco.rpm)
 barco.__exit__()
 barco.desligar()
 del barco
+print()
 
-print('\nVeículo é anfíbio.')
-anfibio = Anfibio(185, 15.2, 'Toyota', 'Mobiflex')
-anfibio.__call__(anfibio.__repr__())
+# Anfíbio
+anfibio = Anfibio(185, 15.2, 'Toyota', 'Mobi Dick')
+anfibio(print('Veículo é anfíbio.'))
+anfibio.__repr__()
 anfibio.ligar()
 anfibio.__enter__('terra')
 anfibio.velocidade = 120
@@ -257,3 +262,4 @@ anfibio.acelerar(anfibio.velocidade, anfibio.rpm)
 anfibio.__exit__('água')
 anfibio.desligar()
 del anfibio
+print()
