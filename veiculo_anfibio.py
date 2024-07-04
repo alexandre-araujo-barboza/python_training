@@ -30,11 +30,11 @@ class Veiculo(abc.ABC):
     attrs = f'({self._cavalos!r}, {self._torque!r}, {self._marca!r}, {self._modelo!r})'
     return f'{class_name}{attrs}'
   
-  def __enter__(self, terrain) -> None:
-    print(f'Veículo entrou na: {terrain}')
+  def __enter__(self) -> None:
+    print('Veículo iniciado...')
   
-  def __exit__(self, terrain) -> None:
-    print(f'Veículo saiu da: {terrain}')
+  def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    print('Veículo finalizado...')
   
   def __del__(self) -> None:
     print('Destruindo veículo...')
@@ -58,6 +58,14 @@ class Veiculo(abc.ABC):
   @abc.abstractmethod
   def desligar(self) -> None:
     print('veículo desligando...')
+  
+  @abc.abstractmethod
+  def entrar(self, terrain) -> None:
+    print(f'Veículo entrou na {terrain}')
+  
+  @abc.abstractmethod
+  def sair(self, terrain) -> None:
+    print(f'Veículo saiu da {terrain}')
     
   @property
   def cavalos(self):
@@ -120,11 +128,11 @@ class Carro(Veiculo) :
   def __repr__(self):
     return super().__repr__()
   
-  def __enter__(self, terrain='terra') -> None:
-    super().__enter__(terrain)
+  def __enter__(self) -> None:
+    super().__enter__()
   
-  def __exit__(self, terrain='terra') -> None:
-    super().__exit__(terrain)
+  def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    super().__exit__(exc_type, exc_val, exc_tb)
     
   def ligar(self) -> None:
     super().ligar()
@@ -137,7 +145,13 @@ class Carro(Veiculo) :
 
   def desligar(self) -> None:
     super().desligar()
+  
+  def entrar(self, terrain='terra') -> None:
+    super().entrar(terrain)
 
+  def sair(self, terrain='terra') -> None:
+    super().sair(terrain)
+   
 class Barco(Veiculo) :
   def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
     super().__init__(cavalos, torque, marca, modelo)
@@ -151,11 +165,11 @@ class Barco(Veiculo) :
   def __repr__(self):
     return super().__repr__()
   
-  def __enter__(self, terrain='água') -> None:
-    super().__enter__(terrain)
+  def __enter__(self) -> None:
+    super().__enter__()
   
-  def __exit__(self, terrain='água') -> None:
-    super().__exit__(terrain)
+  def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    super().__exit__(exc_type, exc_val, exc_tb)
     
   def ligar(self) -> None:
     super().ligar()
@@ -168,7 +182,13 @@ class Barco(Veiculo) :
 
   def desligar(self) -> None:
     super().desligar()
+  
+  def entrar(self, terrain='água') -> None:
+    super().entrar(terrain)
 
+  def sair(self, terrain='água') -> None:
+    super().sair(terrain)
+  
 class Anfibio(Carro, Barco): 
   def __init__(self, cavalos: int, torque: float, marca: str, modelo: str) -> None:
     super().__init__(cavalos, torque, marca, modelo)
@@ -182,11 +202,11 @@ class Anfibio(Carro, Barco):
   def __repr__(self):
     return super().__repr__()
   
-  def __enter__(self, terrain) -> None:
-    super().__enter__(terrain)
+  def __enter__(self) -> None:
+    super().__enter__()
   
-  def __exit__(self, terrain) -> None:
-    super().__exit__(terrain)
+  def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    super().__exit__(exc_type, exc_val, exc_tb)
     
   def ligar(self) -> None:
     super().ligar()
@@ -199,21 +219,28 @@ class Anfibio(Carro, Barco):
 
   def desligar(self) -> None:
     super().desligar()
+  
+  def entrar(self, terrain) -> None:
+    super().entrar(terrain)
 
+  def sair(self, terrain) -> None:
+    super().sair(terrain)
+  
 # Carro
 carro = Carro(200, 18.0, 'Mercedez', 'C-500')
 carro(print('Veículo é um carro.'))
 print(carro)
-carro.ligar()
-carro.__enter__()
-carro.velocidade = 140
-carro.rpm = 4100
-carro.acelerar(carro.velocidade, carro.rpm)
-carro.velocidade = 64
-carro.rpm = 2180
-carro.freiar(carro.velocidade, carro.rpm)
-carro.__exit__()
-carro.desligar()
+with carro as obj:
+  carro.ligar()
+  carro.entrar()
+  carro.velocidade = 140
+  carro.rpm = 4100
+  carro.acelerar(carro.velocidade, carro.rpm)
+  carro.velocidade = 64
+  carro.rpm = 2180
+  carro.freiar(carro.velocidade, carro.rpm)
+  carro.sair()
+  carro.desligar()
 del carro
 print()
 
@@ -221,16 +248,17 @@ print()
 barco = Barco(160, 11.7, 'Volvo', 'V-30')
 barco(print('Veículo é um barco.'))
 print(barco)
-barco.ligar()
-barco.__enter__()
-barco.velocidade = 80
-barco.rpm = 2200
-barco.acelerar(barco.velocidade, barco.rpm)
-barco.velocidade = 40
-barco.rpm = 1650
-barco.freiar(barco.velocidade, barco.rpm)
-barco.__exit__()
-barco.desligar()
+with barco as obj:
+  barco.ligar()
+  barco.entrar()
+  barco.velocidade = 80
+  barco.rpm = 2200
+  barco.acelerar(barco.velocidade, barco.rpm)
+  barco.velocidade = 40
+  barco.rpm = 1650
+  barco.freiar(barco.velocidade, barco.rpm)
+  barco.sair()
+  barco.desligar()
 del barco
 print()
 
@@ -238,23 +266,24 @@ print()
 anfibio = Anfibio(185, 15.2, 'Toyota', 'Moby-Dick')
 anfibio(print('Veículo é anfíbio.'))
 print(anfibio)
-anfibio.ligar()
-anfibio.__enter__('terra')
-anfibio.velocidade = 120
-anfibio.rpm = 4000
-anfibio.acelerar(anfibio.velocidade, anfibio.rpm)
-anfibio.velocidade = 80
-anfibio.rpm = 3200
-anfibio.freiar(anfibio.velocidade, anfibio.rpm)
-anfibio.__exit__('terra')
-anfibio.__enter__('água')
-anfibio.velocidade = 60
-anfibio.rpm = 2760
-anfibio.freiar(anfibio.velocidade, anfibio.rpm)
-anfibio.velocidade = 70
-anfibio.rpm = 3000
-anfibio.acelerar(anfibio.velocidade, anfibio.rpm)
-anfibio.__exit__('água')
-anfibio.desligar()
+with anfibio as obj:
+  anfibio.ligar()
+  anfibio.entrar('terra')
+  anfibio.velocidade = 120
+  anfibio.rpm = 4000
+  anfibio.acelerar(anfibio.velocidade, anfibio.rpm)
+  anfibio.velocidade = 80
+  anfibio.rpm = 3200
+  anfibio.freiar(anfibio.velocidade, anfibio.rpm)
+  anfibio.sair('terra')
+  anfibio.entrar('água')
+  anfibio.velocidade = 60
+  anfibio.rpm = 2760
+  anfibio.freiar(anfibio.velocidade, anfibio.rpm)
+  anfibio.velocidade = 70
+  anfibio.rpm = 3000
+  anfibio.acelerar(anfibio.velocidade, anfibio.rpm)
+  anfibio.sair('água')
+  anfibio.desligar()
 del anfibio
 print()
