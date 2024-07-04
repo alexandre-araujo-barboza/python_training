@@ -6,6 +6,7 @@
 # https://docs.python.org/3/library/collections.html#collections.namedtuple
 # https://docs.python.org/3/library/typing.html#typing.NamedTuple
 # https://brasilescola.uol.com.br/curiosidades/baralho.htm
+# from collections import namedtuple
 
 from typing import NamedTuple
 
