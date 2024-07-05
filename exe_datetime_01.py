@@ -25,8 +25,8 @@ while data_parcela < data_final:
 numero_parcelas = len(data_parcelas)
 valor_parcela = valor_total / numero_parcelas
 
-for data in data_parcelas:
-    print(data.strftime('%d/%m/%Y'), f'R$ {valor_parcela:,.2f}')
+for i, data in enumerate(data_parcelas):
+    print(f'{i+1}a Parcela', data.strftime('%d/%m/%Y'), f'R$ {valor_parcela:,.2f}')
 
 print()
 print(
