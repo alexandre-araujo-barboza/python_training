@@ -86,7 +86,7 @@ with open(CAMINHO_ABSOLUTO_ARQUIVO, 'w', encoding='utf-8') as arquivo:
   json.dump(filme, arquivo, ensure_ascii=False, indent=2)
   arquivo.close()
 
-with open(CAMINHO_ABSOLUTO_ARQUIVO, 'r') as arquivo:
+with open(CAMINHO_ABSOLUTO_ARQUIVO, 'r', encoding='utf-8') as arquivo:
   filme_do_json = json.load(arquivo)
 
   print('#' * 80)
