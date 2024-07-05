@@ -12,7 +12,7 @@ parser.add_argument(
   metavar='STRING',
   # default='Olá mundo', # Valor padrão
   required=False,
-   action='append',  # Recebe o argumento mais de uma vez
+  action='append',  # Recebe o argumento mais de uma vez
   # nargs='+', # Recebe mais de um valor
 )
 parser.add_argument(
