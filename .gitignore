@@ -3,6 +3,8 @@
 /package/__pycache__
 /calculadora-imc
 /exe_banco/__pycache__
+/zip_example
+/zip_example_unzipped
 error.log
 teste.txt
 requirements.txt
@@ -14,4 +16,5 @@ context_02.txt
 json_01.json
 csv_01.csv
 string_01.txt
+zip_example.zip
 .env
