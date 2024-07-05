@@ -14,9 +14,9 @@ files = [
 
 merger = PdfMerger()
 for file in files:
-  merger.append(file)  # type: ignore
+  merger.append(file)
 
-merger.write(TARGET_FOLDER / 'merged.pdf')  # type: ignore
+merger.write(TARGET_FOLDER / 'merged.pdf') 
 merger.close()
 
 arr = next(os.walk(TARGET_FOLDER))[2]

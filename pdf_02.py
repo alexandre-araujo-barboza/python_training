@@ -17,7 +17,7 @@ for i, page in enumerate(reader.pages):
 
   with open(TARGET_FOLDER / f'page{i+1}.pdf', 'wb') as arquivo:
     writer.add_page(page)
-    writer.write(arquivo) # type: ignore
+    writer.write(arquivo) 
 
 arr = next(os.walk(TARGET_FOLDER))[2]
 print(arr) 
