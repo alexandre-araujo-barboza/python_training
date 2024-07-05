@@ -27,5 +27,9 @@ for page in reader.pages:
   
   for i, image in enumerate(page.images):
     print(f'Imagem({i+1}) Name =', image.name)
+    
+    with open(TARGET_FOLDER / 'images' / image.name, 'wb') as FP:
+      FP.write(image.data)
+      FP.close()
 
 print('Pages Len:', len(reader.pages))
