@@ -13,3 +13,5 @@ context_01.txt
 context_02.txt
 json_01.json
 csv_01.csv
+string_01.txt
+.env-example
