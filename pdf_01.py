@@ -22,8 +22,10 @@ SOURCE_FOLDER.mkdir(exist_ok=True)
 
 reader = PdfReader(PDF_FILE)
 
-page = reader.pages[0]
-imagem = page.images[0]
+for page in reader.pages:
+  print('Page Text:', page.extract_text())
+  
+  for i, image in enumerate(page.images):
+    print(f'Imagem({i+1}) Name =', image.name)
 
-print(page.extract_text())
-print('Imagem Name =', imagem.name)
+print('Pages Len:', len(reader.pages))
