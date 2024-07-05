@@ -9,7 +9,7 @@ TARGET_FOLDER = ROOT_FOLDER / 'pdf_target'
 
 files = [
     TARGET_FOLDER / 'page1.pdf',
-    TARGET_FOLDER / 'page0.pdf',
+    TARGET_FOLDER / 'page2.pdf',
 ]
 
 merger = PdfMerger()

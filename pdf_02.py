@@ -15,7 +15,7 @@ for i, page in enumerate(reader.pages):
 
   writer = PdfWriter()
 
-  with open(TARGET_FOLDER / f'page{i}.pdf', 'wb') as arquivo:
+  with open(TARGET_FOLDER / f'page{i+1}.pdf', 'wb') as arquivo:
     writer.add_page(page)
     writer.write(arquivo) # type: ignore
 
