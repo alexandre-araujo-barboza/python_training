@@ -33,20 +33,23 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://alexandrebarboza.freevar.com/'  # 'http://127.0.0.1:3333/' # python -m http.server -d C:\Users\Alexandre\Documents\Projetos\Python\Udemy/ 3333
+url = 'https://alexandrebarboza.freevar.com/servicos.php'  # 'http://127.0.0.1:3333/' # python -m http.server -d C:\Users\Alexandre\Documents\Projetos\Python\Udemy\ 3333
 response = requests.get(url)
-bytes_html = response.content
-parsed_html = BeautifulSoup(bytes_html, 'html.parser', from_encoding='utf-8')
+bytes = response.content
+html = BeautifulSoup(bytes, 'html.parser', from_encoding='utf-8')
 
-if parsed_html.title is not None:
-  print(parsed_html.title.text)
+#if html.title is not None:
+#  print(html.title.text)
 
-top_jobs_heading = parsed_html.select_one('#intro > div > div > article > h2')
-
-if top_jobs_heading is not None:
-  article = top_jobs_heading.parent
-
-  if article is not None:
-    for p in article.select('p'):
-      print(re.sub(r'\s{1,}', ' ', p.text).strip())
+#h2 = html.select_one('h2')
+#if h2 is not None:
+#  print(re.sub(r'\s{1,}', ' ', h2.text).strip())
+  
+h3 = html.select_one('h3')
+if h3 is not None:
+  print(re.sub(r'\s{1,}', ' ', h3.text).strip())
+  next = h3.find_next()
+  if next is not None:
+    for block in next.select('blockquote'):
+      print(re.sub(r'\s{1,}', ' ', block.text).strip())
       
