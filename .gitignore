@@ -5,6 +5,9 @@
 /exe_banco/__pycache__
 /zip_example
 /zip_example_unzipped
+/drivers
+index.html
+style.css
 error.log
 teste.txt
 requirements.txt
