@@ -54,8 +54,8 @@ class Veiculo(abc.ABC):
   @abc.abstractmethod
   def sair(self, terrain) -> None:
     print(f'Veículo saiu da {terrain}')
-  @abc.abstractmethod
   
+  @abc.abstractmethod
   def acelerar(self, velocidade: int, rpm: int) -> None:
     print('veículo acelerando')
     print(f'\tvelocidade: {velocidade}') 
