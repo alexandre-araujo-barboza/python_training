@@ -20,13 +20,11 @@ shutil.rmtree(CAMINHO_DESCOMPACTADO, ignore_errors=True)
 # Cria o diretório para a aula
 CAMINHO_ZIP_DIR.mkdir(exist_ok=True)
 
-
 def criar_arquivos(qtd: int, zip_dir: Path):
   for i in range(qtd):
     texto = 'arquivo_%s' % i
     with open(zip_dir / f'{texto}.txt', 'w', encoding='utf-8') as arquivo:
       arquivo.write(texto)
-
 
 criar_arquivos(10, CAMINHO_ZIP_DIR)
 
@@ -34,7 +32,6 @@ criar_arquivos(10, CAMINHO_ZIP_DIR)
 with ZipFile(CAMINHO_COMPACTADO, 'w') as zip:
   for root, dirs, files in os.walk(CAMINHO_ZIP_DIR):
     for file in files:
-      # print(file)
       zip.write(os.path.join(root, file), file)
 
 # Lendo arquivos de um zip
