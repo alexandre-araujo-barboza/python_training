@@ -15,8 +15,6 @@ Path.unlink(CAMINHO_COMPACTADO, missing_ok=True)
 shutil.rmtree(str(CAMINHO_COMPACTADO).replace('.zip', ''), ignore_errors=True)
 shutil.rmtree(CAMINHO_DESCOMPACTADO, ignore_errors=True)
 
-# raise Exception()
-
 # Cria o diretório para a aula
 CAMINHO_ZIP_DIR.mkdir(exist_ok=True)
 
