@@ -10,9 +10,11 @@ TARGET_FOLDER = ROOT_FOLDER / 'pdf_target'
 PDF_FILE = SOURCE_FOLDER / 'R20230210.pdf'
 
 reader = PdfReader(PDF_FILE)
-writer = PdfWriter()
   
 for i, page in enumerate(reader.pages):
+
+  writer = PdfWriter()
+
   with open(TARGET_FOLDER / f'page{i}.pdf', 'wb') as arquivo:
     writer.add_page(page)
     writer.write(arquivo) # type: ignore
