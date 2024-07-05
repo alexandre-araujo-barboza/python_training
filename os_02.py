@@ -33,7 +33,7 @@ def formata_tamanho(tamanho_em_bytes: int, base: int = 1000) -> str:
     return f'{tamanho_final:.2f} {abreviacao_tamanho}'
 
 
-caminho = os.path.join('/Users', 'alexandre', 'Desktop', 'denuncia')
+caminho = os.path.join('/Users', 'alexandre', 'Desktop', 'samples')
 counter = count()
 
 for root, dirs, files in os.walk(caminho):
