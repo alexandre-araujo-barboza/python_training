@@ -28,12 +28,13 @@
 # - Doc: https://www.crummy.com/software/BeautifulSoup/bs4/doc.ptbr/
 # + Instalação
 # - pip install requests types-requests bs4
+# - python -m http.server -d C:\Users\Alexandre\Documents\Projetos\Python\Udemy\ 3333
 import re
 
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://alexandrebarboza.freevar.com/servicos.php'  # 'http://127.0.0.1:3333/' # python -m http.server -d C:\Users\Alexandre\Documents\Projetos\Python\Udemy\ 3333
+url = 'https://alexandrebarboza.freevar.com/servicos.php' 
 response = requests.get(url)
 bytes = response.content
 html = BeautifulSoup(bytes, 'html.parser', from_encoding='utf-8')
