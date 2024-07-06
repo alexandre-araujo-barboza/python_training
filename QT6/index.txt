@@ -9,4 +9,5 @@ Calculadora:
   variables.py - variáveis e método p/ adicionar widgets no vlayout
   display.py - QLineEdit e o display
   info.py - criando um QLabel para mostrar informações
+  styles.py - Estilos do QT for Python
 

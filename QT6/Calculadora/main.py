@@ -7,9 +7,11 @@ from PySide6.QtWidgets import QApplication
 from variables import WINDOW_ICON_PATH
 from display import Display
 from info import Info
+from styles import setupTheme
 
 if __name__ == '__main__':
   app = QApplication(sys.argv)
+  setupTheme()
   window = MainWindow()
   
   # Define o ícone
