@@ -14,8 +14,8 @@ from pathlib import Path
 from PyPDF2 import PdfReader
 
 ROOT_FOLDER = Path(__file__).parent
-SOURCE_FOLDER = ROOT_FOLDER / 'pdf_source'
-TARGET_FOLDER = ROOT_FOLDER / 'pdf_target'
+SOURCE_FOLDER = ROOT_FOLDER / 'PDF' / 'source'
+TARGET_FOLDER = ROOT_FOLDER / 'PDF' / 'target'
 PDF_FILE = SOURCE_FOLDER / 'R20230210.pdf'
 
 SOURCE_FOLDER.mkdir(exist_ok=True)

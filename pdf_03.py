@@ -5,7 +5,7 @@ from pathlib import Path
 from PyPDF2 import PdfMerger
 
 ROOT_FOLDER = Path(__file__).parent
-TARGET_FOLDER = ROOT_FOLDER / 'pdf_target'
+TARGET_FOLDER = ROOT_FOLDER / 'PDF' / 'target'
 
 files = [
     TARGET_FOLDER / 'page1.pdf',
