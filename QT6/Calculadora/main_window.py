@@ -1,6 +1,6 @@
 # Criando a janela principal com QMainWindow, QWidget e QVBoxLayout
 
-from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QMainWindow, QMessageBox, QVBoxLayout, QWidget
 
 class MainWindow(QMainWindow):
   def __init__(self, parent: QWidget | None = None, *args, **kwargs) -> None:
@@ -22,3 +22,6 @@ class MainWindow(QMainWindow):
   
   def addWidgetToVLayout(self, widget: QWidget):
     self.vlayout.addWidget(widget)
+  
+  def makeMsgBox(self):
+    return QMessageBox(self)
