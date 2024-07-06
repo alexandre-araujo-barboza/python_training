@@ -6,4 +6,7 @@ qt_05.py - O básico sobre Signal e Slots
 qt_06.py - Trabalhando com classes e herança no PySide6
 Calculadora:
   main.py, main_window.py - Criando a janela principal com QMainWindow, QWidget e QVBoxLayout
-  variables.py - window icon path  
+  variables.py - variáveis e método p/ adicionar widgets no vlayout
+  display.py - QLineEdit e o display
+  info.py - criando um QLabel para mostrar informações
+
