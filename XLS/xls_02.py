@@ -12,7 +12,7 @@ ROOT_FOLDER = Path(__file__).parent
 WORKBOOK_PATH = ROOT_FOLDER / 'workbook.xlsx'
 
 workbook = Workbook()
-worksheet: Worksheet = workbook.active
+# worksheet: Worksheet = workbook.active
 
 # Nome para a planilha
 sheet_name = 'Planilha de exemplo'
@@ -30,4 +30,6 @@ print('Workbook removed.')
 
 # Criando os cabeçalhos
 worksheet.cell(1, 1, 'Nome')
-print('Cell [Nome] was created.')
+print(f'Cell {worksheet.active_cell} was created.'
+      f' on {workbook.active}') 
+
