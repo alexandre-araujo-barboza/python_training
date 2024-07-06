@@ -1,3 +1,5 @@
+# Módulo principal
+
 import sys
 
 from main_window import MainWindow
@@ -8,6 +10,7 @@ from variables import WINDOW_ICON_PATH
 from display import Display
 from info import Info
 from styles import setupTheme
+from buttons import ButtonsGrid
 
 if __name__ == '__main__':
   app = QApplication(sys.argv)
@@ -21,11 +24,15 @@ if __name__ == '__main__':
   
    # Info
   info = Info('2.0 ^ 10.0 = 1024')
-  window.addToVLayout(info)
+  window.addWidgetToVLayout(info)
   
   # Display
   display = Display()
-  window.addToVLayout(display)
+  window.addWidgetToVLayout(display)
+  
+  # Grid
+  buttonsGrid = ButtonsGrid(display)
+  window.vlayout.addLayout(buttonsGrid)
   
   # Executa tudo
   window.adjustFixedSize()

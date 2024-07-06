@@ -1,3 +1,5 @@
+# QLineEdit e o display
+
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QLineEdit
 from variables import BIG_FONT_SIZE, MINIMUM_WIDTH, TEXT_MARGIN

@@ -1,4 +1,4 @@
-#variáveis e método p/ adicionar widgets no vlayout
+# Variáveis e método p/ adicionar widgets no vlayout
 
 from pathlib import Path
 

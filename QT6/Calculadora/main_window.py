@@ -1,3 +1,5 @@
+# Criando a janela principal com QMainWindow, QWidget e QVBoxLayout
+
 from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget
 
 class MainWindow(QMainWindow):
@@ -18,5 +20,5 @@ class MainWindow(QMainWindow):
     self.adjustSize()
     self.setFixedSize(self.width(), self.height())  
   
-  def addToVLayout(self, widget: QWidget):
+  def addWidgetToVLayout(self, widget: QWidget):
     self.vlayout.addWidget(widget)
