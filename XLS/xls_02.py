@@ -1,8 +1,6 @@
 # openpyxl - criando uma planilha do Excel (Workbook e Worksheet)
 # openpyxl - manipulando as planilhas do Workbook
-# Com essa biblioteca será possível ler e escrever dados em células
-# específicas, formatar células, inserir gráficos,
-# criar fórmulas, adicionar imagens e outros elementos gráficos às suas
+
 from pathlib import Path
 
 from openpyxl import Workbook
