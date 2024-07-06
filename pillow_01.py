@@ -1,5 +1,6 @@
 # Pillow: redimensionando imagens com Python
 # Essa biblioteca é o Photoshop do Python
+
 from pathlib import Path
 
 from PIL import Image
