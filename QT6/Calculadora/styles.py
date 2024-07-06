@@ -23,17 +23,17 @@ qss = f"""
   }}
 """
 
-#def setupTheme():
-#  qdarktheme.setup_theme(
-#    theme='dark',
-#    corner_shape='rounded',
-#    custom_colors={
-#      "[dark]": {
-#        "primary": f"{PRIMARY_COLOR}",
-#      },
-#      "[light]": {
-#        "primary": f"{PRIMARY_COLOR}",
-#      },
-#    },
-#    additional_qss=qss
-#  )
+def setupTheme():
+  qdarktheme.setup_theme(
+    theme='dark',
+    corner_shape='rounded',
+    custom_colors={
+      "[dark]": {
+        "primary": f"{PRIMARY_COLOR}",
+      },
+      "[light]": {
+        "primary": f"{PRIMARY_COLOR}",
+      },
+    },
+    additional_qss=qss
+  )
