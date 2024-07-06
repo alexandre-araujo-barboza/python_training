@@ -1,4 +1,4 @@
-# Variáveis e método p/ adicionar widgets no vlayout
+#variáveis e método p/ adicionar widgets no vlayout
 
 from pathlib import Path
 
@@ -12,8 +12,8 @@ DARKER_PRIMARY_COLOR = '#16658a'
 DARKEST_PRIMARY_COLOR = '#115270'
 
 # Sizing
-BIG_FONT_SIZE = 32
+BIG_FONT_SIZE = 40
 MEDIUM_FONT_SIZE = 24
 SMALL_FONT_SIZE = 18
-TEXT_MARGIN = 15
+TEXT_MARGIN = 5
 MINIMUM_WIDTH = 500
