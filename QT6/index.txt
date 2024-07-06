@@ -1,0 +1,7 @@
+qt_01.py  instalaçãp
+qt_02.py  QApplication e QPushButton
+qt_03.py  QWidget e QLayout de PySide6.QtWidgets
+qt_04.py  QMainWindow e centralWidget
+qt_05.py  O básico sobre Signal e Slots
+qt_06.py  Trabalhando com classes e herança no PySide6
+  
