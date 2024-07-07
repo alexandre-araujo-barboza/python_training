@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from blog.data import posts
 
 def index(request):
     context = {
         'text' : 'Say hello page at blog!',
-        'title' : 'BLOG'
+        'title' : 'BLOG',
+        'posts': posts
     }
     return render(
         request,

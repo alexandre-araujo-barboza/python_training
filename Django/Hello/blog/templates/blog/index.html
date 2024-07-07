@@ -1,6 +1,11 @@
 {% extends 'global/base.html' %}
 
-{% block header %}<span class="blue" id="border-blue">{{ text }}</span>{% endblock header %}
+{% block header %}
+  <span class="blue" id="border-blue">{{ text }}</span>
+{% endblock header %}
+
 {% block posts %}
-  {%include 'global/partials/post.html' %}
+  {% for post in posts %}
+    {%include 'global/partials/post.html' %}
+  {% endfor %}
 {% endblock posts %}
