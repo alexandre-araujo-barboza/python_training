@@ -13,6 +13,19 @@ def index(request):
         context
     )
 
+def post(request, id):
+    
+    context = {
+        'text': f'Say hello to post: {id}',
+        'title' : f'POST:{id}',
+    }
+
+    return render(
+        request,
+        'blog/example.html',
+        context
+    )
+
 def example(request):
     context = {
         'text' : 'Say hello page at blog example!',
