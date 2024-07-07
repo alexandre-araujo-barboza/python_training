@@ -9,3 +9,6 @@ venv\Scripts\activate
 
 python manage.py runserver
 08:09 07/07/2024
+
+python manage.py startapp home
+09:19 07/07/2024
