@@ -1,0 +1,2 @@
+static_global_css
+static_global_images
