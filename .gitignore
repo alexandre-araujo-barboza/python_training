@@ -15,3 +15,8 @@ json_01.json
 csv_01.csv
 string_01.txt
 .env
+/SQL/MySQL/.env
+/SQL/MySQL/mysql_container
+/SQL/MySQL/__pycache__
+/Django/venv
+/Django/Hello/project/__pycache__
