@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 def index(request):
     context = {
-        'text' : 'Say hello page at blog!'
+        'text' : 'Say hello page at blog!',
+        'title' : 'BLOG'
     }
     return render(
         request,
@@ -12,7 +13,8 @@ def index(request):
 
 def example(request):
     context = {
-        'text' : 'Say hello page at blog example!'
+        'text' : 'Say hello page at blog example!',
+        'title' : 'BLOG - EXAMPLE'
     }
     return render(
         request,
