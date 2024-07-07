@@ -1,4 +1,10 @@
 .blue {
-  background-color: blue;
+  background-color: darkblue;
   color: white;
+}
+
+#border-blue {
+  border: 2px solid darkblue;
+  padding: 10px;
+  border-radius: 50px 20px;
 }
