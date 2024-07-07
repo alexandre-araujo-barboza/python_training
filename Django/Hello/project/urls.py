@@ -16,7 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http import HttpResponse
+
+# HTTP Request | HTTP Response
+# Model View Template (MVC)
+
+def home(request):
+    print('home')
+    return HttpResponse('page as home!')
+
+def blog(request):
+    print('blog')
+    return HttpResponse('page as blog!')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('blog/', blog),
+    path('', home),
 ]
