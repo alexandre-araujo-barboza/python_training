@@ -20,5 +20,5 @@ string_01.txt
 /SQL/MySQL/__pycache__
 /Django/venv
 /Django/Hello/project/__pycache__
-/Django/Hello/home/__pycache__/
-/Django/Hello/blog/__pycache__/
+/Django/Hello/home/__pycache__
+/Django/Hello/blog/__pycache__

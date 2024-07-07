@@ -19,9 +19,6 @@ from django.urls import path
 from home import views as home_views
 from blog import views as blog_views
 
-# HTTP Request | HTTP Response
-# Model View Template (MVC)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', blog_views.index),
