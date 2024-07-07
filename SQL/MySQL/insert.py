@@ -31,14 +31,34 @@ with connection:
     )
     data = ("Luiz", 18)
     result = cursor.execute(sql, data)
+    
     print(sql, data)
 
     data = ("João", 42)
     result = cursor.execute(sql, data)
+    
     print(sql, data)
 
     data = ("Sérgio", 18)
     result = cursor.execute(sql, data)
+    
     print(sql, data)
+    
+    sql_many = (
+      f'INSERT INTO {TABLE_NAME} '
+       '(nome, idade) '
+       'VALUES '
+       '(%(name)s, %(age)s) '
+    )
+
+    data_many = (
+      {"name": "Yoko", "age": 33},
+      {"name": "Júlia", "age": 74},
+      {"name": "Rose", "age": 53}
+    )
+
+    result = cursor.executemany(sql_many, data_many)
+    
+    print(sql_many, data_many)
 
     connection.commit()
