@@ -13,19 +13,29 @@ def index(request):
         context
     )
 
-def post(request, id):
-    
+def post(request, post_id):
+    found_post: dict[str, Any] | None = None # type: ignore
+
+    for post in posts:
+        if post['id'] == post_id:
+            found_post = post
+            break
+
+    if found_post is None:
+        raise Exception('Post não existe.')
+
     context = {
-        'text': f'Say hello to post: {id}',
-        'title' : f'POST:{id}',
+        'text': f'Say hello to post: {post_id}',
+        'title' : f'POST: {post_id}',
+        'post' : found_post,
     }
 
     return render(
         request,
-        'blog/example.html',
+        'blog/post.html',
         context
     )
-
+    
 def example(request):
     context = {
         'text' : 'Say hello page at blog example!',
