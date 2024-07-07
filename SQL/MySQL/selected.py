@@ -14,9 +14,10 @@ connection = pymysql.connect(
   charset = 'utf8mb4'
 )
 with connection:
-
-  # Lendo os valores com SELECT
   with connection.cursor() as cursor:
+        
+    # Lendo os valores com SELECT
+  
     menor = int(input('Digite a menor idade: '))
     maior = int(input('Digite a maior idade: '))
     

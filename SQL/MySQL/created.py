@@ -19,6 +19,8 @@ connection = pymysql.connect(
 with connection:
   with connection.cursor() as cursor:
     
+    # Criando uma tabela
+  
     print(cursor)
     
     cursor.execute(

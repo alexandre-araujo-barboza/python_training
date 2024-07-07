@@ -17,6 +17,7 @@ connection = pymysql.connect(
 with connection.cursor() as cursor:
 
   # Editando com UPDATE, WHERE e placeholders no PyMySQL
+  
   sql = (
     f'UPDATE {TABLE_NAME} '
      'SET nome=%s, idade=%s '

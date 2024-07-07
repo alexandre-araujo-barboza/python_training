@@ -15,10 +15,11 @@ connection = pymysql.connect(
   cursorclass = pymysql.cursors.DictCursor,
 )
 
-# Trocando o cursor para retornar dicionários
-# pymysql.cursors.DictCursor
-
 with connection.cursor() as cursor:
+  
+  # Trocando o cursor para retornar dicionários
+  # pymysql.cursors.DictCursor
+
   cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
   for row in cursor.fetchall():
     print(row)

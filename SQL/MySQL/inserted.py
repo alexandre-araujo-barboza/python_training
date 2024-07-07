@@ -18,11 +18,14 @@ with connection:
   with connection.cursor() as cursor:
 
     # CUIDADO: ISSO LIMPA A TABELA
+    
     cursor.execute(f'TRUNCATE TABLE {TABLE_NAME}')
     connection.commit()
-
-  # Começo a manipular dados a partir daqui
+  
   with connection.cursor() as cursor:
+        
+    # Inserindo dados
+
     sql = (
       f'INSERT INTO {TABLE_NAME} '
        '(nome, idade) '

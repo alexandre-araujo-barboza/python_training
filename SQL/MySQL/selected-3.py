@@ -18,10 +18,11 @@ connection = pymysql.connect(
   cursorclass = CURRENT_CURSOR,
 )
 
-# para conjuntos de dados muito grandes
-# SSCursor, SSDictCursor e scroll
-
 with connection.cursor() as cursor:
+  
+  # Para conjuntos de dados muito grandes
+  # SSCursor, SSDictCursor e scroll
+
   cursor = cast(CURRENT_CURSOR, cursor)
   cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
   cursor.scroll(2)

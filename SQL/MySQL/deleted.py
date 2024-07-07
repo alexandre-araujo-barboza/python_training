@@ -17,6 +17,7 @@ connection = pymysql.connect(
 with connection.cursor() as cursor:
 
   # Apagando com DELETE, WHERE e placeholders no PyMySQL
+  
   sql = (
     f'DELETE FROM {TABLE_NAME} '
      'WHERE id = %s'
