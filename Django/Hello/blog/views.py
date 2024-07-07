@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from blog.data import posts
+from typing import Any
 
 def index(request):
     context = {
@@ -14,7 +15,7 @@ def index(request):
     )
 
 def post(request, post_id):
-    found_post: dict[str, Any] | None = None # type: ignore
+    found_post: dict[str, Any] | None = None
 
     for post in posts:
         if post['id'] == post_id:
