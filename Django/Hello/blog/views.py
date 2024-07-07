@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpRequest
 from blog.data import posts
 from typing import Any
 
@@ -14,7 +15,7 @@ def index(request):
         context
     )
 
-def post(request, post_id):
+def post(request: HttpRequest, post_id: int):
     found_post: dict[str, Any] | None = None
 
     for post in posts:
