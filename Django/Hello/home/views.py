@@ -4,7 +4,7 @@ from django.http import HttpResponse
 def index(request):
     return HttpResponse('Hello page as home!')
 
-def exemplo(request):
+def example(request):
     return HttpResponse('Hello page as home (example)!')
 
 
