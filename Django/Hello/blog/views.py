@@ -2,9 +2,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse('Hello page as blog!')
+    return render(
+        request,
+        'blog/index.html'
+    )
 
 def example(request):
-    return HttpResponse('Hello page as blog (example)!')
+    return render(
+        request,
+        'blog/example.html'
+    )
 
 
