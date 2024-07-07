@@ -5,7 +5,7 @@ from typing import Any
 
 def index(request):
     context = {
-        'text' : 'Say hello page at blog!',
+        'text' : 'Say hello to blog page!',
         'title' : 'BLOG',
         'posts': posts
     }
@@ -24,10 +24,10 @@ def post(request: HttpRequest, post_id: int):
             break
 
     if found_post is None:
-        raise Http404('Post não existe.')
+        raise Http404(f'This post ({post_id}) does not exist.')
 
     context = {
-        'text': f'Say hello to post: {post_id}',
+        'text': f'Say hello to post: {post_id}!',
         'title' : f'POST: {post_id}',
         'post' : found_post,
     }
@@ -40,7 +40,7 @@ def post(request: HttpRequest, post_id: int):
     
 def example(request):
     context = {
-        'text' : 'Say hello page at blog example!',
+        'text' : 'Say hello to blog page of example!',
         'title' : 'BLOG - EXAMPLE'
     }
     return render(

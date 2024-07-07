@@ -7,11 +7,7 @@
 {% block posts %}
 <article class="post single-post">
   <header>
-    <h2 class="post__title">
-      <a href="{% url 'blog:post' post.id %}">
-        {{ post.title }}
-      </a>
-    </h2>
+    <h2 class="post__title">{{ post.title }}</h2>
   </header>
   <div class="post__body">{{ post.body }}</div>
 </article>
