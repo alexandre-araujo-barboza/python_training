@@ -30,3 +30,4 @@ string_01.txt
 /Django/Agenda/assets
 /Django/Agenda/uploads
 /Django/Agenda/project/local_settings.py
+/Django/Agenda/contact/views/__pycache__
