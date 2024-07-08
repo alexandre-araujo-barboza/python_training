@@ -27,3 +27,5 @@ string_01.txt
 /Django/Agenda/project/__pycache__
 /Django/Agenda/contact/__pycache__
 /Django/Agenda/contact/migrations/__pycache__
+/Django/Agenda/assets
+/Django/Agenda/uploads

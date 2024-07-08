@@ -23,3 +23,6 @@ python manage.py changepassword alexandre
 
 python manage.py shell
 10:26 08/07/2024
+
+python manage.py collectstatic
+10:57 08/07/2024
