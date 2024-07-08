@@ -29,3 +29,4 @@ string_01.txt
 /Django/Agenda/contact/migrations/__pycache__
 /Django/Agenda/assets
 /Django/Agenda/uploads
+/Django/Agenda/project/local_settings.py
