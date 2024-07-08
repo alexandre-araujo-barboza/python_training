@@ -16,3 +16,7 @@ python manage.py runserver
 python manage.py makemigrations
 python manage.py migrate 
 08:57 08/07/2024
+
+python manage.py createsuperuser
+python manage.py changepassword alexandre
+09:06 08/07/2024
