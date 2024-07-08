@@ -12,3 +12,7 @@ python manage.py startapp home
 
 python manage.py runserver
 08:09 07/07/2024
+
+python manage.py makemigrations
+python manage.py migrate 
+08:57 08/07/2024
