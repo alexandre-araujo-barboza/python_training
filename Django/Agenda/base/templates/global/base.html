@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacts</title>
+  <title>Document</title>
   <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
-  <link rel="shortcut icon" type="image/png" href="{% static 'global/img/icon/agenda.ico' %}"/>
 </head>
 <body>
-  <h1>Contacts</h1>
+  <main class="content">
+    {% block content %}{% endblock content %}
+  </main>
 </body>
 </html>
