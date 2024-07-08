@@ -1,0 +1,4 @@
+base_templates
+base_template_global
+base_static
+base_static_global
