@@ -1,0 +1,3 @@
+base_static_global_css
+base_static_global_images
+
