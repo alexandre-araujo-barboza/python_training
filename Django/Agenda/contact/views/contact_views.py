@@ -28,7 +28,7 @@ def search(request):
     if search_value == '':
         return redirect('contact:index')
 
-    contacts = Contact.objects \
+    page_obj = Contact.objects \
         .filter(show=True)\
         .filter(
             Q(first_name__icontains=search_value) |
@@ -37,9 +37,13 @@ def search(request):
             Q(email__icontains=search_value)
         )\
         .order_by('-id')
+    
+    paginator = Paginator(page_obj, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
 
     context = {
-        'contacts': contacts,
+        'page_obj': page_obj,
         'site_title': ' - Busca'
     }
 
