@@ -22,6 +22,7 @@ def index(request):
         'contact/index.html',
         context
     )
+
 def search(request):
     search_value = request.GET.get('q', '').strip()
 
