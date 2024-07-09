@@ -34,7 +34,7 @@ class ContactForm(forms.ModelForm):
             }
         ),
         label='Nome',
-        help_text='Apenas letras (com acentuação).',
+        help_text='Apenas letras (com acentuação)',
     )
     last_name = forms.CharField(
         widget=forms.TextInput(
@@ -44,18 +44,44 @@ class ContactForm(forms.ModelForm):
             }
         ),
         label='Sobrenome',
-        help_text='Letras (com acentuação) e espaços.',
+        help_text='Letras (com acentuação) e espaços',
     )
     phone = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 'class': 'smallest',
-                'placeholder': 'digte seu telefone.',
+                'placeholder': 'digte seu telefone',
             }
         ),
         label='Telefone',
         help_text='ex: +55(21)99506-8649',
     )
+    email = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'smallest',
+                'placeholder': 'digte seu e-mail',
+            }
+        ),
+        label='E-mail',
+        help_text='digite um formato válido de e-mail',
+    )
+    '''
+    description = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'class': 'smallest',
+                'placeholder': 'entre com uma descrição',
+            }
+        ),
+        label='Descrição',
+        help_text='entre com informações adicionais (opcional)',
+    )
+    category = forms.ChoiceField(
+        label='Categoria',
+        help_text='categoria do contato (opcional)',
+    )
+    '''
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -65,6 +91,9 @@ class ContactForm(forms.ModelForm):
             'first_name',
             'last_name',
             'phone',
+            'email',
+            'description',
+            'category',
         )
     def clean(self):
         cleaned_data = self.cleaned_data
