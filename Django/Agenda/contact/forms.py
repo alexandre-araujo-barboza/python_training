@@ -56,6 +56,7 @@ class ContactForm(forms.ModelForm):
         label='Telefone',
         help_text='ex: +55(21)99506-8649',
     )
+    '''
     email = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -66,7 +67,6 @@ class ContactForm(forms.ModelForm):
         label='E-mail',
         help_text='digite um formato válido de e-mail',
     )
-    '''
     description = forms.CharField(
         widget=forms.Textarea(
             attrs={
