@@ -4,7 +4,7 @@ from contact import views
 app_name = 'contact'
 
 urlpatterns = [
-    
+    path('user/create/', views.register, name='register'),
     path('<int:contact_id>/', views.contact, name='contact'),
     path('contact/<int:contact_id>/update/', views.update, name='update'),
     path('contact/<int:contact_id>/delete/', views.delete, name='delete'),
