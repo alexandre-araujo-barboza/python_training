@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
 from django.urls import reverse
 from contact.models import Contact
 from contact.forms import ContactForm
@@ -15,6 +15,7 @@ def create(request):
         }
         if form.is_valid():
             contact = form.save()
+            messages.success(request, 'Contato incluído com êxito')
             return redirect('contact:update', contact_id=contact.pk)
 
         return render(
@@ -53,6 +54,7 @@ def update(request, contact_id):
 
         if form.is_valid():
             contact = form.save()
+            messages.success(request, 'Contato atualizado com êxito')
             return redirect('contact:update', contact_id=contact.pk)
         
         return render(
