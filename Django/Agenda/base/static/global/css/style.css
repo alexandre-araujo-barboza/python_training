@@ -48,6 +48,10 @@ body {
   background: var(--clr-light-gray);
 }
 
+.smallest {
+  font-size: var(--smallest-font-size);
+}
+
 img,
 svg {
   display: block;

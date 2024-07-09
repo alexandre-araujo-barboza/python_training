@@ -6,32 +6,32 @@ class ContactForm(forms.ModelForm):
     first_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'classe-a classe-b',
-                'placeholder': 'Aqui veio do init',
+                'class': 'smallest',
+                'placeholder': 'digite seu nome',
             }
         ),
         label='Nome',
-        help_text='Texto de ajuda para seu usuário',
+        help_text='Apenas letras (com acentuação).',
     )
     last_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'classe-a classe-b',
-                'placeholder': 'Aqui veio do init',
+                'class': 'smallest',
+                'placeholder': 'digite seu sobrenome',
             }
         ),
         label='Sobrenome',
-        help_text='Texto de ajuda para seu usuário',
+        help_text='Letras (com acentuação) e espaços.',
     )
     phone = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'classe-a classe-b',
-                'placeholder': 'Aqui veio do init',
+                'class': 'smallest',
+                'placeholder': 'digte seu telefone.',
             }
         ),
         label='Telefone',
-        help_text='Texto de ajuda para seu usuário',
+        help_text='ex: +55(21)99506-8649',
     )
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
