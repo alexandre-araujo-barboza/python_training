@@ -69,6 +69,7 @@ class ContactForm(forms.ModelForm):
         ),
         label='E-mail',
         help_text='digite um formato válido de e-mail',
+        error_messages={'invalid': 'formato de e-mail inválido'}
     )
     email.required = False
     
