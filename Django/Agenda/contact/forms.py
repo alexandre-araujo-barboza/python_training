@@ -271,7 +271,7 @@ class RegisterForm(UserCreationForm):
 
 class RegisterUpdateForm(forms.ModelForm):
     first_name = forms.CharField(
-        min_length=2,
+        min_length=3,
         max_length=30,
         required=True,
         help_text='Required.',
@@ -279,9 +279,9 @@ class RegisterUpdateForm(forms.ModelForm):
             'min_length': 'Please, add more than 2 letters.'
         }
     )
-    
+
     last_name = forms.CharField(
-        min_length=2,
+        min_length=3,
         max_length=30,
         required=True,
         help_text='Required.'
