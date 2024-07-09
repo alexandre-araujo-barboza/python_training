@@ -82,6 +82,14 @@ class ContactForm(forms.ModelForm):
         help_text='categoria do contato (opcional)',
     )
     '''
+    picture = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={
+                'accept': 'image/*',
+            }
+        )
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -94,6 +102,7 @@ class ContactForm(forms.ModelForm):
             'email',
             'description',
             'category',
+            'picture',
         )
     def clean(self):
         cleaned_data = self.cleaned_data
