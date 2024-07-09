@@ -36,6 +36,7 @@ class ContactForm(forms.ModelForm):
         label='Nome',
         help_text='Apenas letras (com acentuação)',
     )
+
     last_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -46,6 +47,8 @@ class ContactForm(forms.ModelForm):
         label='Sobrenome',
         help_text='Letras (com acentuação) e espaços',
     )
+    last_name.required = False
+
     phone = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -56,7 +59,7 @@ class ContactForm(forms.ModelForm):
         label='Telefone',
         help_text='ex: +55(21)99506-8649',
     )
-    '''
+    
     email = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -67,6 +70,8 @@ class ContactForm(forms.ModelForm):
         label='E-mail',
         help_text='digite um formato válido de e-mail',
     )
+    email.required = False
+    
     description = forms.CharField(
         widget=forms.Textarea(
             attrs={
@@ -77,22 +82,28 @@ class ContactForm(forms.ModelForm):
         label='Descrição',
         help_text='entre com informações adicionais (opcional)',
     )
+    description.required = False
+
+    '''
     category = forms.ChoiceField(
         label='Categoria',
         help_text='categoria do contato (opcional)',
     )
     '''
+    
     picture = forms.ImageField(
         widget=forms.FileInput(
             attrs={
                 'accept': 'image/*',
             }
-        )
+        ),
+        label='Imagem',
     )
+    picture.required = False
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        
     class Meta:
         model = models.Contact
         fields = (
@@ -104,6 +115,7 @@ class ContactForm(forms.ModelForm):
             'category',
             'picture',
         )
+        
     def clean(self):
         cleaned_data = self.cleaned_data
         first_name = cleaned_data.get('first_name')
@@ -172,7 +184,7 @@ class ContactForm(forms.ModelForm):
     def clean_last_name(self):
         last_name = self.cleaned_data.get('last_name')
          
-        if len(last_name) < 3:
+        if len(last_name) < 3 and len(last_name) > 0:
             self.add_error(
                 'last_name',
                 ValidationError(
