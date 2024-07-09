@@ -6,15 +6,23 @@
     <form 
       action="{% url 'contact:search' %}" 
       method="GET">
-      <input 
-        type="search" 
-        class="search-input"
-        placeholder="Buscar"
-        id="search"
-        name="q"
-        value="{{ request.GET.q.strip }}"
-      >
-      <button type="submit"><i class="fa fa-search"></i></button>
+      <table>
+        <tr>
+          <td> 
+            <input 
+              type="search" 
+              class="search-input"
+              placeholder="Buscar"
+              id="search"
+              name="q"
+              value="{{ request.GET.q.strip }}"
+            >
+          </td>
+          <td>
+            <button type="submit" style="background-color: rgb(230, 230, 245) !important;"><i class="fa fa-search"></i></button>
+          </td>
+        </tr>
+      </table>  
     </form>
   </div>
 </div>

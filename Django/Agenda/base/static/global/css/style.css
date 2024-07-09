@@ -58,6 +58,7 @@ svg {
   max-width: 100%;
 }
 
+/*
 .header {
   background: var(--clr-blue);
   padding: var(--spacing);
@@ -80,6 +81,7 @@ svg {
 .header-link:hover {
   filter: brightness(45%);
 }
+*/
 
 .menu {
   margin: var(--spacing);
