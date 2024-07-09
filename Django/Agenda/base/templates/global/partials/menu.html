@@ -1,10 +1,19 @@
 <div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
+  <a class="active" href="{% url 'contact:index' %}">Contatos</a>
+  <a href="{% url 'contact:create' %}">Novo</a>
+  <a href="#">Login</a>
   <div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Search.." name="search">
+    <form 
+      action="{% url 'contact:search' %}" 
+      method="GET">
+      <input 
+        type="search" 
+        class="search-input"
+        placeholder="Buscar"
+        id="search"
+        name="q"
+        value="{{ request.GET.q.strip }}"
+      >
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
