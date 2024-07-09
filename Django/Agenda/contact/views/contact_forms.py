@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from contact.models import Contact
 
 class ContactForm(forms.ModelForm):
+
     class Meta:
         model = Contact
         fields = (
@@ -33,13 +34,9 @@ class ContactForm(forms.ModelForm):
 
         return super().clean()
 
+
 def create(request):
     if request.method == 'POST':
-        print()
-        print(request.method)
-        print(request.POST.get('first_name'))
-        print(request.POST.get('last_name'))
-        print()
         context = {
             'form': ContactForm(request.POST)
         }
