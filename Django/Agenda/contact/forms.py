@@ -6,7 +6,9 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = models.Contact
         fields = (
-            'first_name', 'last_name', 'phone',
+            'first_name',
+            'last_name',
+            'phone',
         )
 
     def clean(self):
