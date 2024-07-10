@@ -5,9 +5,6 @@ from contact.forms import RegisterForm, RegisterUpdateForm
 
 def register(request):
     form = RegisterForm()
-    
-    messages.info(request, 'Essa é uma informação!')
-    
     if request.method == 'POST':
         form = RegisterForm(request.POST)
 
