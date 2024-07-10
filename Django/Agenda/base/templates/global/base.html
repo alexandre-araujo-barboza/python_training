@@ -5,12 +5,16 @@
 </head>
 <body>
   {% include 'global/partials/menu.html' %}
+  {% include 'global/partials/messages.html' %}
+  
   <main class="content">
     {% block content %}{% endblock content %}
     {% include 'global/partials/pagination.html' %}
   </main>
+  
   <footer>
     {% include 'global/partials/footer.html' %}
   </footer>  
+
 </body>
 </html>
