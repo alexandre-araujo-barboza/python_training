@@ -34,3 +34,4 @@ string_01.txt
 /Django/Blog/project/__pycache__
 /Django/Blog/assets
 /Django/Blog/uploads
+/Django/Blog/env-files/.env
