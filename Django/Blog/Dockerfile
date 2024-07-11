@@ -15,7 +15,7 @@ COPY . /docker
 COPY scripts /docker/scripts
 
 # Entra na pasta djangoapp no container
-WORKDIR /p
+WORKDIR /docker
 
 # A porta 8000 estará disponível para conexões externas ao container
 # É a porta que vamos usar para o Django.
