@@ -1,14 +1,28 @@
 .LOG
 04:33 06/07/2024
 
-django-admin startproject project .
-08:08 07/07/2024
-
 venv\Scripts\activate
+08:09 07/07/2024
+
+django-admin startproject project .
+08:09 07/07/2024
+
+python manage.py startapp home
 08:09 07/07/2024
 
 python manage.py runserver
 08:09 07/07/2024
 
-python manage.py startapp home
-09:19 07/07/2024
+python manage.py makemigrations
+python manage.py migrate 
+08:57 08/07/2024
+
+python manage.py createsuperuser
+python manage.py changepassword alexandre
+09:06 08/07/2024
+
+python manage.py shell
+10:26 08/07/2024
+
+python manage.py collectstatic
+10:57 08/07/2024
