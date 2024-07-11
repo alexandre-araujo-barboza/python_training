@@ -14,9 +14,9 @@ services:
     env_file:
       - ./env-files/.env
     depends_on:
-      - psql
+      - postgres
   psql:
-    container_name: psql
+    container_name: postgres
     image: postgres:13-alpine
     volumes:
       - ./data/postgres/data:/var/lib/postgresql/data/
