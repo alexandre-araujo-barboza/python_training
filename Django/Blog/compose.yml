@@ -21,4 +21,4 @@ services:
     volumes:
       - ./data/postgres/data:/var/lib/postgresql/data/
     env_file:
-      - ./dotenv_files/.env
+      - ./env-files/.env
