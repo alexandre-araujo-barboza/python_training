@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   app:
-    container_name: blog-app
+    container_name: django-blog
     build:
       context: .
     ports:
