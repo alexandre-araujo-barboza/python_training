@@ -1,14 +1,14 @@
 version: '3.9'
 
 services:
-  djangoapp:
-    container_name: djangoapp
+  app:
+    container_name: app
     build:
       context: .
     ports:
       - 8000:8000
     volumes:
-      - ./djangoapp:/app
+      - ./app:/app
       - ./data/web/assets:/data/web/assets/
       - ./data/web/uploads:/data/web/uploads/
     env_file:
