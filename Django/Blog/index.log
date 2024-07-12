@@ -40,5 +40,13 @@ docker ps -a
 10:59 12/07/2024
 
 docker-compose run --rm django-blog migrate.sh
+13:50 12/07/2024
 
 docker-compose run --rm django-blog makemigrations.sh
+13:50 12/07/2024
+
+docker-compose run --rm django-blog python manage.py startapp blog
+13:50 12/07/2024
+
+docker-compose run --rm django-blog python manage.py createsuperuser
+13:50 12/07/2024
