@@ -30,5 +30,11 @@ python manage.py collectstatic
 docker-compose up --build
 10:57 12/07/2024
 
+docker-compose up -d
+10:57 12/07/2024
+
+docker-compose down
+10:58 12/07/2024
+
 docker ps -a
 10:59 12/07/2024
