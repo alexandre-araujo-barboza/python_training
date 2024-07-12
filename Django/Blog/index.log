@@ -26,3 +26,6 @@ python manage.py shell
 
 python manage.py collectstatic
 10:57 08/07/2024
+
+docker-compose up --build
+10:57 12/07/2024
