@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class MenuLink(models.Model):
     class Meta:
         verbose_name = 'Menu Link'
