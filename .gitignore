@@ -31,7 +31,6 @@ string_01.txt
 /Django/Agenda/uploads
 /Django/Agenda/project/local_settings.py
 /Django/Agenda/contact/views/__pycache__
-/Django/Blog/project/__pycache__
-/Django/Blog/assets
-/Django/Blog/uploads
-/Django/Blog/env-files/.env
+/Django/Blog/app/assets
+/Django/Blog/app/uploads
+/Django/Blog/app/__pycache__

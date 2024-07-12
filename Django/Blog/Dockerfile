@@ -11,11 +11,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Copia a pasta "djangoapp" e "scripts" para dentro do container.
-COPY . /docker
-COPY scripts /docker/scripts
+COPY app /app
+COPY scripts /scripts
 
 # Entra na pasta djangoapp no container
-WORKDIR /docker
+WORKDIR /app
 
 # A porta 8000 estará disponível para conexões externas ao container
 # É a porta que vamos usar para o Django.
@@ -26,18 +26,18 @@ EXPOSE 8000
 # imagem como uma nova camada.
 # Agrupar os comandos em um único RUN pode reduzir a quantidade de camadas da 
 # imagem e torná-la mais eficiente.
-RUN python -m venv /docker/venv && \
-  /docker/venv/bin/pip install --upgrade pip && \
-  /docker/venv/bin/pip install -r /requirements.txt && \
+RUN python -m venv /venv && \
+  /venv/bin/pip install --upgrade pip && \
+  /venv/bin/pip install -r /app/requirements.txt && \
   adduser --disabled-password --no-create-home duser && \
-  mkdir -p /docker/data/web/assets && \
-  mkdir -p /docker/data/web/uploads && \
+  mkdir -p /data/web/assets && \
+  mkdir -p /data/web/uploads && \
   chown -R duser:duser /venv && \
-  chown -R duser:duser /docker/data/web/assets && \
-  chown -R duser:duser /docker/data/web/uploads && \
-  chmod -R 755 /docker/data/web/assets && \
-  chmod -R 755 /docker/data/web/uploads && \
-  chmod -R +x /docker/scripts
+  chown -R duser:duser /data/web/assets && \
+  chown -R duser:duser /data/web/uploads && \
+  chmod -R 755 /data/web/assets && \
+  chmod -R 755 /data/web/uploads && \
+  chmod -R +x /scripts
 
 # Adiciona a pasta scripts e venv/bin 
 # no $PATH do container.
