@@ -23,9 +23,6 @@ def index(request):
     )
 
 def page(request):
-    paginator = Paginator(posts, 9)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
     return render(
         request,
         'blog/pages/page.html',
