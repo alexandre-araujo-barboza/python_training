@@ -93,7 +93,6 @@ def tag(request, slug):
 
 def search(request):
     search_value = request.GET.get('search', '').strip()
-
     posts = (
         Post.objects.get_published()
         .filter(
@@ -102,7 +101,6 @@ def search(request):
             Q(content__icontains=search_value)
         )[:PER_PAGE]
     )
-
     return render(
         request,
         'blog/pages/index.html',
