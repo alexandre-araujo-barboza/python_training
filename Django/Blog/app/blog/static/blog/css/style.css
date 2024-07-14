@@ -201,6 +201,10 @@ html,
   padding-bottom: var(--spacing-base);
 }
 
+.mt-base {
+  margin-top: var(--spacing-base);
+}
+
 .center {
   text-align: center;
 }
@@ -476,8 +480,4 @@ html,
 
 img {
   margin: 0 auto;
-}
-
-.mt-base {
-  margin-top: var(--spacing-base);
 }
