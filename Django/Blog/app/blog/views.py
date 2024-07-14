@@ -1,13 +1,11 @@
-from django.core.paginator import Paginator
 from django.db.models import Q
-from django.db import models
 from blog.models import Page, Post
 from django.contrib.auth.models import User
 from django.views.generic import DetailView, ListView
 from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 
 PER_PAGE = 9
 
@@ -24,6 +22,23 @@ class PostListView(ListView):
         })
         return context
 
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/pages/post.html'
+    context_object_name = 'post'
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        ctx = super().get_context_data(**kwargs)
+        post = self.get_object()
+        page_title = f'{post.title} - Post - '  # type: ignore
+        ctx.update({
+            'page_title': page_title,
+        })
+        return ctx
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return super().get_queryset().filter(is_published=True)
+    
 class CreatedByListView(PostListView):
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -93,24 +108,6 @@ class PageDetailView(DetailView):
 
     def get_queryset(self) -> QuerySet[Any]:
         return super().get_queryset().filter(is_published=True)
-
-def post(request, slug):
-    post_obj = (
-        Post.objects.get_published()
-        .filter(slug=slug)
-        .first()
-    )
-    if post_obj is None:
-        raise Http404()
-    page_title = f'{post_obj.title} - Post - '
-    return render(
-        request,
-        'blog/pages/post.html',
-        {
-           'post': post_obj,
-           'page_title': page_title,
-        }
-    )
 
 class TagListView(PostListView):
     allow_empty = False
