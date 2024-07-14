@@ -40,6 +40,7 @@ class PostDetailView(DetailView):
         return super().get_queryset().filter(is_published=True)
     
 class CreatedByListView(PostListView):
+    
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self._temp_context: dict[str, Any] = {}
@@ -129,6 +130,7 @@ class TagListView(PostListView):
         return ctx
 
 class SearchListView(PostListView):
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._search_value = ''
