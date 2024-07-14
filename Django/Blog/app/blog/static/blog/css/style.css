@@ -477,3 +477,7 @@ html,
 img {
   margin: 0 auto;
 }
+
+.mt-base {
+  margin-top: var(--spacing-base);
+}
