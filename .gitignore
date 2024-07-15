@@ -31,7 +31,13 @@ string_01.txt
 /Django/Agenda/uploads
 /Django/Agenda/project/local_settings.py
 /Django/Agenda/contact/views/__pycache__
+/Django/Blog/project/__pycache__
 /Django/Blog/app/assets
 /Django/Blog/app/uploads
 /Django/Blog/app/__pycache__
 /Django/Blog/data
+/Django/E-commerce/project/__pycache__
+/Django/E-commerce/order/__pycache__
+/Django/E-commerce/product/__pycache__
+/Django/E-commerce/store/__pycache__
+/Django/E-commerce/user/__pycache__
