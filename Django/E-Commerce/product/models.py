@@ -16,7 +16,22 @@ class Product(models.Model):
             ('S', 'Simple'),
         )
     )
+    
+    @staticmethod
+    def resize_image(img, new_with=800):
+        print(img.name)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        max_image_size = 800 
+
+        if self.image:
+            self.resize_image(self.image, max_image_size) 
+
+    def __str__(self):
+        return self.name
+    
 """
         Variacao:
             nome - char
