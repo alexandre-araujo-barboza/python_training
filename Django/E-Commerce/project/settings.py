@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'product',
+    
     # TODO: Remove Debug Tool Bar on deploy
     # Debug Tool Bar need to be a last!
     'debug_toolbar',
