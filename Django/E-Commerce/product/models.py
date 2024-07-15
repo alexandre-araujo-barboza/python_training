@@ -4,6 +4,10 @@ from PIL import Image
 import os
 
 class Product(models.Model):
+    class Meta:
+        verbose_name = 'Produto'
+        verbose_name_plural = 'Produtos'
+
     name = models.CharField(max_length=255)
     short_description = models.TextField(max_length=255)
     long_description = models.TextField()
@@ -38,9 +42,7 @@ class Product(models.Model):
      
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-
         max_image_size = 800 
-
         if self.image:
             self.resize_image(self.image, max_image_size) 
 
@@ -48,6 +50,10 @@ class Product(models.Model):
         return self.name
 
 class Variation(models.Model):
+    class Meta:
+        verbose_name = 'Variação'
+        verbose_name_plural = 'Variações'
+    
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, blank=True, null=True)
     price = models.FloatField()
