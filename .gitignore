@@ -37,8 +37,9 @@ string_01.txt
 /Django/Blog/app/__pycache__
 /Django/Blog/data
 /Django/E-commerce/project/__pycache__
-/Django/E-commerce/order/__pycache__
 /Django/E-commerce/product/__pycache__
+/Django/E-commerce/order/__pycache__
 /Django/E-commerce/store/__pycache__
 /Django/E-commerce/user/__pycache__
 /Django/E-Commerce/product/migrations/__pycache__
+/Django/E-commerce/order/migrations/__pycache__
