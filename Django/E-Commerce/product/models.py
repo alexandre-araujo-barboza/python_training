@@ -1,4 +1,7 @@
 from django.db import models
+from django.conf import settings
+from PIL import Image
+import os
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -19,8 +22,12 @@ class Product(models.Model):
     
     @staticmethod
     def resize_image(img, new_with=800):
-        print(img.name)
-
+        img_full_path = os.path.join(settings.MEDIA_ROOT, img.name)
+        img_pil = Image.open(img_full_path)
+        original_width, original_height = img_pil.size
+        print("Tamanho da imagem:") 
+        print(original_width, original_height) 
+        print("==================")
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
