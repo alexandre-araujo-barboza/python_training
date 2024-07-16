@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #TODO: Remover no Deploy (precisa ser o último)
+    # Remover no Deploy (precisa ser o último)
     'debug_toolbar',
 ]
 
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #TODO: Remover no Deploy
+    # Remover no Deploy
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
@@ -162,7 +162,7 @@ SESSION_SAVE_EVERY_REQUEST = False
 # SESSION_ENGINE = "django.contrib.sessions.backends.file"
 # SESSION_FILE_PATH = '/home/luizotavio/Desktop/temp'
 
-#TODO: Remover no Deploy
+# Remover no Deploy
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
