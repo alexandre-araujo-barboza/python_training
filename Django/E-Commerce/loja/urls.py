@@ -1,5 +1,5 @@
 """
-URL configuration for project project.
+URL configuration for loja project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# TODO: Remove Debug Tool Bar To Deploy
+#TODO: Remover no Deploy
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
