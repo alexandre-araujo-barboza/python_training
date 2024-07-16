@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 class Order(models.Model):
     class Meta:
@@ -25,7 +25,7 @@ class Order(models.Model):
     def __str__(self):
         out = _("Order")
         return f'{out} N. {self.pk}' 
-
+    
 class ItemOrder(models.Model):
     class Meta:
         verbose_name = 'Item do Pedido'
@@ -42,5 +42,5 @@ class ItemOrder(models.Model):
     image  = models.CharField(max_length=2000) 
 
     def __str__(self):
-        out = _("of Order")
-        return f'Item {out} N. {self.order}' 
+        out = _("Detail of order")
+        return f'{out} N. {self.order}' 

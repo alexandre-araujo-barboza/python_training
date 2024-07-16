@@ -21,3 +21,9 @@ python manage.py createsuperuser
 
 python manage.py runserver
 08:10 07/07/2024
+
+python manage.py makemessages -l 'pt_BR'
+21:41 15/07/2024
+
+python manage.py compilemessages
+21:42 15/07/2024

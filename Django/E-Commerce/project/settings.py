@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
+    'django.contrib.admindocs',
     'product',
     'order',
-     
+
     # TODO: Remove Debug Tool Bar on deploy
     # Debug Tool Bar need to be a last!
     'debug_toolbar',
@@ -114,14 +118,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'pt-BR'
+LANGUAGE_CODE = 'pt-br'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('pt', 'Portuguese'),
+]
 
 TIME_ZONE = 'America/Sao_Paulo'
-
+USE_L10N = True
 USE_I18N = True
-
 USE_TZ = True
-
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
