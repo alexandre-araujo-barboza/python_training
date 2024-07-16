@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.forms import ValidationError
+from utils.validacpf import valida_cpf
+import re
 class Perfil(models.Model):
     class Meta:
         verbose_name = 'Perfil'
@@ -51,8 +53,14 @@ class Perfil(models.Model):
     )
     
     def __str__(self):
-        return f'{self.usuario.first_name} {self.usuario.last_name}'             
+        return f'{self.usuario}'             
    
     def clean(self):
-        pass
+        error_messages = {}
+        if not valida_cpf(self.cpf):
+            error_messages['cpf'] = 'Digite um CPF válido'
+        if re.search(r'[^0-9]', self.cep) or len(self.cep) < 8: 
+            error_messages['cep'] = 'CEP inválido, digite os 8 números'
+        if error_messages:
+            raise ValidationError(error_messages)        
  
