@@ -3,24 +3,24 @@ from django.conf import settings
 from PIL import Image
 import os
 
-class Product(models.Model):
+class Produto(models.Model):
     class Meta:
         verbose_name = 'Produto'
         verbose_name_plural = 'Produtos'
 
-    name = models.CharField(max_length=255)
-    short_description = models.TextField(max_length=255)
-    long_description = models.TextField()
-    image = models.ImageField(upload_to='product_images/%Y/%m/', blank=True, null=True)
+    nome = models.CharField(max_length=255)
+    descricao_curta = models.TextField(max_length=255)
+    descricao_longa = models.TextField()
+    imagem = models.ImageField(upload_to='produto_imagens/%Y/%m/', blank=True, null=True)
     slug = models.SlugField(unique=True)
-    price_marketing = models.FloatField()
-    price_marketing_promotional = models.FloatField(default=0)
-    type = models.CharField(
+    preco_marketing = models.FloatField()
+    preco_marketing_promocional = models.FloatField(default=0)
+    tipo = models.CharField(
         default='V',
         max_length=1,
         choices=(
-            ('V', 'Variable'),
-            ('S', 'Simple'),
+            ('V', 'Variável'),
+            ('S', 'Simples'),
         )
     )
     
@@ -47,19 +47,19 @@ class Product(models.Model):
             self.resize_image(self.image, max_image_size) 
 
     def __str__(self):
-        return self.name
+        return self.nome
 
-class Variation(models.Model):
+class Variacao(models.Model):
     class Meta:
         verbose_name = 'Variação'
         verbose_name_plural = 'Variações'
     
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    price = models.FloatField()
-    price_promotional = models.FloatField(default=0)
-    stock = models.PositiveIntegerField(default=1)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    nome = models.CharField(max_length=50, blank=True, null=True)
+    preco = models.FloatField()
+    preco_promotional = models.FloatField(default=0)
+    estoque = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return self.name or self.product.name
+        return self.nome or self.produto.nome
     

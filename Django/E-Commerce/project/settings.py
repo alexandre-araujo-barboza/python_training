@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.admindocs',
-    'product',
-    'order',
+    'loja',
+    'produto',
+    'pedido',
+    'perfil',
 
     # TODO: Remove Debug Tool Bar on deploy
     # Debug Tool Bar need to be a last!
