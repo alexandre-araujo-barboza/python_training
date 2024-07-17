@@ -40,7 +40,15 @@ class Produto(models.Model):
             optimize=True,
             quality=50,
         )
-     
+    
+    def format_price_marketing(self):
+        return f'R$ {self.preco_marketing:.2f}'.replace('.', ',')
+    format_price_marketing.short_description = 'Preço'
+    
+    def format_price_marketing_promotional(self):
+        return f'R$ {self.preco_marketing_promocional:.2f}'.replace('.', ',')
+    format_price_marketing_promotional.short_description = 'Preço promoção'
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = f'{slugify(self.nome)}-{shortuuid.uuid()}'

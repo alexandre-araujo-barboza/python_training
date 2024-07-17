@@ -9,8 +9,8 @@ class ProdutoAdmin(admin.ModelAdmin):
     list_display = [
         'nome',
         'descricao_curta',
-        'preco_marketing',
-        'preco_marketing_promocional',
+        'format_price_marketing',
+        'format_price_marketing_promotional',
     ]
     inlines = [
         VariacaoInLine, 
