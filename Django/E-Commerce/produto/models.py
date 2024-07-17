@@ -3,7 +3,7 @@ from django.conf import settings
 from django.utils.text import slugify
 from PIL import Image
 import os
-
+import shortuuid
 class Produto(models.Model):
     class Meta:
         verbose_name = 'Produto'
@@ -43,12 +43,12 @@ class Produto(models.Model):
      
     def save(self, *args, **kwargs):
         if not self.slug:
-            slug = f'{slugify(self.nome)}-{self.pk}'
+            slug = f'{slugify(self.nome)}-{shortuuid.uuid()}'
             self.slug = slug
         super().save(*args, **kwargs)
         max_image_size = 800 
-        if self.image:
-            self.resize_image(self.image, max_image_size) 
+        if self.imagem:
+            self.resize_image(self.imagem, max_image_size) 
 
     def __str__(self):
         return self.nome
