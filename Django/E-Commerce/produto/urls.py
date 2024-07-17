@@ -10,7 +10,7 @@ urlpatterns = [
         name='lista'
     ),
     path(
-        '<slug>/',
+        '<slug>',
         views.ProductDetails.as_view(),
         name='detalhe'),
     path(
