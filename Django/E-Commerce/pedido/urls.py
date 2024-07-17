@@ -10,9 +10,9 @@ urlpatterns = [
         name='pagar'
     ),
     path(
-        'fecharpedido/',
+        'fechar/',
         views.OrderClose.as_view(),
-        name='fecharpedido'
+        name='fechar'
     ),
     path(
         'detalhes/',
