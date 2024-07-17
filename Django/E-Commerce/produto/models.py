@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
 from PIL import Image
 import os
 
@@ -12,7 +13,7 @@ class Produto(models.Model):
     descricao_curta = models.TextField(max_length=255, verbose_name='descrição curta')
     descricao_longa = models.TextField(verbose_name='descrição longa')
     imagem = models.ImageField(upload_to='produto_imagens/%Y/%m/', blank=True, null=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
     preco_marketing = models.FloatField(verbose_name='preço marketing')
     preco_marketing_promocional = models.FloatField(default=0, verbose_name='preço marketing promocional')
     tipo = models.CharField(
@@ -41,6 +42,9 @@ class Produto(models.Model):
         )
      
     def save(self, *args, **kwargs):
+        if not self.slug:
+            slug = f'{slugify(self.nome)}-{self.pk}'
+            self.slug = slug
         super().save(*args, **kwargs)
         max_image_size = 800 
         if self.image:
