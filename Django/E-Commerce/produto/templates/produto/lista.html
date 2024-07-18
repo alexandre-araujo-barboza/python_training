@@ -34,7 +34,10 @@
         <div
           class="card-footer bg-transparent border-top-light-custom text-center"
         >
-          <a href="post.html" class="btn btn-primary btn-sm m-1 btn-block">
+          <a
+            href="{{ produto.slug }}"
+            class="btn btn-primary btn-sm m-1 btn-block"
+          >
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             Comprar
           </a>
@@ -42,6 +45,11 @@
       </div>
       {% endfor %}
     </div>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col d-flex justify-content-center">
+    {% include 'partials/pagination.html' %}
   </div>
 </div>
 {% endblock %}
