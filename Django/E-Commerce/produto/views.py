@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.core import serializers
 from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
-from django.forms.models import model_to_dict
 from pprint import pprint
 from . import models
 
@@ -40,7 +38,6 @@ class ProductAddToCart(View):
         produto_id = produto.id
         produto_nome = produto.nome
         variacao_nome = variacao.nome or ''
-        variacao_id = variacao.id
         preco_unitario = variacao.preco
         preco_unitario_promocional = variacao.preco_promocional
         slug = produto.slug 
@@ -89,8 +86,7 @@ class ProductAddToCart(View):
             }
             
         self.request.session.save()
-        pprint(carrinho)
-        return HttpResponse(f'{variacao.produto} {variacao.nome}')
+        return redirect(http_referer)
 class ProductRemoveFromCart(View):
 
     def get(self, *args, **kargs):
