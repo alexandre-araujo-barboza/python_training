@@ -31,6 +31,7 @@
         {% endif %}
       </p>
       <form action="/addtocart/" id="form-add-to-cart">
+        {% if produto.tipo == 'V' %}
         <div class="form-group">
           <select
             id="select-variacoes"
@@ -38,8 +39,6 @@
             class="form-control form-control-lg"
           >
             {% for variacao in produto.variacao_set.all reversed %}
-            <!-- variação -->
-            {% if variacao.preco_promocional %}
             <option
               data-preco="{{ variacao.preco | price_format}}"
               data-preco-promocional="{{ variacao.preco_promocional | price_format }}"
@@ -47,12 +46,10 @@
             >
               {{ variacao.nome }}
             </option>
-            {% endif %}
-            <!-- fim da variação -->
             {% endfor %}
           </select>
         </div>
-
+        {% endif %}
         <div class="text-left">
           <button type="submit" class="btn btn-primary btn-lg btn-block">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
