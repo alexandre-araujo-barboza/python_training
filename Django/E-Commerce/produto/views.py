@@ -102,7 +102,7 @@ class ProductRemoveFromCart(View):
 class ProductCart(View):
 
     def get(self, *args, **kargs):
-        return HttpResponse('carrinho')
+        return render(self.request, 'produto/carrinho.html')
 
 class ProductFinish(View):
 
