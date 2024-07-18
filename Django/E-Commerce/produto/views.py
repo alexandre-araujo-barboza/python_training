@@ -55,6 +55,7 @@ class ProductAddToCart(View):
             self.request.session['carrinho'] = {}
             self.request.session.save()
         carrinho = self.request.session['carrinho']
+        flag_limit_in_stock = False
         if variacao_id in carrinho:
             # existe no carrinho
             quantidade_atual = carrinho[variacao_id]['quantidade']
@@ -65,7 +66,8 @@ class ProductAddToCart(View):
                     f'Não temos {quantidade_atual} desse produto no estoque,'
                     f' foram adicionadas {variacao_estoque} unidades.'
                  )
-                quantidade_atual = variacao_estoque 
+                quantidade_atual = variacao_estoque
+                flag_limit_in_stock = True 
             carrinho[variacao_id]['quantidade'] = quantidade_atual
             carrinho[variacao_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
             carrinho[variacao_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual     
@@ -84,7 +86,12 @@ class ProductAddToCart(View):
                 'slug' : slug, 
                 'imagem' : imagem,
             }
-            
+        if not flag_limit_in_stock:
+            messages.success (
+                self.request,
+                f'Adicionamos no seu carrinho o produto {produto_nome} do tipo'
+                f' {variacao_nome}.'
+            )
         self.request.session.save()
         return redirect(http_referer)
 class ProductRemoveFromCart(View):
