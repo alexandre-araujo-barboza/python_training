@@ -31,7 +31,10 @@ Produto {% endblock title %} {% block content %}
         </span>
         {% endif %}
       </p>
-      <form action="/addtocart/" id="form-add-to-cart">
+      <form
+        action="{% url 'produto:adicionaraocarrinho' %}"
+        id="form-add-to-cart"
+      >
         {% if produto.tipo == 'V' %}
         <div class="form-group">
           <select

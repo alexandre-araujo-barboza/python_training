@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views import View
 from django.http import HttpResponse
+from django.contrib import messages
 from . import models
 
 class ProductsList(ListView):
@@ -17,10 +18,13 @@ class ProductDetails(DetailView):
     context_object_name = 'produto'
     slug_url_kwarg = 'slug'
 class ProductAddToCart(View):
-
+    
     def get(self, *args, **kargs):
-        return HttpResponse('adicionar')
-
+        messages.success(
+            self.request,
+            'mensagem de sucesso'
+        )
+        return redirect(self.request.META['HTTP_REFERER'])
 class ProductRemoveFromCart(View):
 
     def get(self, *args, **kargs):

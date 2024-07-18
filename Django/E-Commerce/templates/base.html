@@ -8,7 +8,10 @@
   <body>
     {% include 'partials/menu.html' %}
     <main class="container-fluid mt-4 mb-4">
+      {% include 'partials/messages.html' %}
+      <!--conteúdo -->
       {% block content %}{% endblock content %}
+      <!--fim conteúdo -->
     </main>
     {% include 'partials/footer.html' %}
   </body>
