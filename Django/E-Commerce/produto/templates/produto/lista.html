@@ -1,9 +1,13 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 <div class="row">
   <div class="col-lg-12">
     <div class="card-columns">
       <div class="card">
-        <img class="card-img-top" src="imgs/squared.jpg" alt="Card image cap" />
+        <img
+          class="card-img-top"
+          src="{% static 'assets/custom/img/squared.jpg'%}"
+          alt="Card image cap"
+        />
         <div class="card-body">
           <h5 class="card-title">Card title that wraps to a new line</h5>
           <p class="card-text">
