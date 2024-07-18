@@ -9,7 +9,7 @@ class Produto(models.Model):
     class Meta:
         verbose_name = 'Produto'
         verbose_name_plural = 'Produtos'
-
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=255)
     descricao_curta = models.TextField(max_length=255, verbose_name='descrição curta')
     descricao_longa = models.TextField(verbose_name='descrição longa')
@@ -51,9 +51,11 @@ class Produto(models.Model):
     format_price_marketing_promotional.short_description = 'Preço promoção'
     
     def save(self, *args, **kwargs):
-        if not self.slug:
+        if not self.id :
             slug = f'{slugify(self.nome)}-{shortuuid.uuid()}'
-            self.slug = slug
+        else:
+            slug = f'{slugify(self.nome)}-{self.id}'
+        self.slug = slug
         super().save(*args, **kwargs)
         max_image_size = 800 
         if self.imagem:
