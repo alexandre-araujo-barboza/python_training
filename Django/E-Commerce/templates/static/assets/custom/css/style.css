@@ -71,13 +71,6 @@ ul.errorlist li {
     }
 }
 
-@media (min-width: 75em) {
-    .card-columns {
-        -webkit-column-count: 5;
-        -moz-column-count: 5;
-        column-count: 5;
-    }
-}
 */
 .form-group textarea {
   width: 100%;
