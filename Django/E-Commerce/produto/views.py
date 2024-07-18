@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.core import serializers
 from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
+from django.forms.models import model_to_dict
 from pprint import pprint
 from . import models
 
@@ -43,7 +45,7 @@ class ProductAddToCart(View):
         preco_unitario_promocional = variacao.preco_promocional
         slug = produto.slug 
         if produto.imagem:
-            imagem = produto.imagem
+            imagem = produto.imagem.url
         else:
             imagem = '' 
         if variacao.estoque < 1:
@@ -53,11 +55,8 @@ class ProductAddToCart(View):
             )
             return redirect(http_referer)
         if not self.request.session.get('carrinho'):
-            self.request.session['carrinho'] = {
-
-            }
+            self.request.session['carrinho'] = {}
             self.request.session.save()
-
         carrinho = self.request.session['carrinho']
         if variacao_id in carrinho:
             # existe no carrinho
@@ -75,8 +74,7 @@ class ProductAddToCart(View):
             carrinho[variacao_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual     
         else:
             # não existe no carrinho
-            carrinho['variacao_id'] = {
-                'produto' : produto,
+            carrinho[variacao_id] = {
                 'produto_id' : produto_id,
                 'produto_nome' : produto_nome,
                 'variacao_nome' : variacao_nome,
@@ -89,6 +87,7 @@ class ProductAddToCart(View):
                 'slug' : slug, 
                 'imagem' : imagem,
             }
+            
         self.request.session.save()
         pprint(carrinho)
         return HttpResponse(f'{variacao.produto} {variacao.nome}')
