@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load priceFilter %} {% block content %}
 <div
   class="row"
   style="padding-left: 40px !important; padding-right: 40px !important"
@@ -17,14 +17,22 @@
       <h1 class="h2">{{ produto.nome }}</h1>
       <p class="lead">{{ produto.descricao_curta | linebreaks }}</p>
       <p class="lead">
-        <span id="variation-preco" class="lead product-price">R$29,90</span>
+        {% if produto.preco_marketing_promocional %}
+        <span id="variation-preco" class="lead product-price">
+          {{ produto.preco_marketing_promocional | price_format }}
+        </span>
         <span
           id="variation-preco-promocional"
           class="lead product-old-price text-muted"
-          >R$49,90</span
         >
+          {{ produto.preco_marketing | price_format}}
+        </span>
+        {% else %}
+        <span id="variation-preco" class="lead product-price">
+          {{ produto.preco_marketing | price_format}}
+        </span>
+        {% endif %}
       </p>
-
       <form action="/addtocart/" id="form-add-to-cart">
         <div class="form-group">
           <select
