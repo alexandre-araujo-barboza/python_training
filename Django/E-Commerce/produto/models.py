@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils.text import slugify
+from utils.onfilters import price_format
 from PIL import Image
 import os
 import shortuuid
@@ -42,11 +43,11 @@ class Produto(models.Model):
         )
     
     def format_price_marketing(self):
-        return f'R$ {self.preco_marketing:.2f}'.replace('.', ',')
+        return price_format(self.preco_marketing)
     format_price_marketing.short_description = 'Preço'
     
     def format_price_marketing_promotional(self):
-        return f'R$ {self.preco_marketing_promocional:.2f}'.replace('.', ',')
+        return price_format(self.preco_marketing_promocional)
     format_price_marketing_promotional.short_description = 'Preço promoção'
     
     def save(self, *args, **kwargs):
