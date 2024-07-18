@@ -52,7 +52,11 @@ Produto {% endblock title %} {% block content %}
         </div>
         {% endif %}
         <div class="text-left">
-          <button type="submit" class="btn btn-primary btn-lg btn-block">
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg btn-block"
+            style="background-color: purple !important"
+          >
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             Adicionar ao carrinho
           </button>
@@ -64,7 +68,7 @@ Produto {% endblock title %} {% block content %}
 <div class="row">
   <div class="col-lg-12">
     <div class="mt-5 mb-5">
-      <h5 class="text-center" style="color: #008b8b !important">
+      <h5 class="text-center" style="color: purple !important">
         <strong>{{ produto.nome }}</strong>
       </h5>
       <div class="text-center">{{ produto.descricao_longa | linebreaks }}</div>
