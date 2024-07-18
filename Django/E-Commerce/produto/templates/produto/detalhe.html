@@ -1,5 +1,8 @@
 {% extends 'base.html' %} {% block content %}
-<div class="row">
+<div
+  class="row"
+  style="padding-left: 40px !important; padding-right: 40px !important"
+>
   {% if produto.imagem %}
   <div class="col-lg">
     <div class="row no-gutters">
@@ -69,7 +72,9 @@
       <h5 class="text-center" style="color: #008b8b !important">
         <strong>{{ produto.nome }}</strong>
       </h5>
-      {{ produto.descricao_longa }}
+      <p style="text-align: center !important">
+        {{ produto.descricao_longa | linebreaks }}
+      </p>
     </div>
   </div>
 </div>
