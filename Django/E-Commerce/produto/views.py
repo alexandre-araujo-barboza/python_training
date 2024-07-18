@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
+from pprint import pprint
 from . import models
 
 class ProductsList(ListView):
@@ -32,6 +33,25 @@ class ProductAddToCart(View):
             )
             return redirect(http_referer)
         variacao = get_object_or_404(models.Variacao, id = variacao_id)
+        variacao_estoque = variacao.estoque
+        produto = variacao.produto
+        produto_id = produto.id
+        produto_nome = produto.nome
+        variacao_nome = variacao.nome or ''
+        variacao_id = variacao.id
+        preco_unitario = variacao.preco
+        preco_unitario_promocional = variacao.preco_promocional
+        slug = produto.slug 
+        if produto.imagem:
+            imagem = produto.imagem
+        else:
+            imagem = '' 
+        if variacao.estoque < 1:
+            messages.warning (
+                self.request,
+                'Não temos esse produto no estoque'
+            )
+            return redirect(http_referer)
         if not self.request.session.get('carrinho'):
             self.request.session['carrinho'] = {
 
@@ -40,12 +60,37 @@ class ProductAddToCart(View):
 
         carrinho = self.request.session['carrinho']
         if variacao_id in carrinho:
-            # variação existe no carrinho
-            pass
+            # existe no carrinho
+            quantidade_atual = carrinho[variacao_id]['quantidade']
+            quantidade_atual += 1
+            if variacao_estoque < quantidade_atual:
+                messages.info (
+                    self.request,
+                    f'Não temos {quantidade_atual} desse produto no estoque,'
+                    f' foram adicionadas {variacao_estoque} unidades.'
+                 )
+                quantidade_atual = variacao_estoque 
+            carrinho[variacao_id]['quantidade'] = quantidade_atual
+            carrinho[variacao_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
+            carrinho[variacao_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual     
         else:
-            # variação não existe no carrinho
-            pass
-            
+            # não existe no carrinho
+            carrinho['variacao_id'] = {
+                'produto' : produto,
+                'produto_id' : produto_id,
+                'produto_nome' : produto_nome,
+                'variacao_nome' : variacao_nome,
+                'variacao_id': variacao_id,
+                'preco_unitario' : preco_unitario,
+                'preco_unitario_promocional' : preco_unitario_promocional,
+                'preco_quantitativo' : preco_unitario,
+                'preco_quantitativo_promocional' : preco_unitario_promocional,
+                'quantidade' : 1,
+                'slug' : slug, 
+                'imagem' : imagem,
+            }
+        self.request.session.save()
+        pprint(carrinho)
         return HttpResponse(f'{variacao.produto} {variacao.nome}')
 class ProductRemoveFromCart(View):
 
