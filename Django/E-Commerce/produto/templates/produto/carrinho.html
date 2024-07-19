@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load priceFilter %} {% block content %}
 <!-- Carrinho de compras-->
 {% if request.session.carrinho %}
 <div class="row mt-3">
@@ -10,28 +10,37 @@
         <tr>
           <th class="d-none d-lg-block">Imagem</th>
           <th>Produto</th>
-          <th>V.</th>
-          <th>QTD.</th>
+          <th>Excluir</th>
+          <th>Valor</th>
+          <th>Quantidade</th>
           <th>Total</th>
         </tr>
-
+        {% for produto in request.session.carrinho.values %}
         <tr>
           <td class="d-none d-lg-block">
-            <img
-              class="cart-img"
-              src="imgs/7eb9d706-b8e3-48d0-957e-25f4a722f944.jpg"
-            />
+            <img class="cart-img" src="{{ produto.imagem }}" />
           </td>
+          <td>{{ produto.produto_nome }}</td>
           <td>
-            Nome do produto que o cliente está comprando
             <a class="ml-3" href="#">
               <i class="fas fa-times-circle text-danger" aria-hidden="true"></i>
             </a>
           </td>
-          <td>Variação</td>
-          <td>2x</td>
-          <td>R$ 10500,59</td>
+          <td>{{ produto.variacao_nome }}</td>
+          <td>{{ produto.quantidade }}x</td>
+          <td>
+            {% if produto.preco_quantitativo_promocional %}
+            <!-- preço na promoção -->
+            {{produto.preco_quantitativo_promocional | price_format }}
+            <!-- fim preço na promoção -->
+            {% else %}
+            <!-- preço normal -->
+            {{ produto.preco_quantitativo | price_format }}
+            <!-- fim preço normal -->
+            {% endif %}
+          </td>
         </tr>
+        {% endfor %}
       </table>
     </div>
   </div>
@@ -39,7 +48,6 @@
 <div class="row mt-3" style="width: 100% !important">
   <div class="col-lg">
     <p class="lead">Total no carrinho</p>
-
     <div class="table-responsive">
       <table class="table">
         <tr>
@@ -56,10 +64,14 @@
         href="#"
         style="background-color: purple !important; max-width: 400px !important"
       >
-        Finalizar a compra <i class="fa fa-comment-dollar"></i>
+        Finalizar Compra <i class="fa fa-comment-dollar"></i>
       </a>
     </div>
   </div>
+</div>
+{% else %}
+<div class="d-flex justify-content-center align-items-center">
+  <h3>Seu carrinho de compras está vazio.</h3>
 </div>
 {% endif %}
 <!-- Fim do Carrinho de compras -->
