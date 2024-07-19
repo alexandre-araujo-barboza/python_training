@@ -19,7 +19,7 @@ urlpatterns = [
          name='adicionaraocarrinho'
     ),
     path(
-        'removerdocarrinho/<slug>',
+        'removerdocarrinho/',
          views.ProductRemoveFromCart.as_view(),
          name='removerdocarrinho'
     ),
