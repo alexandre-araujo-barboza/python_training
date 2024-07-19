@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %} 
-  <div class="row">
-    <div class="col-lg">
-       <h1>Login</h1> 
-    </div>
-    <div class="col-lg">
-        <h1>Cadastro</h1>
-        <form method="POST" action="">
-            {{ userform|crispy }}
-        </form>
-    </div>
-  </div>  
+<div class="row">
+  <div class="col-lg">
+    <h1>Login</h1> 
+  </div>
+  <div class="col-lg">
+    <h1>Cadastro</h1>
+    <form method="POST" action="">
+      {{ userform|crispy }}
+      <div class="row">
+        <div class="col">
+          <button type="submit"
+            class="btn btn-primary btn-block btn-lg"
+            style="background-color: purple !important">
+            Enviar
+          </button>    
+        </div>
+      </div>
+    </form>
+  </div>
+</div>  
 {% endblock content %}
