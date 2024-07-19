@@ -110,10 +110,12 @@ class ProductAddToCart(View):
                     self.request,
                     message,
                 )
-                flag_limit_in_stock = True 
-            carrinho[variacao_id]['quantidade'] = quantidade_atual
-            carrinho[variacao_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
-            carrinho[variacao_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual     
+                flag_limit_in_stock = True
+            else:     
+                carrinho[variacao_id]['quantidade'] = quantidade_atual
+                carrinho[variacao_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
+                carrinho[variacao_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual
+
         elif produto_id in carrinho and carrinho[produto_id]['tipo'] == 'S':
             # existe no carrinho
             quantidade_atual += 1
@@ -122,10 +124,11 @@ class ProductAddToCart(View):
                     self.request,
                     message,
                 )
-                flag_limit_in_stock = True 
-            carrinho[produto_id]['quantidade'] = quantidade_atual
-            carrinho[produto_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
-            carrinho[produto_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual
+                flag_limit_in_stock = True
+            else:     
+                carrinho[produto_id]['quantidade'] = quantidade_atual
+                carrinho[produto_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
+                carrinho[produto_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual
         else:
             # não existe no carrinho
             if (variacao_id):
