@@ -19,8 +19,8 @@ class ProductDetails(DetailView):
     template_name = 'produto/detalhe.html'
     context_object_name = 'produto'
     slug_url_kwarg = 'slug'
+
 class ProductAddToCart(View):
-    
     def get(self, *args, **kargs):
         http_referer = self.request.META.get(
             'HTTP_REFERER',
