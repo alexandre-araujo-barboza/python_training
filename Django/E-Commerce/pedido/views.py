@@ -8,10 +8,10 @@ class OrderPayment(View):
     def get(self, *args, **kargs):
         return HttpResponse('pagamento')
 
-class OrderClose(View):
+class OrderSave(View):
 
     def get(self, *args, **kargs):
-        return HttpResponse('fechar')
+        return HttpResponse('salvar')
 
 class OrderDetails(View):
 

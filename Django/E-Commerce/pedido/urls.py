@@ -10,9 +10,9 @@ urlpatterns = [
         name='pagar'
     ),
     path(
-        'fechar/',
-        views.OrderClose.as_view(),
-        name='fechar'
+        'salvar/',
+        views.OrderSave.as_view(),
+        name='salvar'
     ),
     path(
         'detalhes/',
