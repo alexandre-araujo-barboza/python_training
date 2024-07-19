@@ -27,7 +27,19 @@
             </a>
           </td>
           <td>{{ produto.variacao_nome }}</td>
-          <td>{{ produto.quantidade }}x</td>
+          <td>
+            {{ produto.quantidade }} x
+            <!-- quantidade unitária -->
+            {% if produto.preco_unitario_promocional %}
+            <!-- preço unitário na promoção -->
+            {{produto.preco_unitario_promocional | price_format }}
+            <!-- fim preço unitário na promoção -->
+            {% else %}
+            <!-- preço unitário normal -->
+            {{ produto.preco_unitario | price_format }}
+            <!-- fim preço unitário normal -->
+            {% endif %}
+          </td>
           <td>
             {% if produto.preco_quantitativo_promocional %}
             <!-- preço na promoção -->
