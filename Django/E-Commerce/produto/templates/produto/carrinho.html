@@ -53,7 +53,7 @@
           <td>
             {% if produto.preco_quantitativo_promocional %}
             <!-- preço na promoção -->
-            {{produto.preco_quantitativo_promocional | price_format }}
+            {{ produto.preco_quantitativo_promocional | price_format }}
             <!-- fim preço na promoção -->
             {% else %}
             <!-- preço normal -->
@@ -74,7 +74,9 @@
       <table class="table">
         <tr>
           <td class="font-weight-bold">Total</td>
-          <td>R$100000</td>
+          <td>
+            {{ request.session.carrinho.values | product_sum | price_format }}
+          </td>
         </tr>
       </table>
     </div>
