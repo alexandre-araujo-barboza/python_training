@@ -75,14 +75,17 @@ ul.errorlist li {
 .form-group textarea {
   width: 100%;
 }
+
 .nav-cart,
 .nav-cart a {
   color: #fff;
   text-decoration: none;
 }
+
 .cart-img {
   max-width: 150px;
 }
+
 .form-control:focus,
 .btn:focus {
   border-color: red;
