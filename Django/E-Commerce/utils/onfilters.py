@@ -14,4 +14,12 @@ def product_sum(carrinho):
           count += product['preco_quantitativo_promocional']
       else:
           count += product['preco_quantitativo']
-    return count 
+    return count
+
+@register.filter
+def quantity_total(carrinho):
+    count = 0
+    for product in carrinho:
+        count += product['quantidade']
+    return count    
+    
