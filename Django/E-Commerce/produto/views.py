@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
+from django.core.exceptions import SuspiciousOperation
 from pprint import pprint
 from . import models
 
@@ -21,6 +22,7 @@ class ProductDetails(DetailView):
 class ProductAddToCart(View):
     
     def get(self, *args, **kargs):
+             
         http_referer = self.request.META.get(
             'HTTP_REFERER',
             reverse('produto:lista')
@@ -43,6 +45,7 @@ class ProductAddToCart(View):
             preco_unitario_promocional = variacao.preco_promocional
             produto = variacao.produto
         produto_nome = produto.nome
+        produto_tipo = produto.tipo
         slug = produto.slug
         if produto.imagem:
             imagem = produto.imagem.url
@@ -72,6 +75,7 @@ class ProductAddToCart(View):
             'preco_quantitativo' : preco_unitario,
             'preco_quantitativo_promocional' : preco_unitario_promocional,
             'quantidade' : 1,
+            'tipo': produto_tipo,
             'slug' : slug, 
             'imagem' : imagem,
         }
@@ -81,7 +85,7 @@ class ProductAddToCart(View):
             self.request.session.save()
         carrinho = self.request.session['carrinho']
         flag_limit_in_stock = False
-        if variacao_id: 
+        if variacao_id and carrinho[variacao_id]['tipo'] == 'V': 
             if variacao_id in carrinho:
                 # variação existe no carrinho
                 quantidade_atual = carrinho[variacao_id]['quantidade']
@@ -90,7 +94,7 @@ class ProductAddToCart(View):
                     messages.info (
                         self.request,
                         f'Não temos {quantidade_atual} desse tipo de produto no estoque,'
-                        f' foram adicionadas {variacao_estoque} unidades.'
+                        f' já foram adicionadas {variacao_estoque} unidades.'
                     )
                     quantidade_atual = variacao_estoque
                     flag_limit_in_stock = True 
@@ -100,7 +104,7 @@ class ProductAddToCart(View):
             else:
                 # variação não existe no carrinho
                 carrinho[variacao_id] = dicionario
-        else: 
+        elif produto_id and carrinho[produto_id]['tipo'] == 'S': 
             if produto_id in carrinho:
                 # produto existe no carrinho
                 quantidade_atual = carrinho[produto_id]['quantidade']
@@ -109,7 +113,7 @@ class ProductAddToCart(View):
                     messages.info (
                         self.request,
                         f'Não temos {quantidade_atual} desse produto no estoque,'
-                        f' foram adicionadas {produto_estoque} unidades.'
+                        f' já foram adicionadas {produto_estoque} unidades.'
                     )
                     quantidade_atual = variacao_estoque
                     flag_limit_in_stock = True 
@@ -119,7 +123,8 @@ class ProductAddToCart(View):
             else:
                 # produto não existe no carrinho
                 carrinho[produto_id] = dicionario
-        
+        else:
+            raise SuspiciousOperation("Algo não está correto com a sua sessão")
         if not flag_limit_in_stock:
             if variacao_id:
                 message = f'Adicionamos no seu carrinho o produto {produto_nome} do tipo {variacao_nome}.'
