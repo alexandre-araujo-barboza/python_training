@@ -26,15 +26,13 @@ class ProductAddToCart(View):
             'HTTP_REFERER',
             reverse('produto:lista')
         )
-        #del self.request.session['carrinho']
-        #self.request.session.save()
-        #exit()
         produto_id  = self.request.GET.get('produto')
         variacao_id = self.request.GET.get('vid')
         if not variacao_id:
             produto = get_object_or_404(models.Produto, id = produto_id)
             estoque = produto.estoque
             variacao_id   = 0
+            produto_id = 's' + str(produto_id)
             variacao_nome = ''
             preco_unitario = produto.preco_marketing
             preco_unitario_promocional = produto.preco_marketing_promocional
@@ -42,6 +40,7 @@ class ProductAddToCart(View):
             variacao = get_object_or_404(models.Variacao, id = variacao_id)
             estoque = variacao.estoque
             produto_id = 0
+            variacao_id = 'v' + str(variacao_id)
             variacao_nome = variacao.nome
             preco_unitario = variacao.preco
             preco_unitario_promocional = variacao.preco_promocional
@@ -103,7 +102,7 @@ class ProductAddToCart(View):
                 raise SuspiciousOperation("Algo não está correto com a sua sessão")
         
         if variacao_id in carrinho and carrinho[variacao_id]['tipo'] == 'V':
-            # existe no carrinho
+            # variacao existe no carrinho
             quantidade_atual += 1
             if estoque < quantidade_atual:
                 messages.info (
@@ -117,7 +116,7 @@ class ProductAddToCart(View):
                 carrinho[variacao_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual
 
         elif produto_id in carrinho and carrinho[produto_id]['tipo'] == 'S':
-            # existe no carrinho
+            # produto existe no carrinho
             quantidade_atual += 1
             if estoque < quantidade_atual:
                 messages.info (
@@ -146,8 +145,6 @@ class ProductAddToCart(View):
                 message
             )
         
-        print(quantidade_atual)
-
         self.request.session.save()
         return redirect(http_referer)      
         
