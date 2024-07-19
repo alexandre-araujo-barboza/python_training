@@ -103,3 +103,13 @@ ul.errorlist li {
   background-color: purple;
   color: white;
 }
+
+.link {
+  color: purple !important;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: black !important;
+  text-decoration: underline;
+}

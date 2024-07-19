@@ -18,9 +18,19 @@
         {% for produto in request.session.carrinho.values %}
         <tr>
           <td class="d-none d-lg-block">
-            <img class="cart-img" src="{{ produto.imagem }}" />
+            <img
+              class="cart-img"
+              src="{{ produto.imagem }}"
+              alt="{{ produto.slug }}"
+              width="64"
+              height="64"
+            />
           </td>
-          <td>{{ produto.produto_nome }}</td>
+          <td>
+            <a href="{% url 'produto:detalhe' produto.slug %}" class="link"
+              >{{ produto.produto_nome }}</a
+            >
+          </td>
           <td>
             <a class="ml-3" href="#">
               <i class="fas fa-times-circle text-danger" aria-hidden="true"></i>
