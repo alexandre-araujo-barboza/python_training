@@ -35,6 +35,7 @@ Produto {% endblock title %} {% block content %}
         action="{% url 'produto:adicionaraocarrinho' %}"
         id="form-add-to-cart"
       >
+        <input type="hidden" name="produto" value="{{ produto.id }}" />
         {% if produto.tipo == 'V' %}
         <div class="form-group">
           <select

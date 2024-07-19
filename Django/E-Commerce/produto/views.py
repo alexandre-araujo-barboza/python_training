@@ -25,11 +25,12 @@ class ProductAddToCart(View):
             'HTTP_REFERER',
             reverse('produto:lista')
         )
+        produto_id = self.request.GET.get('produto')
         variacao_id = self.request.GET.get('vid')
         if not variacao_id:
             messages.error(
                 self.request,
-                'Produto não existe'
+                'O tipo não existe'
             )
             return redirect(http_referer)
         variacao = get_object_or_404(models.Variacao, id = variacao_id)

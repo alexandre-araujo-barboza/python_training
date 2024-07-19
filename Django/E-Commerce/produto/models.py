@@ -25,7 +25,8 @@ class Produto(models.Model):
             ('S', 'Simples'),
         )
     )
-    
+    estoque = models.PositiveIntegerField(default=0, blank=True, null=True)
+
     @staticmethod
     def resize_image(img, new_width=800):
         img_full_path = os.path.join(settings.MEDIA_ROOT, img.name)
