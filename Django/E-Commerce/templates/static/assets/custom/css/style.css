@@ -70,8 +70,8 @@ ul.errorlist li {
         column-count: 4;
     }
 }
-
 */
+
 .form-group textarea {
   width: 100%;
 }
@@ -94,4 +94,9 @@ ul.errorlist li {
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.1rem red;
+}
+
+.dropdown-item:hover {
+  background-color: purple;
+  color: white;
 }
