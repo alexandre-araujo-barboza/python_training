@@ -22,61 +22,62 @@ class ProductDetails(DetailView):
 class ProductAddToCart(View):
     
     def get(self, *args, **kargs):
-             
         http_referer = self.request.META.get(
             'HTTP_REFERER',
             reverse('produto:lista')
         )
+        #del self.request.session['carrinho']
+        #self.request.session.save()
+        #exit()
         produto_id  = self.request.GET.get('produto')
         variacao_id = self.request.GET.get('vid')
         if not variacao_id:
             produto = get_object_or_404(models.Produto, id = produto_id)
-            variacao_estoque = 0
+            estoque = produto.estoque
+            variacao_id   = 0
             variacao_nome = ''
-            produto_estoque = produto.estoque 
             preco_unitario = produto.preco_marketing
             preco_unitario_promocional = produto.preco_marketing_promocional
         else:
             variacao = get_object_or_404(models.Variacao, id = variacao_id)
-            variacao_estoque = variacao.estoque
+            estoque = variacao.estoque
+            produto_id = 0
             variacao_nome = variacao.nome
-            produto_estoque = 0
             preco_unitario = variacao.preco
             preco_unitario_promocional = variacao.preco_promocional
             produto = variacao.produto
         produto_nome = produto.nome
         produto_tipo = produto.tipo
-        slug = produto.slug
+        produto_slug = produto.slug
         if produto.imagem:
             imagem = produto.imagem.url
         else:
             imagem = ''
         
-        if variacao_id and variacao.estoque < 1:
+        if variacao_id:
+            message = 'Não temos produto com esse tipo no estoque'
+        else:
+            message = 'Não temos esse produto no estoque'
+        
+        if estoque < 1:
             messages.warning (
                 self.request,
-                'Não temos produto com esse tipo no estoque'
-            )
-            return redirect(http_referer)
-        elif not variacao_id and produto.estoque < 1:
-            messages.warning (
-                self.request,
-                'Não temos esse produto no estoque'
+                message
             )
             return redirect(http_referer)
         
         dicionario = {
             'produto_id' : produto_id,
+            'variacao_id' : variacao_id,
             'produto_nome' : produto_nome,
             'variacao_nome' : variacao_nome,
-            'variacao_id': variacao_id,
             'preco_unitario' : preco_unitario,
             'preco_unitario_promocional' : preco_unitario_promocional,
             'preco_quantitativo' : preco_unitario,
             'preco_quantitativo_promocional' : preco_unitario_promocional,
-            'quantidade' : 1,
+            'quantidade' : estoque,
             'tipo': produto_tipo,
-            'slug' : slug, 
+            'slug' : produto_slug, 
             'imagem' : imagem,
         }
 
@@ -85,46 +86,54 @@ class ProductAddToCart(View):
             self.request.session.save()
         carrinho = self.request.session['carrinho']
         flag_limit_in_stock = False
-        if variacao_id and carrinho[variacao_id]['tipo'] == 'V': 
-            if variacao_id in carrinho:
-                # variação existe no carrinho
-                quantidade_atual = carrinho[variacao_id]['quantidade']
-                quantidade_atual += 1
-                if variacao_estoque < quantidade_atual:
-                    messages.info (
-                        self.request,
-                        f'Não temos {quantidade_atual} desse tipo de produto no estoque,'
-                        f' já foram adicionadas {variacao_estoque} unidades.'
-                    )
-                    quantidade_atual = variacao_estoque
-                    flag_limit_in_stock = True 
-                carrinho[variacao_id]['quantidade'] = quantidade_atual
-                carrinho[variacao_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
-                carrinho[variacao_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual     
-            else:
-                # variação não existe no carrinho
-                carrinho[variacao_id] = dicionario
-        elif produto_id and carrinho[produto_id]['tipo'] == 'S': 
-            if produto_id in carrinho:
-                # produto existe no carrinho
-                quantidade_atual = carrinho[produto_id]['quantidade']
-                quantidade_atual += 1
-                if produto_estoque < quantidade_atual:
-                    messages.info (
-                        self.request,
-                        f'Não temos {quantidade_atual} desse produto no estoque,'
-                        f' já foram adicionadas {produto_estoque} unidades.'
-                    )
-                    quantidade_atual = variacao_estoque
-                    flag_limit_in_stock = True 
-                carrinho[produto_id]['quantidade'] = quantidade_atual
-                carrinho[produto_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
-                carrinho[produto_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual     
-            else:
-                # produto não existe no carrinho
-                carrinho[produto_id] = dicionario
+        if variacao_id in carrinho and carrinho[variacao_id]['tipo'] == 'V':
+            quantidade_atual = carrinho[variacao_id]['quantidade']
+        elif produto_id in carrinho and carrinho[produto_id]['tipo'] == 'S':
+            quantidade_atual = carrinho[produto_id]['quantidade']
         else:
-            raise SuspiciousOperation("Algo não está correto com a sua sessão")
+            quantidade_atual = 0
+
+        if variacao_id in carrinho and variacao_id and carrinho[variacao_id]['tipo'] == 'V': 
+            message = f'Não temos {quantidade_atual +1} desse tipo de produto no estoque, já foram adicionadas {estoque} unidades.'
+        elif produto_id in carrinho and produto_id and carrinho[produto_id]['tipo'] == 'S': 
+            message = f'Não temos {quantidade_atual +1} desse produto no estoque, já foram adicionadas {estoque} unidades.'
+        else:
+            if quantidade_atual != 0:
+                raise SuspiciousOperation("Algo não está correto com a sua sessão")
+        
+        if variacao_id in carrinho and carrinho[variacao_id]['tipo'] == 'V':
+            # existe no carrinho
+            quantidade_atual += 1
+            if estoque < quantidade_atual:
+                messages.info (
+                    self.request,
+                    message,
+                )
+                quantidade_atual = estoque
+                flag_limit_in_stock = True 
+            carrinho[variacao_id]['quantidade'] = quantidade_atual
+            carrinho[variacao_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
+            carrinho[variacao_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual     
+        elif produto_id in carrinho and carrinho[produto_id]['tipo'] == 'S':
+            # existe no carrinho
+            quantidade_atual += 1
+            if estoque < quantidade_atual:
+                messages.info (
+                    self.request,
+                    message,
+                )
+                quantidade_atual = estoque
+                flag_limit_in_stock = True 
+            carrinho[produto_id]['quantidade'] = quantidade_atual
+            carrinho[produto_id]['preco_quantitativo'] = preco_unitario * quantidade_atual
+            carrinho[produto_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_atual
+        else:
+            # não existe no carrinho
+            if (variacao_id):
+                carrinho[variacao_id] = dicionario
+            else:
+                carrinho[produto_id] = dicionario 
+        
         if not flag_limit_in_stock:
             if variacao_id:
                 message = f'Adicionamos no seu carrinho o produto {produto_nome} do tipo {variacao_nome}.'
@@ -135,7 +144,7 @@ class ProductAddToCart(View):
                 message
             )
         self.request.session.save()
-        return redirect(http_referer)        
+        return redirect(http_referer)      
         
 class ProductRemoveFromCart(View):
 
