@@ -58,8 +58,13 @@ class ProfileCreate(BaseProfile):
         if self.request.user.is_authenticated:
             pass
         else:
-            username = self.userform.save(commit = False)
-            username.set_password(password)
+            usuario = self.userform.save(commit=False)
+            usuario.set_password(password)
+            usuario.save()
+
+            perfil = self.perfilform.save(commit=False)
+            perfil.usuario = usuario
+            perfil.save()
 
         return self.renderizar
 
