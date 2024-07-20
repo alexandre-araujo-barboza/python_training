@@ -11,9 +11,8 @@ class PerfilForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     password = forms.CharField(
         required = False,
-        widget = forms.PasswordInput(),
+        widget = forms.PasswordInput(attrs={'value': '      '}),
         label = 'Senha',
-        initial = 0,
     )
     password_confirm = forms.CharField(
         required = False,
@@ -35,6 +34,7 @@ class UserForm(forms.ModelForm):
             'email',
         )
         
+        
     def clean(self, *args, **kwargs):
         data = self.data
         messages = []
@@ -45,4 +45,9 @@ class UserForm(forms.ModelForm):
         mail_db = User.objects.filter(email=data['email']).first()
         if mail_db and mail_db.username != self.username: # email existe
             messages.append("Esse e-mail já existe") 
-        
+        if data['password'] != '      ' and data['password_confirm'] != '':
+            if data['password'] != data['password_confirm']: # senha alterada
+                messages.append("Senhas não são idênticas")
+            if len(data['password']) < 6:
+                messages.append("Tamanho mínimo da senha são 6 caracteres")
+                
