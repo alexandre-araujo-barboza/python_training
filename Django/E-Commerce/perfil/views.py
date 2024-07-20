@@ -16,8 +16,6 @@ class BaseProfile(View):
                     data = self.request.POST or None,
                     username = self.request.user,
                     instance = self.request.user,
-                    password = self.request.POST.get('password'),
-                    email    = self.request.POST.get('email'),
                 ),
                 'perfilform' : forms.PerfilForm(
                     data = self.request.POST or None
