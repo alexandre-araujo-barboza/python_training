@@ -1,8 +1,12 @@
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.list import ListView
 from django.views import View
 from django.http import HttpRequest, HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+import copy
 from . import models
 from . import forms
 class BaseProfile(View):
@@ -10,6 +14,7 @@ class BaseProfile(View):
 
     def setup(self, *args, **kwargs):
         super().setup(*args, **kwargs)
+        self.carrinho = copy.deepcopy(self.request.session.get('carrinho', {}))
         self.perfil = None
 
         if self.request.user.is_authenticated:
@@ -54,9 +59,31 @@ class ProfileCreate(BaseProfile):
         email = self.userform.cleaned_data.get('email')
         first_name = self.userform.cleaned_data.get('first_name')
         last_name = self.userform.cleaned_data.get('last_name')
-
+        
+        # Usuário logado
         if self.request.user.is_authenticated:
-            pass
+            usuario = get_object_or_404(
+                User, username=self.request.user.username
+            )
+            usuario.username = username
+            if password:
+                usuario.set_password(password)
+
+            usuario.email = email
+            usuario.first_name = first_name
+            usuario.last_name = last_name
+            usuario.save()
+
+            if not self.perfil:
+                self.perfilform.cleaned_data['usuario'] = usuario
+                perfil = models.Perfil(**self.perfilform.cleaned_data)
+                perfil.save()
+            else:
+                perfil = self.perfilform.save(commit=False)
+                perfil.usuario = usuario
+                perfil.save()
+
+        # Usário não logado (novo)
         else:
             usuario = self.userform.save(commit=False)
             usuario.set_password(password)
@@ -65,7 +92,28 @@ class ProfileCreate(BaseProfile):
             perfil = self.perfilform.save(commit=False)
             perfil.usuario = usuario
             perfil.save()
+        
+        if password:
+            autentica = authenticate(
+                self.request,
+                username=usuario,
+                password=password
+            )
+            if autentica:
+                login(self.request, user=usuario)
 
+        self.request.session['carrinho'] = self.carrinho
+        self.request.session.save()
+
+        messages.success(
+            self.request,
+            'Seu cadastro foi criado ou atualizado com sucesso.'
+        )
+
+        messages.success(
+            self.request,
+            'Você fez login e pode concluir sua compra.'
+        )
         return self.renderizar
 
 class ProfileUpdate(View):

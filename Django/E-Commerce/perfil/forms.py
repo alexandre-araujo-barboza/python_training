@@ -11,17 +11,14 @@ class PerfilForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     password = forms.CharField(
         required = False,
-        widget = forms.PasswordInput(attrs={'value':'      '}),
+        widget = forms.PasswordInput(attrs={'value': '      '}),
         label = 'Senha',
-        help_text='Obrigatória apenas para novo usuário.'
     )
-
     password_confirm = forms.CharField(
         required = False,
         widget = forms.PasswordInput(),
         label = 'Repetir senha',
     )
-    
     def __init__(self, username = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.username = username
@@ -49,25 +46,18 @@ class UserForm(forms.ModelForm):
                 validation['username'] = "Esse usuário já existe"
         
         # verifica email
-        mail_db = User.objects.filter(email = data['email']).first()
+        mail_db = User.objects.filter(email=data['email']).first()
         if mail_db and str(mail_db.username) != str(self.username):
             validation['email'] = "Esse e-mail já existe"
         
         # verifica senha
         if data['password'] != '      ' and data['password_confirm'] != '':
             if str(data['password']) != str(data['password_confirm']): 
-                validation['password_confirm'] = "Senhas não são idênticas"
-            
-            if len(data['password']) < 6:
-                validation['password'] = "Tamanho mínimo da senha são 6 caracteres"
-        
-        # novo usuário
-        if not self.username:
-            if data['password'] == '      ':
-                validation['password'] = 'Senha é obrigatória'
-            if data['email'] == '':
-                validation['email'] = 'E-mail é obrigatório'
-        
+                validation['password'] = "Senhas não são idênticas"
+            else: 
+                if len(data['password']) < 6:
+                    validation['password'] = "Tamanho mínimo da senha são 6 caracteres"
+                
         # mostra erros
         if validation:
             raise(forms.ValidationError(validation))
