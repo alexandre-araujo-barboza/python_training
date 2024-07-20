@@ -46,18 +46,25 @@ class UserForm(forms.ModelForm):
                 validation['username'] = "Esse usuário já existe"
         
         # verifica email
-        mail_db = User.objects.filter(email=data['email']).first()
+        mail_db = User.objects.filter(email = data['email']).first()
         if mail_db and str(mail_db.username) != str(self.username):
             validation['email'] = "Esse e-mail já existe"
         
         # verifica senha
         if data['password'] != '      ' and data['password_confirm'] != '':
             if str(data['password']) != str(data['password_confirm']): 
-                validation['password'] = "Senhas não são idênticas"
-            else: 
-                if len(data['password']) < 6:
-                    validation['password'] = "Tamanho mínimo da senha são 6 caracteres"
-                
+                validation['password_confirm'] = "Senhas não são idênticas"
+            
+            if len(data['password']) < 6:
+                validation['password'] = "Tamanho mínimo da senha são 6 caracteres"
+        
+        # novo usuário
+        if not self.username:
+            if data['password'] == '      ':
+                validation['password'] = 'Senha é obrigatória'
+            if data['email'] == '':
+                validation['email'] = 'E-mail é obrigatório'
+        
         # mostra erros
         if validation:
             raise(forms.ValidationError(validation))
