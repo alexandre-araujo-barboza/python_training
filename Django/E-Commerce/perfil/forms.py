@@ -11,15 +11,17 @@ class PerfilForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     password = forms.CharField(
         required = False,
-        widget = forms.PasswordInput(attrs={'value': '      '}),
+        widget = forms.PasswordInput(attrs={'value':'      '}),
         label = 'Senha',
-        help_text='Obrigatória apenas para novo usuário'
+        help_text='Obrigatória apenas para novo usuário.'
     )
+
     password_confirm = forms.CharField(
         required = False,
         widget = forms.PasswordInput(),
         label = 'Repetir senha',
     )
+    
     def __init__(self, username = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.username = username
