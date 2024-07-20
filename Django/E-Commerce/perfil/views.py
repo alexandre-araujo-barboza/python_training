@@ -14,8 +14,10 @@ class BaseProfile(View):
             self.contexto = {
                 'userform': forms.UserForm(
                     data = self.request.POST or None,
-                    usuario = self.request.user,
+                    username = self.request.user,
                     instance = self.request.user,
+                    password = self.request.POST.get('password'),
+                    email    = self.request.POST.get('email'),
                 ),
                 'perfilform' : forms.PerfilForm(
                     data = self.request.POST or None
@@ -38,7 +40,7 @@ class BaseProfile(View):
 
 class ProfileCreate(BaseProfile):
     def post(self, *args, **kwargs):
-        pass
+        return self.renderizar
 
 class ProfileUpdate(View):
 
