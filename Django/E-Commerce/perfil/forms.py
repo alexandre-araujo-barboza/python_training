@@ -37,17 +37,27 @@ class UserForm(forms.ModelForm):
         
     def clean(self, *args, **kwargs):
         data = self.data
-        messages = []
-        if (data['username']) != self.username: # usuário mudou  
-           user_db = User.objects.filter(username=self.username).first()       
-           if (user_db):
-               messages.append("Esse usuário já existe") 
+        validation = {} 
+        
+        # verifica usuário
+        if (str(data['username'])) != str(self.username): 
+            user_db = User.objects.filter(username = data['username']).first()       
+            if (user_db):
+                validation['username'] = "Esse usuário já existe"
+        
+        # verifica email
         mail_db = User.objects.filter(email=data['email']).first()
-        if mail_db and mail_db.username != self.username: # email existe
-            messages.append("Esse e-mail já existe") 
+        if mail_db and str(mail_db.username) != str(self.username):
+            validation['email'] = "Esse e-mail já existe"
+        
+        # verifica senha
         if data['password'] != '      ' and data['password_confirm'] != '':
-            if data['password'] != data['password_confirm']: # senha alterada
-                messages.append("Senhas não são idênticas")
-            if len(data['password']) < 6:
-                messages.append("Tamanho mínimo da senha são 6 caracteres")
+            if str(data['password']) != str(data['password_confirm']): 
+                validation['password'] = "Senhas não são idênticas"
+            else: 
+                if len(data['password']) < 6:
+                    validation['password'] = "Tamanho mínimo da senha são 6 caracteres"
                 
+        # mostra erros
+        if validation:
+            raise(forms.ValidationError(validation))
