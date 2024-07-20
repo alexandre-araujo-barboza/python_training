@@ -59,6 +59,7 @@ class ProfileCreate(BaseProfile):
             pass
         else:
             username = self.userform.save(commit = False)
+            username.set_password(password)
 
         return self.renderizar
 
