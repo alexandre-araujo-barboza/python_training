@@ -59,6 +59,10 @@ class BaseProfile(View):
 class ProfileCreate(BaseProfile):
     def post(self, *args, **kwargs):
         if not self.userform.is_valid() or not self.perfilform.is_valid():
+            messages.error(
+                self.request,
+                'Existem erros no formulário, por favor verifique o preenchimento dos campos.'
+            )
             return self.renderizar
         
         username = self.userform.cleaned_data.get('username')
