@@ -115,21 +115,50 @@ class ProfileCreate(BaseProfile):
 
         messages.success(
             self.request,
-            'Seu cadastro foi criado ou atualizado com sucesso.'
+            'Seus dados foram registrados com sucesso.'
         )
         return redirect('produto:carrinho')
 
-class ProfileUpdate(View):
-
-    def get(self, *args, **kargs):
-        return HttpResponse('atualizar')
-
 class ProfileLogin(View):
+    def post(self, *args, **kwargs):
+        username = self.request.POST.get('username')
+        password = self.request.POST.get('password')
+        
+        print(username)
+        print(password)
 
-    def get(self, *args, **kargs):
-        return HttpResponse('login')
+        if not username or not password:
+            messages.error(
+                self.request,
+                'Usuário ou senha inválidos.'
+            )
+            return redirect('perfil:criar')
+
+        usuario = authenticate(
+            self.request,
+            username=username,
+            password=password
+        )
+
+        if not usuario:
+            messages.error(
+                self.request,
+                'Usuário ou senha inválidos.'
+            )
+            return redirect('perfil:criar')
+
+        login(self.request, user=usuario)
+
+        messages.success(
+            self.request,
+            'Você fez login no sistema com sucesso.'
+        )
+        return redirect('produto:carrinho')
 
 class ProfileLogout(View):
-
-    def get(self, *args, **kargs):
-        return HttpResponse('logout')
+    def get(self, *args, **kwargs):
+        carrinho = copy.deepcopy(self.request.session.get('carrinho'))
+        logout(self.request)
+        self.request.session['carrinho'] = carrinho
+        self.request.session.save()
+        return redirect('produto:lista')
