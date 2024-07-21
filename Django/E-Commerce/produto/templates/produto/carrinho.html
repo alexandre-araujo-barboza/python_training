@@ -26,11 +26,19 @@
   </div>
   <div class="col-lg mt-auto" style="width: 100% !important">
     <div class="d-flex justify-content-center align-items-center">
+      {% if request.user.is_authenticated %}
       <a
         class="btn btn-lg btn-block btn-primary"
         href="{% url 'produto:resumo' %}"
         style="background-color: purple !important; max-width: 400px !important"
       >
+      {% else %}
+      <a
+        class="btn btn-lg btn-block btn-primary"
+        href="{% url 'perfil:criar' %}"
+        style="background-color: purple !important; max-width: 400px !important"
+      >
+      {% endif %}
         Finalizar Compra <i class="fa fa-comment-dollar"></i>
       </a>
     </div>
