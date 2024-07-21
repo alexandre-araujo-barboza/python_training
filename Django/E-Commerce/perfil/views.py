@@ -151,7 +151,10 @@ class ProfileLogin(View):
             return redirect('perfil:criar')
 
         login(self.request, user=usuario)
-
+        
+        storage = messages.get_messages(self.request)
+        storage.used = True
+        
         messages.success(
             self.request,
             'Você fez login no sistema com sucesso.'
