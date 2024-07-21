@@ -113,3 +113,9 @@ ul.errorlist li {
   color: black !important;
   text-decoration: underline;
 }
+
+.nav-link:hover,
+.navbar-brand:hover,
+.btn-secondary:hover {
+  color: Pink !important;
+}
