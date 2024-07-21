@@ -13,6 +13,7 @@ class UserForm(forms.ModelForm):
         required = False,
         widget = forms.PasswordInput(attrs={'value': '      '}),
         label = 'Senha',
+        help_text= 'Senha obrigatória para usuário novo.'
     )
     password_confirm = forms.CharField(
         required = False,

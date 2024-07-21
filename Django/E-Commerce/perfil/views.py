@@ -43,8 +43,16 @@ class BaseProfile(View):
             }
         
         self.userform = self.contexto['userform']
-        self.perfilform = self.contexto['perfilform']  
-        self.renderizar = render(self.request, self.template_name, self.contexto)
+        self.perfilform = self.contexto['perfilform']
+
+        if self.request.user.is_authenticated:
+            self.template_name = 'perfil/atualizar.html'
+
+        self.renderizar = render(
+            self.request,
+            self.template_name,
+            self.contexto
+        )
 
     def get(self, *args, **kargs):
         return self.renderizar
