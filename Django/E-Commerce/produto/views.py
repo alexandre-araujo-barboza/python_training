@@ -188,11 +188,12 @@ class ProductCart(View):
         return render(self.request, 'produto/carrinho.html')
 
 class ProductResume(View):
-     def get(self, *args, **kwargs):
+    def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
             return redirect('perfil:criar')
 
         perfil = Perfil.objects.filter(usuario=self.request.user).exists()
+
         if not perfil:
             messages.error(
                 self.request,

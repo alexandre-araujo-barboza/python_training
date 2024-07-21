@@ -51,20 +51,23 @@
     <div class="col">
         <h3>Resumo do carrinho</h3>
         <p class="lead">Os produtos, quantidades e preços que você escolheu.</p>
-        {% include 'parciais/resumo.html' %}
+        {% include 'partials/itens.html' %}
     </div>
 </div>
 <div class="row mt-3">
     <div class="col">
         <p class="lead text-center"><span class="font-weight-bold">Total do carrinho:</span>
-            {{ carrinho |  product_sum | price_format }}</p>
+            {{ carrinho.values | product_sum | price_format }}</p>
     </div>
 </div>
 
 <div class="row">
-    <div class="col">
-        <a class="btn btn-block btn-primary btn-lg" href="{% url 'pedido:salvarpedido' %}">
-            Realizar pedido e pagar
+    <div class="col-lg d-flex justify-content-center align-items-center">
+        <a class="btn btn-block btn-primary btn-lg"
+         href="{% url 'pedido:salvar' %}"
+         style="background-color: purple !important;
+         max-width: 400px !important">
+            Pagar
         </a>
     </div>
 </div>

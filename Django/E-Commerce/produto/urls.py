@@ -29,7 +29,7 @@ urlpatterns = [
          name='carrinho'
     ),
     path(
-        'resumodaCompra /',
+        'resumodacompra/',
          views.ProductResume.as_view(),
          name='resumo'
     ),
