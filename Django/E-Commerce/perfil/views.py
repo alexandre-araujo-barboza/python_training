@@ -123,10 +123,6 @@ class ProfileLogin(View):
     def post(self, *args, **kwargs):
         username = self.request.POST.get('username')
         password = self.request.POST.get('password')
-        
-        print(username)
-        print(password)
-
         if not username or not password:
             messages.error(
                 self.request,
