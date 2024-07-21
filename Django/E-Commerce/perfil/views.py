@@ -14,34 +14,37 @@ class BaseProfile(View):
 
     def setup(self, *args, **kwargs):
         super().setup(*args, **kwargs)
+
         self.carrinho = copy.deepcopy(self.request.session.get('carrinho', {}))
+
         self.perfil = None
 
         if self.request.user.is_authenticated:
             self.perfil = models.Perfil.objects.filter(
-                usuario = self.request.user
-            ).first
+                usuario=self.request.user
+            ).first()
 
             self.contexto = {
                 'userform': forms.UserForm(
-                    data = self.request.POST or None,
-                    username = self.request.user,
-                    instance = self.request.user,
+                    data=self.request.POST or None,
+                    usuario=self.request.user,
+                    instance=self.request.user,
                 ),
-                'perfilform' : forms.PerfilForm(
-                    data = self.request.POST or None
+                'perfilform': forms.PerfilForm(
+                    data=self.request.POST or None,
+                    instance=self.perfil
                 )
             }
         else:
             self.contexto = {
                 'userform': forms.UserForm(
-                    data = self.request.POST or None
+                    data=self.request.POST or None
                 ),
-                'perfilform' : forms.PerfilForm(
-                    data = self.request.POST or None
+                'perfilform': forms.PerfilForm(
+                    data=self.request.POST or None
                 )
             }
-        
+
         self.userform = self.contexto['userform']
         self.perfilform = self.contexto['perfilform']
 
@@ -49,12 +52,9 @@ class BaseProfile(View):
             self.template_name = 'perfil/atualizar.html'
 
         self.renderizar = render(
-            self.request,
-            self.template_name,
-            self.contexto
-        )
+            self.request, self.template_name, self.contexto)
 
-    def get(self, *args, **kargs):
+    def get(self, *args, **kwargs):
         return self.renderizar
 
 class ProfileCreate(BaseProfile):
@@ -117,11 +117,12 @@ class ProfileCreate(BaseProfile):
             self.request,
             'Seu cadastro foi criado ou atualizado com sucesso.'
         )
-
+        """ 
         messages.success(
             self.request,
             'Você fez login e pode concluir sua compra.'
         )
+        """
         return self.renderizar
 
 class ProfileUpdate(View):

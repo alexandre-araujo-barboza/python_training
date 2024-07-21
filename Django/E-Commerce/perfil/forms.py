@@ -20,9 +20,9 @@ class UserForm(forms.ModelForm):
         widget = forms.PasswordInput(),
         label = 'Repetir senha',
     )
-    def __init__(self, username = None, *args, **kwargs):
+    def __init__(self, usuario = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.username = username
+        self.username = usuario
         
     class Meta:
         model = User
