@@ -1,14 +1,14 @@
 from typing import Any
-from django.shortcuts import render, get_object_or_404
-from django.views.generic.list import ListView
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 import copy
 from . import models
 from . import forms
+
 class BaseProfile(View):
     template_name = 'perfil/criar.html'
 
@@ -117,13 +117,7 @@ class ProfileCreate(BaseProfile):
             self.request,
             'Seu cadastro foi criado ou atualizado com sucesso.'
         )
-        """ 
-        messages.success(
-            self.request,
-            'Você fez login e pode concluir sua compra.'
-        )
-        """
-        return self.renderizar
+        return redirect('produto:carrinho')
 
 class ProfileUpdate(View):
 
