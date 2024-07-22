@@ -19,13 +19,13 @@ class DispatchLoginRequiredMixin(View):
         return qs
     
 class OrderPayment(DispatchLoginRequiredMixin, DetailView):
-    template_name = 'pedido/pagar.html'
+    template_name = 'pedido/pagamento.html'
     model = Pedido
     pk_url_kwarg = 'pk'
     context_object_name = 'pedido'
 
 class OrderSave(View):
-    template_name = 'pedido/pagar.html'
+    template_name = 'pedido/pagamento.html'
 
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
@@ -104,7 +104,7 @@ class OrderSave(View):
         del self.request.session['carrinho']
         return redirect(
             reverse(
-                'pedido:pagar',
+                'pedido:pagamento',
                 kwargs={
                     'pk': pedido.pk
                 }
