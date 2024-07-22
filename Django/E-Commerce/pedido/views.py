@@ -15,7 +15,7 @@ class DispatchLoginRequiredMixin(View):
 
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset(*args, **kwargs)
-        qs = qs.filter(usuario=self.request.user)
+        qs = qs.filter(user=self.request.user)
         return qs
     
 class OrderPayment(View):
@@ -127,6 +127,6 @@ class OrderDetails(View):
 class OrderList(DispatchLoginRequiredMixin, ListView):
     model = Pedido
     context_object_name = 'pedidos'
-    template_name = 'pedido/lista.html'
+    template_name = 'pedido/listar.html'
     paginate_by = 10
     ordering = ['-id']

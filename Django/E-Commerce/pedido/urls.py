@@ -16,7 +16,7 @@ urlpatterns = [
     path(
         'listar/',
         views.OrderList.as_view(),
-        name='lista'),
+        name='listar'),
     path(
         'salvar/',
         views.OrderSave.as_view(),
