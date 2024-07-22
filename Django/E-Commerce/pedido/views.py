@@ -1,10 +1,10 @@
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect, reverse, render
 from django.views.generic import ListView, DetailView
 from django.views import View
 from django.contrib import messages
 from produto.models import Variacao
 from .models import Pedido, ItemPedido
-from utils import utils
+from utils.onfilters import quantity_total, product_sum 
 
 class DispatchLoginRequiredMixin(View):
     def dispatch(self, *args, **kwargs):
@@ -18,15 +18,23 @@ class DispatchLoginRequiredMixin(View):
         qs = qs.filter(usuario=self.request.user)
         return qs
     
-class OrderPayment(DispatchLoginRequiredMixin, DetailView):
+class OrderPayment(View):
     template_name = 'pedido/pagamento.html'
-    model = Pedido
-    pk_url_kwarg = 'pk'
-    context_object_name = 'pedido'
+    
+    def get(self, *args, **kargs):
+        if not self.request.user.is_authenticated:
+            messages.info(
+                self.request,
+                'Necessário fazer o Login.'
+            )
+            return redirect('perfil:criar')
+            
+        context = {
 
+        }
+        return render(self.request, self.template_name, context)
 class OrderSave(View):
     template_name = 'pedido/pagamento.html'
-
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
             messages.error(
@@ -76,8 +84,8 @@ class OrderSave(View):
                 self.request.session.save()
                 return redirect('produto:carrinho')
 
-        qtd_total_carrinho = utils.cart_total_qtd(carrinho)
-        valor_total_carrinho = utils.cart_totals(carrinho)
+        qtd_total_carrinho = quantity_total(carrinho)
+        valor_total_carrinho = product_sum(carrinho)
         pedido = Pedido(
             usuario=self.request.user,
             total=valor_total_carrinho,

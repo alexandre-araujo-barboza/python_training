@@ -2,6 +2,9 @@
 {% load priceFilter %}
 <div class="row">
     <div class="col">
+        {% if pedido is None %}
+        <h3>Não existe Nenhum pedido!</h3>
+        {% else %}
         <h3>{{ pedido }}</h3>
         <div class="row mt-4">
             <div class="col-lg-2 font-weight-bold">Número do pedido:</div>
@@ -47,5 +50,6 @@
                 {% endfor %}
             </table>
         </div>
+        {% endif %} 
     </div>
 </div>
