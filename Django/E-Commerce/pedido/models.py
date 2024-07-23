@@ -8,6 +8,7 @@ class Pedido(models.Model):
 
     user   = models.ForeignKey(User, on_delete=models.CASCADE)
     total  = models.FloatField()
+    quantidade = models.PositiveIntegerField()
     status = models.CharField(
         default="C",
         max_length=1,
@@ -40,4 +41,4 @@ class ItemPedido(models.Model):
     imagem  = models.CharField(max_length=2000) 
 
     def __str__(self):
-        return f'Detalhes do pedido Nro. {self.order}' 
+        return f'Detalhes do pedido Nro. {self.pk}' 

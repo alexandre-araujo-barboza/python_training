@@ -2,7 +2,7 @@ from django.shortcuts import redirect, reverse, render
 from django.views.generic import ListView, DetailView
 from django.views import View
 from django.contrib import messages
-from produto.models import Variacao
+from produto.models import Variacao, Produto
 from .models import Pedido, ItemPedido
 from utils.onfilters import quantity_total, product_sum 
 
@@ -51,68 +51,86 @@ class OrderSave(View):
             return redirect('produto:lista')
 
         carrinho = self.request.session.get('carrinho')
-        carrinho_variacao_ids = [v for v in carrinho]
-        bd_variacoes = list(
-            Variacao.objects.select_related('produto')
-            .filter(id__in=carrinho_variacao_ids)
-        )
+        
+        for item in carrinho:
+            it_ch = item[0]
+            it_id = int(item[1:])
+                    
+            if it_ch == 'v':
+                bd_work = Variacao.objects.select_related('produto').filter(id=it_id)
+            elif it_ch == 's':
+                bd_work = Produto.objects.filter(id=it_id)
+            else:
+                raise Exception('índice inválido no carrinho') 
+        
+            print(bd_work)
 
-        for variacao in bd_variacoes:
-            vid = str(variacao.id)
-            estoque = variacao.estoque
-            qtd_carrinho = carrinho[vid]['quantidade']
-            preco_unt = carrinho[vid]['preco_unitario']
-            preco_unt_promo = carrinho[vid]['preco_unitario_promocional']
-            error_msg_estoque = ''
-            if estoque < qtd_carrinho:
-                carrinho[vid]['quantidade'] = estoque
-                carrinho[vid]['preco_quantitativo'] = estoque * preco_unt
-                carrinho[vid]['preco_quantitativo_promocional'] = estoque * \
-                    preco_unt_promo
+            for piece in bd_work:
+                pid = it_ch + str(piece.id)
+                estoque = piece.estoque
+                qtd_carrinho = carrinho[pid]['quantidade']
+                preco_unt = carrinho[pid]['preco_unitario']
+                preco_unt_promo = carrinho[pid]['preco_unitario_promocional']
+                error_msg_estoque = ''
+                if estoque < qtd_carrinho:
+                    carrinho[pid]['quantidade'] = estoque
+                    carrinho[pid]['preco_quantitativo'] = estoque * preco_unt
+                    carrinho[pid]['preco_quantitativo_promocional'] = estoque * \
+                        preco_unt_promo
 
-                error_msg_estoque = 'Estoque insuficiente para alguns '\
-                    'produtos do seu carrinho. '\
-                    'Reduzimos a quantidade desses produtos. Por favor, '\
-                    'verifique quais produtos foram afetados a seguir.'
+                    error_msg_estoque = 'Estoque insuficiente para alguns '\
+                        'produtos do seu carrinho. '\
+                        'Reduzimos a quantidade desses produtos. Por favor, '\
+                        'verifique quais produtos foram afetados a seguir.'
 
-            if error_msg_estoque:
-                messages.error(
-                    self.request,
-                    error_msg_estoque
-                )
+                if error_msg_estoque:
+                    messages.error(
+                        self.request,
+                        error_msg_estoque
+                    )
 
-                self.request.session.save()
-                return redirect('produto:carrinho')
-
-        qtd_total_carrinho = quantity_total(carrinho)
-        valor_total_carrinho = product_sum(carrinho)
+                    self.request.session.save()
+                    return redirect('produto:carrinho')
+        
+        qtd_total_carrinho   = 0
+        valor_total_carrinho = 0
+        
         pedido = Pedido(
-            usuario=self.request.user,
+            user=self.request.user,
             total=valor_total_carrinho,
-            qtd_total=qtd_total_carrinho,
+            quantidade=qtd_total_carrinho,
             status='C',
         )
 
         pedido.save()
-        ItemPedido.objects.bulk_create(
-            [
-                ItemPedido(
-                    pedido=pedido,
-                    produto=v['produto_nome'],
-                    produto_id=v['produto_id'],
-                    variacao=v['variacao_nome'],
-                    variacao_id=v['variacao_id'],
-                    preco=v['preco_quantitativo'],
-                    preco_promocional=v['preco_quantitativo_promocional'],
-                    quantidade=v['quantidade'],
-                    imagem=v['imagem'],
-                ) for v in carrinho.values()
-            ]
-        )
+        
+        for v in carrinho.values():
+            if not v['produto_id']:
+                vid = v['variacao_id'][1:]
+                pid = 0
+            else: 
+                pid = v['produto_id'][1:]
+                vid = 0
+            ItemPedido.objects.bulk_create(
+                [
+                    ItemPedido(
+                        pedido=pedido,
+                        produto=v['produto_nome'],
+                        produto_id= pid,
+                        variacao=v['variacao_nome'],
+                        variacao_id=vid,
+                        preco=v['preco_quantitativo'],
+                        preco_promocional=v['preco_quantitativo_promocional'],
+                        quantidade=v['quantidade'],
+                        imagem=v['imagem'],
+                    ) 
+                ]
+            )
+            
         del self.request.session['carrinho']
         return redirect(
             reverse(
-                'pedido:pagamento',
+                'pedido:pagar',
                 kwargs={
                     'pk': pedido.pk
                 }
