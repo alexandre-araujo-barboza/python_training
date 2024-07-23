@@ -37,21 +37,22 @@ class OrderSave(View):
     template_name = 'pedido/pagamento.html'
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
-            messages.error(
+            messages.info(
                 self.request,
                 'Você precisa fazer login.'
             )
             return redirect('perfil:criar')
 
         if not self.request.session.get('carrinho'):
-            messages.error(
+            messages.info(
                 self.request,
                 'Seu carrinho está vazio.'
             )
             return redirect('produto:lista')
 
         carrinho = self.request.session.get('carrinho')
-        
+        quantidade = 0
+        total = 0
         for item in carrinho:
             it_ch = item[0]
             it_id = int(item[1:])
@@ -61,49 +62,47 @@ class OrderSave(View):
             elif it_ch == 's':
                 bd_work = Produto.objects.filter(id=it_id)
             else:
-                raise Exception('índice inválido no carrinho') 
-        
-            print(bd_work)
-
+                raise Exception('índice inválido no carrinho')
+             
             for piece in bd_work:
                 pid = it_ch + str(piece.id)
                 estoque = piece.estoque
                 qtd_carrinho = carrinho[pid]['quantidade']
                 preco_unt = carrinho[pid]['preco_unitario']
                 preco_unt_promo = carrinho[pid]['preco_unitario_promocional']
+                quantidade += qtd_carrinho
+                if preco_unt_promo:
+                    total += preco_unt_promo
+                else:
+                    total += preco_unt    
                 error_msg_estoque = ''
                 if estoque < qtd_carrinho:
                     carrinho[pid]['quantidade'] = estoque
                     carrinho[pid]['preco_quantitativo'] = estoque * preco_unt
                     carrinho[pid]['preco_quantitativo_promocional'] = estoque * \
                         preco_unt_promo
-
                     error_msg_estoque = 'Estoque insuficiente para alguns '\
                         'produtos do seu carrinho. '\
                         'Reduzimos a quantidade desses produtos. Por favor, '\
                         'verifique quais produtos foram afetados a seguir.'
-
                 if error_msg_estoque:
-                    messages.error(
+                    messages.warning(
                         self.request,
                         error_msg_estoque
                     )
-
                     self.request.session.save()
                     return redirect('produto:carrinho')
         
-        qtd_total_carrinho   = 0
-        valor_total_carrinho = 0
-        
+        qtd_total_carrinho   = quantidade
+        valor_total_carrinho = total
         pedido = Pedido(
-            user=self.request.user,
-            total=valor_total_carrinho,
-            quantidade=qtd_total_carrinho,
-            status='C',
+            user = self.request.user,
+            total = valor_total_carrinho,
+            quantidade = qtd_total_carrinho,
+            status = 'C',
         )
-
         pedido.save()
-        
+       
         for v in carrinho.values():
             if not v['produto_id']:
                 vid = v['variacao_id'][1:]
