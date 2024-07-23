@@ -74,8 +74,7 @@ class OrderSave(View):
                         preco_unt_promo
                     error_msg_estoque = 'Estoque insuficiente para alguns '\
                         'produtos do seu carrinho. '\
-                        'Reduzimos a quantidade desses produtos. Por favor, '\
-                        'verifique quais produtos foram afetados a seguir.'
+                        'Por favor, verifique quais produtos foram afetados.'
                 if error_msg_estoque:
                     messages.warning(
                         self.request,
