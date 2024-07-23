@@ -18,21 +18,12 @@ class DispatchLoginRequiredMixin(View):
         qs = qs.filter(user=self.request.user)
         return qs
     
-class OrderPayment(View):
+class OrderPayment(DispatchLoginRequiredMixin, DetailView):
     template_name = 'pedido/pagamento.html'
-    
-    def get(self, *args, **kargs):
-        if not self.request.user.is_authenticated:
-            messages.info(
-                self.request,
-                'Necessário fazer o Login.'
-            )
-            return redirect('perfil:criar')
-            
-        context = {
+    model = Pedido
+    pk_url_kwarg = 'pk'
+    context_object_name = 'pedido'
 
-        }
-        return render(self.request, self.template_name, context)
 class OrderSave(View):
     template_name = 'pedido/pagamento.html'
     def get(self, *args, **kwargs):
