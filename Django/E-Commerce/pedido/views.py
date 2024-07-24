@@ -54,18 +54,13 @@ class OrderSave(View):
                 bd_work = Produto.objects.filter(id=it_id)
             else:
                 raise Exception('índice inválido no carrinho')
-             
+
             for piece in bd_work:
                 pid = it_ch + str(piece.id)
                 estoque = piece.estoque
                 qtd_carrinho = carrinho[pid]['quantidade']
                 preco_unt = carrinho[pid]['preco_unitario']
                 preco_unt_promo = carrinho[pid]['preco_unitario_promocional']
-                quantidade += qtd_carrinho
-                if preco_unt_promo:
-                    total += preco_unt_promo
-                else:
-                    total += preco_unt    
                 error_msg_estoque = ''
                 if estoque < qtd_carrinho:
                     carrinho[pid]['quantidade'] = estoque
@@ -82,6 +77,12 @@ class OrderSave(View):
                     )
                     self.request.session.save()
                     return redirect('produto:carrinho')
+                
+                quantidade += qtd_carrinho
+                if carrinho[pid]['preco_quantitativo_promocional']:
+                    total += carrinho[pid]['preco_quantitativo_promocional']
+                else:
+                    total += carrinho[pid]['preco_quantitativo']
         
         qtd_total_carrinho   = quantidade
         valor_total_carrinho = total
