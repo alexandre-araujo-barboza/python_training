@@ -19,7 +19,7 @@
                 <tr>
                     <th scope="row">{{ pedido }}</td>
                     <td>{{ pedido.total | price_format }}</td>
-                    <td>{{ pedido.quantidade }} x {{  }}</td>
+                    <td>{{ pedido.quantidade }} itens</td>
                     <td>{{ pedido.get_status_display }}</td>
                     <td>
                         <a href="{% url 'pedido:detalhe' pedido.id %}">
