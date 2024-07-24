@@ -125,7 +125,8 @@ class OrderSave(View):
                 }
             )
         )
-class OrderDetails(View):
+
+class OrderDetails(DetailView):
     model = Pedido
     context_object_name = 'pedido'
     template_name = 'pedido/detalhe.html'

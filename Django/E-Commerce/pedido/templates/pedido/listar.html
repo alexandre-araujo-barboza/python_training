@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block title %} Pedidos de {{ user }} {% endblock title%}
-{% load static %}
 {% load priceFilter %}
 {% block content %}
 <div class="row">
@@ -12,7 +11,7 @@
                 <tr>
                     <th scope="col">Pedido</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Qtd. Itens</th>
+                    <th scope="col">Quantidade</th>
                     <th scope="col">Status</th>
                     <th scope="col">Mais detalhes</th>
                 </tr>
@@ -20,7 +19,7 @@
                 <tr>
                     <th scope="row">{{ pedido }}</td>
                     <td>{{ pedido.total | price_format }}</td>
-                    <td>{{ pedido.qtd_total }}</td>
+                    <td>{{ pedido.quantidade }} x {{  }}</td>
                     <td>{{ pedido.get_status_display }}</td>
                     <td>
                         <a href="{% url 'pedido:detalhe' pedido.id %}">

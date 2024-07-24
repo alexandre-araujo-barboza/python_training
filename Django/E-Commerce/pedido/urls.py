@@ -7,7 +7,7 @@ urlpatterns = [
     path(
         'pagar/<int:pk>',
         views.OrderPayment.as_view(),
-        name='pagar'
+        name='pagar',
     ),
     path(
         'detalhe/<int:pk>',
