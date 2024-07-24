@@ -38,7 +38,8 @@ class ItemPedido(models.Model):
     preco        = models.FloatField(verbose_name='preço')
     preco_promocional = models.FloatField(default=0, verbose_name='preço promocional')
     quantidade = models.PositiveIntegerField()
-    imagem  = models.CharField(max_length=2000) 
+    imagem  = models.CharField(max_length=2000)
+    preco_unitario = models.FloatField(verbose_name='preço unitário') 
 
     def __str__(self):
         return f'Detalhes do pedido Nro. {self.pk}' 

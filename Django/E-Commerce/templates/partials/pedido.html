@@ -38,7 +38,7 @@
                     </td>
                     <td>{{ item.produto }}</td>
                     <td>{{ item.variacao }}</td>
-                    <td>{{ item.quantidade }}</td>
+                    <td>{{ item.quantidade }} x {{ item.preco_unitario }}</td>
                     <td>
                         {% if item.preco_promocional %}
                         {{ item.preco_promocional | price_format }}

@@ -101,18 +101,25 @@ class OrderSave(View):
             else: 
                 pid = v['produto_id'][1:]
                 vid = 0
+            
+            if v['preco_unitario_promocional']:
+                preco = v['preco_unitario_promocional']
+            else:
+                preco = v['preco_unitario']
+                        
             ItemPedido.objects.bulk_create(
                 [
                     ItemPedido(
-                        pedido=pedido,
-                        produto=v['produto_nome'],
-                        produto_id= pid,
-                        variacao=v['variacao_nome'],
-                        variacao_id=vid,
-                        preco=v['preco_quantitativo'],
-                        preco_promocional=v['preco_quantitativo_promocional'],
-                        quantidade=v['quantidade'],
-                        imagem=v['imagem'],
+                        pedido = pedido,
+                        produto = v['produto_nome'],
+                        produto_id = pid,
+                        variacao = v['variacao_nome'],
+                        variacao_id = vid,
+                        preco = v['preco_quantitativo'],
+                        preco_promocional = v['preco_quantitativo_promocional'],
+                        quantidade = v['quantidade'],
+                        imagem = v['imagem'],
+                        preco_unitario = preco,
                     ) 
                 ]
             )
