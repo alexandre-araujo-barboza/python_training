@@ -1,8 +1,11 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views import View
 from django.contrib import messages
+from django.db.models import Q
 from perfil.models import Perfil
 from . import models
 
@@ -215,3 +218,19 @@ class ProductResume(View):
         }
 
         return render(self.request, 'produto/resumo.html', contexto)
+    
+class ProductSearch(ProductsList):
+    def get_queryset(self, *args, **kwargs):
+        termo = self.request.GET.get('termo')
+        qs = super().get_queryset(*args, **kwargs)
+        if not termo:
+            return qs
+        
+        self.request.session['termo'] = termo
+        qs = qs.filter(
+            Q(nome__icontains=termo) |
+            Q(descricao_curta__icontains=termo) |
+            Q(descricao_longa__icontains=termo)
+        )
+        self.request.session.save()
+        return qs

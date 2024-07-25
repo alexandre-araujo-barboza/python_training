@@ -33,4 +33,9 @@ urlpatterns = [
          views.ProductResume.as_view(),
          name='resumo'
     ),
+    path(
+        'busca/',
+         views.ProductSearch.as_view(),
+         name='busca'
+    ),
 ]
