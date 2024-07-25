@@ -57,6 +57,14 @@ class Perfil(models.Model):
    
     def clean(self):
         error_messages = {}
+        cpf_send = self.cpf or None
+        cpf_safe = None
+        perfil   = Perfil.objects.filter(cpf = cpf_send).first()
+        if (perfil):
+            cpf_safe = perfil.cpf
+            if cpf_safe is not None and self.pk != perfil.pk:
+                error_messages['cpf'] = 'CPF já existe'
+
         if not valida_cpf(self.cpf):
             error_messages['cpf'] = 'Digite um CPF válido'
         if re.search(r'[^0-9]', self.cep) or len(self.cep) < 8: 
