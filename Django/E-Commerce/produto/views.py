@@ -221,7 +221,7 @@ class ProductResume(View):
     
 class ProductSearch(ProductsList):
     def get_queryset(self, *args, **kwargs):
-        termo = self.request.GET.get('termo')
+        termo = self.request.GET.get('termo') or self.request.session['termo']
         qs = super().get_queryset(*args, **kwargs)
         if not termo:
             return qs
