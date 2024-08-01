@@ -51,3 +51,6 @@ string_01.txt
 /Django/E-Commerce/static
 /Django/E-Commerce/uploads
 /Tests/src/__pycache__
+/Design-patterns/behavioral/__pycache__
+/Design-patterns/creational/__pycache__
+/Design-patterns/structural/__pycache__
