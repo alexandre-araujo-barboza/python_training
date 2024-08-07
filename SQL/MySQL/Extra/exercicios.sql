@@ -10,8 +10,8 @@ INSERT INTO users (first_name, last_name, email, password_hash) VALUES
 ALTER TABLE udemy.users ADD Salary FLOAT NULL;
 INSERT INTO udemy.roles (Name) VALUES ('POST'), ('PUT'), ('DELETE'), ('GET');
 
-UPDATE users set salary = round(rand()  * 100000, 2) WHERE id IN 
-(624, 623, 622, 621, 620, 618);
+UPDATE users set salary = round(rand()  * 1000, 2) WHERE id IN 
+(305, 304, 303, 302, 301, 300);
 
 -- 2) Insira 5 perfís para os usuários inseridos
 INSERT INTO profiles (bio, description, user_id) VALUES
@@ -56,7 +56,7 @@ insert into users_roles (user_id, role_id) values
 SELECT * FROM users ORDER BY id DESC LIMIT 5;
 
 -- 5) Atualize o último usuário inserido
-UPDATE users set first_name='Elis Regina', last_name='Atualizada' WHERE id = 624;
+UPDATE users set first_name='Elis Regina', last_name='Atualizada' WHERE id = 305;
 
 -- 6) Remova uma permissão de algum usuário
 delete 
@@ -71,7 +71,7 @@ delete u
 from users u
 inner join users_roles ur on u.id = ur.user_id 
 inner join roles r on ur.role_id = r.id
-where r.name  = 'PUT' and u.id = 624;
+where r.name  = 'PUT' and u.id = 304;
 
 -- 8) Selecione usuários com perfís e permissões (obrigatório)
 SELECT u.id as uid, u.first_name, r.name, p.bio 
