@@ -7,6 +7,8 @@ INSERT INTO users (first_name, last_name, email, password_hash) VALUES
 ('Belchior', 'Moreira', 'email4@a.com', round(rand()  * 100000)),
 ('Elis', 'Regina', 'email5@a.com', round(rand()  * 100000));
 
+ALTER TABLE udemy.users ADD Salary FLOAT NULL;
+
 UPDATE users set salary = round(rand()  * 100000, 2) WHERE id IN 
 (624, 623, 622, 621, 620, 618);
 
