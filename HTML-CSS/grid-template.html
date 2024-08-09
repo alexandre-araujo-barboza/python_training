@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Template</title>
+    <style>
+        body {
+            font: sans-serif;
+            font-size: 40px;
+        }
+        .container {
+            max-width: auto;
+            margin: 0 auto;
+        }
+        .grid {
+            display: grid;
+            grid-template-rows: auto auto auto;
+            grid-template-columns: 200px 1fr;
+            grid-template-areas:
+             'header header'
+             'side-bar main'
+             'footer footer';
+        }
+        .grid div:nth-child(1) {
+            grid-area: header;
+            background: purple;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .grid div:nth-child(2) {
+            grid-area: side-bar;
+            background: pink;
+            color: black
+        }
+        .grid div:nth-child(3) {
+            grid-area: main;
+            background: lavender;
+            color:navy
+        }
+        .grid div:nth-child(4) {
+            background: darkred;
+            color: aliceblue;
+            grid-area: footer;
+        }
+        @media (max-width: 768px) {
+            .grid {
+                display: grid;
+                grid-template-rows: auto ;
+                grid-template-columns: auto;
+                grid-template-areas:
+                'header'
+                'main'
+                'side-bar'
+                'footer';
+            }   
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grid">
+            <div>
+                <h1>Logo</h1>
+                <nav>Menu</nav>
+            </div>
+            <div>
+                <nav>
+                    <ul>
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                        <li>Item 4</li>
+                        <li>Item 5</li>
+                        <li>Item 6</li>
+                        <li>Item 7</li>
+                        <li>Item 8</li>
+                        <li>Item 9</li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <h1>
+                    Olá Mundo!
+                </h1>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis qui voluptas dignissimos corporis unde reiciendis, molestias soluta sunt eum neque libero et alias, vero at sit ipsum iusto beatae possimus.
+                </p>
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus accusamus, commodi maxime ratione ducimus, tempore odit repellendus, sunt excepturi obcaecati corporis adipisci assumenda! Odio repudiandae id repellat? Cupiditate, mollitia ut.
+                </p>
+            </div>
+            <div>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eos recusandae nostrum ea aspernatur corrupti iste odit. Totam, beatae eveniet saepe commodi, eaque quis molestiae cupiditate soluta asperiores reprehenderit nam?
+                </p>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>
